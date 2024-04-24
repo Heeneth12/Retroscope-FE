@@ -2,6 +2,3 @@
     border: 1px solid rgb(195, 192, 192);
     border-radius: 2px;
 }
-.card:hover{
-    box-shadow: 12px;
-}
