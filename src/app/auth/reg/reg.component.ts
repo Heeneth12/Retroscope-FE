@@ -32,10 +32,7 @@ export class RegComponent {
     this.http.post(url, formData).subscribe((response) => {
       console.log(response);
        const test = response;
-      
-        this.router.navigate(['/login']);
-
-      
+        this.router.navigate(['/login']);      
     });
     
   }

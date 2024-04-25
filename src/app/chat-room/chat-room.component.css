@@ -1,0 +1,24 @@
+.chatBox{
+    border: 1px solid rgb(122, 122, 122);
+    height: 80vh;
+}
+
+.noteBar{
+    border: 1px solid black;
+    padding: 12px;
+    border-radius: 2px;
+    height: 80vh;
+}
+textarea{
+    resize: none;
+    font-size: small;
+}
+.areaH1{
+    border: 1px solid rgb(255, 255, 255);
+    width: fit-content;
+    padding: 1px;
+    margin: 0%;
+    /* border-top-right-radius: 4px;
+    border-top-left-radius: 4px; */
+    border-radius: 2px;
+}

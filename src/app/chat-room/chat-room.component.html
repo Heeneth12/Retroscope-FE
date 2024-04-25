@@ -1,43 +1,67 @@
 <app-nav-bar></app-nav-bar>
+
 <div class="flex justify-between">
-  <div>
-    <div class="w-full mt-8">
-      <div class="flex justify-center">
-        <div class="w-full">
-          <div class="bg-gray-100 w-full rounded-lg p-4">
-            <h1 class="text-2xl mb-4">Chat</h1>
-    
-            <div class="chat-box">
-              <!-- Messages from the sender on the right side -->
-              <ng-container *ngFor="let message of messages">
-                <div *ngIf="message.sender === 'user'" class="flex justify-end mb-2">
-                  <div class="bg-blue-500 text-white rounded-lg p-3 max-w-xs">
-                    <p class="text-sm">{{ message.text }}</p>
-                  </div>
-                </div>
-                <!-- Messages from the sender on the left side -->
-                <div *ngIf="message.sender !== 'user'" class="flex justify-start mb-2">
-                  <div class="bg-green-500 text-white rounded-lg p-3 max-w-xs">
-                    <p class="text-sm">{{ message.text }}</p>
-                  </div>
-                </div>
-              </ng-container>
-    
-              <!-- Input field and send button -->
-              <div class="flex items-center">
-                <input #messageInput class="border border-gray-300 rounded-lg px-3 py-1 flex-1 mr-2" placeholder="Type a message...">
-                <button (click)="sendMessage(messageInput.value)" class="bg-blue-500 text-white rounded-lg px-4 py-2">Send</button>
-              </div>
-            </div>
+  <div class="flex flex-col chatBox m-2 w-full h-screen rounded-sm">
+    <!-- Header -->
+    <div class="bg-gray-800 text-white py-2 px-6 flex items-center">
+      <h1><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+      </svg>
+      </h1>
+      <h1 class="text-lg font-semibold mr-1">Chat App</h1>
+    </div>
+
+    <!-- Chat messages -->
+    <div class="flex-1 overflow-y-auto px-6">
+      <div class="flex flex-col space-y-4 mt-6">
+        <!-- Example message -->
+        <div class="flex flex-col items-start">
+          <div class="bg-blue-500 text-white py-2 px-4 rounded-lg max-w-md">
+            <p class="whitespace-pre-line">Hello there! How can I help you today?</p>
           </div>
+          <span class="text-xs text-gray-500 mt-1 self-end">12:30 PM</span>
         </div>
+
+        <!-- Add more message items dynamically here -->
       </div>
     </div>
-  </div>
-  <div class="mt-8">
-    <div >
-      <h1>good box</h1>
+
+    <!-- Message input -->
+    <div class="bg-gray-200 p-2 flex items-center">
+      <input
+        [(ngModel)]="messageInput"
+        id="messageInput"
+        type="text"
+        placeholder="Type your message..."
+        class="flex-1 px-3 py-1 border border-gray-300 rounded-sm focus:outline-none focus:border-blue-500"
+      />
+
+      <button
+        (click)="sendMessage()"
+        class="bg-blue-500 text-white font-semibold px-4 py-1 ml-4 rounded-sm hover:bg-blue-600 focus:outline-none focus:bg-blue-600"
+      >
+        Send
+      </button>
     </div>
   </div>
-</div>
 
+ <!-- Side panel -->
+<div class="flex flex-col w-1/2 noteBar m-2 p-4">
+  <div class="textCard mb-1 ">
+    <h1 class="text-sm areaH1 text-gray-700 font-semibold">Good Area</h1>
+    <textarea class="w-full h-24 border bg-green-300 border-gray-300 rounded-sm px-3 py-2 focus:outline-none focus:border-blue-500 placeholder-gray-400 placeholder-opacity-75"></textarea>
+  </div>
+  <div class="textCard mb-1">
+    <h1 class="text-sm areaH1 text-gray-700 font-semibold ">Bad Area</h1>
+    <textarea class="w-full h-24 border bg-red-400 border-gray-300 rounded-sm px-3 py-2 focus:outline-none focus:border-blue-500 placeholder-gray-400 placeholder-opacity-75"></textarea>
+  </div>
+  <div class="textCard mb-1">
+    <h1 class="text-sm areaH1 text-gray-700 font-semibold ">Neutral Area</h1>
+    <textarea class="w-full h-24 border bg-blue-300 border-gray-300 rounded-sm px-3 py-2 focus:outline-none focus:border-blue-500 placeholder-gray-400 placeholder-opacity-75"></textarea>
+  </div>
+ 
+  <button class="px-4 p-1 bg-slate-500 text-white rounded-sm mt-4 hover:bg-slate-700">
+    submit
+  </button>
+</div>
+</div>
