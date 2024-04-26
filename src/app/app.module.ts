@@ -7,9 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegComponent } from './auth/reg/reg.component';
-import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { ChatModule } from './chat-room/chat.module';
 
 @NgModule({
   declarations: [
@@ -26,8 +26,9 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ChatModule
+  
   ],
-  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
