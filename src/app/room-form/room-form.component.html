@@ -1,0 +1,38 @@
+<app-nav-bar></app-nav-bar>
+<div class="container vh-100">
+    <div class="row h-100 card card-align">
+        <div class="room-card  shadow">
+            <div>
+                <h1 class="heading-align">CREATE ROOM</h1>
+            </div>
+            <div class="form">
+                <form [formGroup]="roomForm" (ngSubmit)="onsubmit()">
+                    <div class="input-align">
+                    <mat-label >Title</mat-label>
+                    <mat-form-field class="example-full-width" >
+                        <input matInput placeholder="Ex. project" value="" formControlName="roomTitle">
+                    </mat-form-field>
+                    </div>
+                    <div class="input-align">
+                        <mat-label>Description</mat-label>
+                        <mat-form-field class="example-full-width">
+                            <textarea matInput placeholder="Ex. It makes me feel..." value="" formControlName="roomDescription"></textarea>
+                        </mat-form-field>
+                    </div>
+                  <div class="input-align">
+                    <mat-label for="startTime">Start Time</mat-label>
+                    <input  type="datetime-local" class="form-control" id="startTime" name="startTime" formControlName="roomStartDate">
+                    
+                  </div>
+                  <div class="input-align">
+                    <mat-label for="endTime">End Time</mat-label>
+                    <input type="datetime-local" class="form-control" id="endTime" name="endTime" formControlName="roomEndDate">
+                  </div>
+
+                  
+                  <button type="submit" class="submit-button">Submit</button>
+                </form>
+              </div>
+        </div>
+    </div>
+</div>

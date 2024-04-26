@@ -9,7 +9,10 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegComponent } from './auth/reg/reg.component';
 import { FormGroup, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-
+import { RoomFormComponent } from './room-form/room-form.component';
+import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import {MatInputModule} from '@angular/material/input';
+import {MatSelectModule} from '@angular/material/select';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import { HttpClientModule } from '@angular/common/http';
     ChatRoomComponent,
     LoginComponent,
     RegComponent,
+    RoomFormComponent,
   ],
   imports: [
     BrowserModule,
@@ -26,8 +30,12 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    MatInputModule,
+    MatSelectModule
   ],
-  providers: [],
+  providers: [
+    provideAnimationsAsync()
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

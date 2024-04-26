@@ -1,0 +1,59 @@
+.card-align{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.room-card{
+    width: 50%;
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    
+}
+.heading-align{
+    text-align: center;
+    margin-bottom: 20px;
+}
+.form{
+    width: 80%;
+    margin-left: 60px;
+}
+.form-group{
+    margin-bottom: 20px;
+    display: flex;
+    flex-direction: row;
+
+}
+mat-label{
+    margin-bottom: 10px;
+}
+.input-align{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-content: center;
+    
+}
+.submit-button{
+    background-image: linear-gradient(red, yellow);
+    
+    margin-bottom: 20px;
+    width: 151px;
+    height: 35px;
+    font: normal normal medium 14px/17px Lato;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    margin-left: 180px;
+    margin-top: 20px;
+}
+.form-control{
+    margin-bottom: 20px;
+    border-radius: 2px;
+    border-width: 1px;
+    border-color: blueviolet;
+    padding: 10px;
+}
