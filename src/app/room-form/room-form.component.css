@@ -3,7 +3,11 @@
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    
 }
+h1 {
+    text-shadow: 0 0 3px #FF0000;
+  }
 
 .room-card{
     width: 50%;
@@ -12,6 +16,7 @@
     flex-direction: column;
     justify-content: center;
     align-content: center;
+    background-image: url("https://t4.ftcdn.net/jpg/06/95/83/77/360_F_695837766_0rEIGpVFzWKt9cx2Gyzea7G1yfSdL3Fn.jpg");
     
 }
 .heading-align{
@@ -30,6 +35,8 @@
 }
 mat-label{
     margin-bottom: 10px;
+    color: white;
+  text-shadow: 2px 2px 4px #000000;
 }
 .input-align{
     display: flex;
@@ -39,7 +46,7 @@ mat-label{
     
 }
 .submit-button{
-    background-image: linear-gradient(red, yellow);
+    background-image: linear-gradient(rgb(106, 200, 231), rgb(126, 120, 238));
     
     margin-bottom: 20px;
     width: 151px;

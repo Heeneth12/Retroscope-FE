@@ -1,7 +1,7 @@
 <app-nav-bar></app-nav-bar>
 <div class="container vh-100">
     <div class="row h-100 card card-align">
-        <div class="room-card  shadow">
+        <div class="room-card  shadow ">
             <div>
                 <h1 class="heading-align">CREATE ROOM</h1>
             </div>
@@ -28,10 +28,27 @@
                     <mat-label for="endTime">End Time</mat-label>
                     <input type="datetime-local" class="form-control" id="endTime" name="endTime" formControlName="roomEndDate">
                   </div>
-
-                  
+                  <div class="input-align">
+                    <mat-label>Topics to Discuss</mat-label>
+                    <mat-form-field>
+                        <mat-select formControlName="roomTopics" multiple>
+                            <mat-select-trigger>
+                                {{roomForm.value.roomTopics?.[0] || ''}}
+                                @if ((roomForm.value.roomTopics?.length || 0) > 1) {
+                                    <span class="example-additional-selection">
+                                        (+{{(roomForm.value.roomTopics?.length || 0) - 1}} {{roomForm.value.roomTopics.value?.length === 2 ? 'other' : 'others'}})
+                                    </span>
+                                }
+                            </mat-select-trigger>
+                            @for (topic of topicList; track topic) {
+                                <mat-option [value]="topic">{{topic}}</mat-option>
+                            }
+                        </mat-select>
+                    </mat-form-field>
+                </div>
                   <button type="submit" class="submit-button">Submit</button>
                 </form>
+
               </div>
         </div>
     </div>
