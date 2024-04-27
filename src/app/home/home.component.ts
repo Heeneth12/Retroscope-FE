@@ -1,19 +1,31 @@
-import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
   styleUrl: './home.component.css'
 })
-export class HomeComponent {
+export class HomeComponent implements OnInit  {
 
-  data:any = 
-    {
-      roomID: 2353,
-      roomName : "Gaming Hub",
-      topic : "discussing about online gaming",
-      startTime: "6:30",
-      endTime : "7:30"
+  roomData:any;
+
+
+  constructor(private http: HttpClient, private router: Router) {}
+
+
+  ngOnInit(): void {
+    this.getRoomData()
+  }
+
+getRoomData(){
+  const url = "http://localhost:8080/get";
+  this.http.get<any>(url).subscribe(
+    (response) => {
+      console.log(response)
+      this.roomData = response
+      console.log(this.roomData)
     }
-  //nikhil
-
+  )
+}
 }

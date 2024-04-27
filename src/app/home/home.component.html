@@ -1,5 +1,5 @@
 <app-nav-bar></app-nav-bar>
-<div class="lg:px-12">
+<div class="lg:px-12 px-2">
     <div>
         <div>
             <div class="flex justify-between items-center">
@@ -17,25 +17,30 @@
             <h4 class="font-thin text-gray-700" >Public boards collaborate by sharing room ID</h4>
         </div>
     </div>
-    <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-10 mt-6">
-        <div class=" card  p-2 hover:shadow-md">
-            <h3>Room ID: 1268</h3>
-        <h3>Room Name : Gaming</h3>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mt-6">
+        <div class="card p-4 flex justify-center transition duration-300 ease-in-out transform hover:shadow-lg hover:-translate-y-1">
+            <button class="text-gray-600 hover:text-gray-900">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+                </svg>
+            </button>
+        </div>
+        <div *ngFor="let item of roomData" class="card p-4 bg-white hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+            <h3 class="text-lg font-semibold text-gray-900">Room ID: {{item.roomId}}</h3>
+            <p class="text-sm text-gray-600">
+                Active:
+                <span class="inline-block h-3 w-3 rounded-full ml-1 {{item.active ? 'bg-green-500' : 'bg-red-500'}}"></span>
+            </p>
+            <h3 class="text-lg font-semibold text-gray-900">Room Creator: {{item.roomCreator}}</h3>
+            <h3 class="text-lg font-semibold text-gray-900">Room Name: {{item.roomName}}</h3>
+            <h3 class="text-lg font-semibold text-gray-900">Description: {{item.roomDescription}}</h3>
             <div class="flex justify-between">
-                <p> 6:30</p>
-                <p>7:30</p>
+                <p class="text-sm text-gray-600">6:30</p>
+                <p class="text-sm text-gray-600">7:30</p>
             </div>
         </div>
-        <div class="bg-slate-300 m-2 p-2 flex justify-center">
-      <button>
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-          </svg>
-          
-      </button>
-        </div>
-
-        
     </div>
-    <h1></h1>
+    
+    
+    
 </div>

@@ -1,6 +1,5 @@
 .Navbar{
     background-color: white;
-   
 }
 
 
@@ -15,4 +14,8 @@ img{
 .user {
     background-color:#9ACD32;
     border-radius: 22px;
+}
+
+.menu{
+    border: 1px solid #E3E3E3;
 }
