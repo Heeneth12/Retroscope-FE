@@ -1,6 +1,7 @@
 .card{
   background-color: white;
   border: 1px solid #E3E3E3;
+  
 
 }
 img{
@@ -10,4 +11,7 @@ img{
 .search-bar{
     border: 1px solid #E3E3E3;
     border-radius: 2px;
+}
+.add-card{
+  border-radius: 50%;
 }

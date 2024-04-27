@@ -24,7 +24,6 @@ getRoomData(){
     (response) => {
       console.log(response)
       this.roomData = response
-      console.log(this.roomData)
     }
   )
 }

@@ -25,4 +25,8 @@ showDropdown: any;
     console.log(this.menu)
   }
 
+  logout() {
+    localStorage.removeItem('jwtToken');
+  }
+
 }
