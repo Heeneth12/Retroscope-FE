@@ -1,10 +1,18 @@
 .Navbar{
-    background-color: #f97316;
+    background-color: white;
    
 }
 
+
+.spect{
+    color: #9ACD32;
+}
 img{
     width: 34px;
     border-radius: 50%;
     
+}
+.user {
+    background-color:#9ACD32;
+    border-radius: 22px;
 }

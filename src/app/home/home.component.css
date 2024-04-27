@@ -1,9 +1,13 @@
 .card{
-    border: 1px solid rgb(195, 192, 192);
-    border-radius: 2px;
-}
+  background-color: white;
+  border: 1px solid #E3E3E3;
 
+}
 img{
     border-radius: 50%;
     
+}
+.search-bar{
+    border: 1px solid #E3E3E3;
+    border-radius: 2px;
 }
