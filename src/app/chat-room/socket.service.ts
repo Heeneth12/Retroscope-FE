@@ -12,7 +12,8 @@ export class SocketService {
   connect() {
     console.log('Attempting to connect to the Socket.IO server...');
     this.socket.connect();
-    return this.socket.ioSocket.connected; // Return connection status
+    console.log( this.socket.ioSocket.connected); // Return connection status
+
   }
 
   // Method to send a message to the server

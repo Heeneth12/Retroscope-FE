@@ -1,17 +1,24 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SocketIoModule } from 'ngx-socket-io';
+import { SocketIoModule, SocketIoConfig } from 'ngx-socket-io'; // Import SocketIoConfig
 import { SocketService } from './socket.service';
 import { ChatRoomComponent } from './chat-room.component';
 
-
+// Define configuration options for Socket.IO
+const config: SocketIoConfig = {
+  url: 'ws://192.168.0.234:8085?room=a&username=nani',
+  options: {
+    transports: ['websocket'], // Specify WebSocket transport only
+    upgrade: false, // Set upgrade to false for Socket.IO v2
+  }
+};
 
 @NgModule({
-  declarations: [],
+  declarations: [ChatRoomComponent], // Include ChatRoomComponent in declarations
   imports: [
     CommonModule,
-    SocketIoModule.forRoot({ url: 'ws://192.168.0.234:8085?room=a&username=nani' })
+    SocketIoModule.forRoot(config) // Pass the configuration to forRoot
   ],
-  providers: [ SocketService],
+  providers: [SocketService],
 })
 export class ChatModule { }

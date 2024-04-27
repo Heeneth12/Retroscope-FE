@@ -4,7 +4,6 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NavBarComponent } from './nav-bar/nav-bar.component';
 import { HomeComponent } from './home/home.component';
-import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegComponent } from './auth/reg/reg.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -16,7 +15,6 @@ import { ChatModule } from './chat-room/chat.module';
     AppComponent,
     NavBarComponent,
     HomeComponent,
-    ChatRoomComponent,
     LoginComponent,
     RegComponent,
   ],

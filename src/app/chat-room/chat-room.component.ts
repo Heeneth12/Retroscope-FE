@@ -13,22 +13,20 @@ export class ChatRoomComponent implements OnInit {
   customEventData: any;
 
   constructor(private socketService: SocketService) { }
+
   ngOnInit(): void {
-    console.log("connect")
+    // Subscribe to connection and disconnection events
+    this.socketService.onConnect().subscribe(() => {
+      console.log('Connected to Socket.IO server');
+    });
+
+    this.socketService.onDisconnect().subscribe(() => {
+      console.log('Disconnected from Socket.IO server');
+    });
+
+    // Connect to the Socket.IO server
+    this.socketService.connect();
   }
-
-  // ngOnInit(): void {
-  //   // Connect to the Socket.IO server
-  //   console.log('Attempting to connect to the Socket.IO server...');
-  //   this.socketService.onConnect();
-  //   console.log('Connection status:', this.socketService.onConnect());
-
-  //   // // Subscribe to incoming messages
-  //   // this.socketService.onReceiveMessage().subscribe((message: unknown) => {
-  //   //   console.log('Received message from server:', message);
-  //   //   this.messages.push(message as string);
-  //   // });
-  // }
 
   sendMessage() {
     // Send message to the server
