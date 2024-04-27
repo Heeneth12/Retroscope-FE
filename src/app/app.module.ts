@@ -13,6 +13,7 @@ import { RoomFormComponent } from './room-form/room-form.component';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { FooterComponent } from './footer/footer.component';
 
 @NgModule({
   declarations: [
@@ -23,6 +24,7 @@ import {MatSelectModule} from '@angular/material/select';
     LoginComponent,
     RegComponent,
     RoomFormComponent,
+    FooterComponent,
   ],
   imports: [
     BrowserModule,

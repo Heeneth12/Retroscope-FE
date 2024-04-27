@@ -9,15 +9,15 @@
                 <form [formGroup]="roomForm" (ngSubmit)="onsubmit()">
                     <div class="input-align">
                     <mat-label >Title</mat-label>
-                    <mat-form-field class="example-full-width" >
-                        <input matInput placeholder="Ex. project" value="" formControlName="roomTitle">
-                    </mat-form-field>
+                    
+                    <input class="form-control" placeholder="Ex. project" value="" formControlName="roomTitle" height="30px">
+                    
+                    
                     </div>
                     <div class="input-align">
                         <mat-label>Description</mat-label>
-                        <mat-form-field class="example-full-width">
-                            <textarea matInput placeholder="Ex. It makes me feel..." value="" formControlName="roomDescription"></textarea>
-                        </mat-form-field>
+                        <textarea class="form-control" placeholder="Ex. It makes me feel..." value="" formControlName="roomDescription"></textarea>
+                        
                     </div>
                   <div class="input-align">
                     <mat-label for="startTime">Start Time</mat-label>
@@ -53,3 +53,4 @@
         </div>
     </div>
 </div>
+

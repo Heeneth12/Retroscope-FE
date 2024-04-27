@@ -1,0 +1,21 @@
+.main-body{
+    height: 50px;
+    /* max-width: 1248px; */
+    
+    background: #0933c9 0% 0% no-repeat padding-box;
+    opacity: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+}
+.icon-align{
+    padding: 10px;
+    
+}
+.footer-font-Color{
+    text-align: left;
+    font: normal normal medium 12px/15px Lato;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+}

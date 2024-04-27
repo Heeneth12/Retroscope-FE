@@ -11,7 +11,8 @@ h1 {
 
 .room-card{
     width: 50%;
-    margin-top: 20px;
+    margin-top: 5px;
+    margin-bottom: 5px;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -21,20 +22,21 @@ h1 {
 }
 .heading-align{
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 5px;
 }
 .form{
     width: 80%;
+    
     margin-left: 60px;
 }
 .form-group{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     display: flex;
     flex-direction: row;
 
 }
 mat-label{
-    margin-bottom: 10px;
+    margin-bottom: 3px;
     color: white;
   text-shadow: 2px 2px 4px #000000;
 }
@@ -48,19 +50,21 @@ mat-label{
 .submit-button{
     background-image: linear-gradient(rgb(106, 200, 231), rgb(126, 120, 238));
     
-    margin-bottom: 20px;
+    margin-bottom: 10px;
     width: 151px;
     height: 35px;
     font: normal normal medium 14px/17px Lato;
     letter-spacing: 0px;
     color: #FFFFFF;
     margin-left: 180px;
-    margin-top: 20px;
+    
 }
 .form-control{
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     border-radius: 2px;
     border-width: 1px;
     border-color: blueviolet;
     padding: 10px;
 }
+
+
