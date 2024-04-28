@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit  {
 
   roomData:any;
+  formToggleVer:boolean = false;
 
 
   constructor(private http: HttpClient, private router: Router) {}
@@ -16,6 +17,10 @@ export class HomeComponent implements OnInit  {
 
   ngOnInit(): void {
     this.getRoomData()
+  }
+
+  formToggle(){
+    this.formToggleVer = !this.formToggleVer
   }
 
 getRoomData(){

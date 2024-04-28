@@ -13,5 +13,8 @@ img{
     border-radius: 2px;
 }
 .add-card{
-  border-radius: 50%;
+  border-radius: 50
+}
+.form{
+  border: 1px solid #E3E3E3;
 }

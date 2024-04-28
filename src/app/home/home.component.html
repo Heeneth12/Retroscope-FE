@@ -1,3 +1,4 @@
+<div>
 <app-nav-bar></app-nav-bar>
 <div class="lg:px-12 px-2">
     <div>
@@ -18,16 +19,12 @@
         </div>
     </div>
     <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-2 gap-6 mt-6">
-        <div class="card p-4 flex justify-center transition duration-300 ease-in-out transform hover:shadow-lg hover:-translate-y-1">
-            
+        <div (click)="formToggle()" class="card p-4 flex justify-center transition duration-300 ease-in-out transform hover:shadow-lg hover:-translate-y-1">
                 <button class="text-gray-600 hover:text-gray-900 ">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                 </button>
-
-            
-           
         </div>
         <div *ngFor="let item of roomData" class="card p-4 bg-white hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
             <div class="flex justify-between items-center">
@@ -49,4 +46,16 @@
             </div>
         </div>
     </div>
+    <div *ngIf="formToggleVer"  class="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+        <!-- Center the form horizontally and vertically -->
+        <div class="">
+          <button (click)="formToggle()" class="hover:text-red-500">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="m9.75 9.75 4.5 4.5m0-4.5-4.5 4.5M21 12a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+              </svg>
+          </button>
+            <app-room-form></app-room-form>
+        </div>
+    </div>
+</div>
 </div>

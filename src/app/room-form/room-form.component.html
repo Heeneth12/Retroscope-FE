@@ -1,33 +1,32 @@
-<app-nav-bar></app-nav-bar>
-<div class="container vh-100">
-    <div class="row h-100 card card-align">
-        <div class="room-card  shadow ">
+<div class="row h-100 card  card-align">
+        <div class=" min-w-fit shadow ">
             <div>
-                <h1 class="heading-align">CREATE ROOM</h1>
+                <h1 class="text-slate-700 font-bold heading-align">CREATE ROOM</h1>
             </div>
-            <div class="form">
+            <div class="px-8 ">
                 <form [formGroup]="roomForm" (ngSubmit)="onsubmit()">
                     <div class="input-align">
                     <mat-label >Title</mat-label>
                     
                     <input class="form-control" placeholder="Ex. project" value="" formControlName="roomTitle" height="30px">
-                    
-                    
                     </div>
                     <div class="input-align">
                         <mat-label>Description</mat-label>
                         <textarea class="form-control" placeholder="Ex. It makes me feel..." value="" formControlName="roomDescription"></textarea>
+                    </div>
+                    <div class="flex justify-between ">
+                        <div class="input-align">
+                            <mat-label for="startTime">Start Time</mat-label>
+                            <input  type="datetime-local" class="form-control" id="startTime" name="startTime" formControlName="roomStartDate">
+                            
+                          </div>
+                          <div class="input-align">
+                            <mat-label for="endTime">End Time</mat-label>
+                            <input type="datetime-local" class="form-control" id="endTime" name="endTime" formControlName="roomEndDate">
+                          </div>
                         
                     </div>
-                  <div class="input-align">
-                    <mat-label for="startTime">Start Time</mat-label>
-                    <input  type="datetime-local" class="form-control" id="startTime" name="startTime" formControlName="roomStartDate">
-                    
-                  </div>
-                  <div class="input-align">
-                    <mat-label for="endTime">End Time</mat-label>
-                    <input type="datetime-local" class="form-control" id="endTime" name="endTime" formControlName="roomEndDate">
-                  </div>
+
                   <div class="input-align">
                     <mat-label>Topics to Discuss</mat-label>
                     <mat-form-field>
@@ -51,5 +50,4 @@
 
               </div>
         </div>
-    </div>
 </div>
