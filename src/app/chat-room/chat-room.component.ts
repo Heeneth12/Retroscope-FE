@@ -7,6 +7,9 @@ import { Component } from '@angular/core';
 })
 
 export class ChatRoomComponent {
+
+  groupChatToggleVer:boolean = false;
+
   messages: { text: string, sender: string }[] = []; // Array to store chat messages
   messageInput: string = ''; // Declare messageInput as string type
 
@@ -18,4 +21,8 @@ export class ChatRoomComponent {
       this.messageInput = ''; // Clear the input field
     }
   }
+
+  groupChatToggle() {
+    this.groupChatToggleVer =  !this.groupChatToggleVer
+    }
 }
