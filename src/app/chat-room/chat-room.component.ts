@@ -20,17 +20,9 @@ export class ChatRoomComponent implements OnInit{
 
 
   ngOnInit(): void {
-    // Subscribe to connection and disconnection events
-    this.socketService.onConnect().subscribe(() => {
-      console.log('Connected to Socket.IO server');
-    });
-
-    this.socketService.onDisconnect().subscribe(() => {
-      console.log('Disconnected from Socket.IO server');
-    });
-
     // Connect to the Socket.IO server
     this.socketService.connect();
+    this.socketService.onReceiveMessage();
   }
 
   sendMessage() {
@@ -39,7 +31,7 @@ export class ChatRoomComponent implements OnInit{
       const data = {
         room: 'a',
         username: 'nani',
-        content: this.message
+        content: "angular test"
       };
       console.log('Sending message to server:', data);
       this.socketService.sendMessage(data);

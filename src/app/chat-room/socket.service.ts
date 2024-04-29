@@ -1,10 +1,13 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
+
+  connected: boolean = false;
 
   constructor(private socket: Socket) { }
 
@@ -12,8 +15,15 @@ export class SocketService {
   connect() {
     console.log('Attempting to connect to the Socket.IO server...');
     this.socket.connect();
-    console.log( this.socket.ioSocket.connected); // Return connection status
 
+    // Update connection status
+    this.socket.on('connect', () => {
+      console.log('Socket connected');
+      this.connected = true; // Update connection status flag
+    });
+
+    // Log current connection status
+    console.log('Connection status:', this.connected);
   }
 
   // Method to send a message to the server
@@ -24,7 +34,7 @@ export class SocketService {
 
   // Method to listen for incoming messages from the server
   onReceiveMessage() {
-    return this.socket.fromEvent('receive_message');
+    return this.socket.fromEvent('receive_message').pipe(map(data =>console.log(data)))
   }
 
   // Method to handle user connection event

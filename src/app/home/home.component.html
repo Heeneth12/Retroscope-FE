@@ -26,7 +26,7 @@
                     </svg>
                 </button>
         </div>
-        <div *ngFor="let item of roomData" class="card p-4 bg-white hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+        <div *ngFor="let item of roomData" routerLink="/chat" class="card p-4 bg-white hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
             <div class="flex justify-between items-center">
                 <h3 class="text-sm font-semibold text-gray-700">Room-id : {{item.roomId}}</h3>
             <p class="text-sm text-gray-600">

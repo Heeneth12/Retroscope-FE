@@ -17,7 +17,7 @@ showDropdown: any;
   ngOnInit(): void {
     if (localStorage.getItem('jwtToken')) {
     this.user = true;
-    console.log(this.user)
+    // console.log(this.user)
     }
   }
 
