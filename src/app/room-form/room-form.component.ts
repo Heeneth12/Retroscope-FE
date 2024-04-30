@@ -39,14 +39,6 @@ export class RoomFormComponent {
 
   onsubmit() {
     console.log(this.roomForm.value);
-
-    // // Handle null values here if needed
-    // const requestData = {
-    //   ...this.roomForm.value,
-    //   roomStartDate: this.roomForm.value.roomStartDate || '', // Handle null value
-    //   roomEndDate: this.roomForm.value.roomEndDate || '', // Handle null value
-    // };
-
     this.http
       .post<any>('http://localhost:8080/add', this.roomForm.value)
       .subscribe(

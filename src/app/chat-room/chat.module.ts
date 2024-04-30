@@ -10,12 +10,11 @@ import { ChatComponent } from '../chat/chat.component';
 
 @NgModule({
   declarations: [ChatRoomComponent, ChatComponent],
-  providers: [SocketService],
   imports: [
     CommonModule,
     FormsModule,
     SocketIoModule, // No need to provide configuration here
-    RouterModule.forChild([{ path: 'chat', component: ChatRoomComponent }]),
+    RouterModule.forChild([{ path: 'chat/:roomId/:roomName', component: ChatRoomComponent }]),
     NavBarComponent,
   ],
 })
