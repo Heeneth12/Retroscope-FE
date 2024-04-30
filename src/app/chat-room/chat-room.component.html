@@ -1,39 +1,156 @@
 <app-nav-bar></app-nav-bar>
 <div>
   <div class="">
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6 px-2 lg:px-12">
+    <div
+      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6 px-2 lg:px-12"
+    >
       <div class="bg-white p-2 shadow min-h-80 rounded-sm chat-card">
-        <h2 class="text-xs text-center font-semibold text-gray-700">Good Area</h2>
-        <button class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold">+</button>
-        <p class="bg-green-400 text-white rounded-sm font-semibold text-xs p-1">the project is too good</p>
-        <input class="border border-gray-300 mt-2 w-full rounded-sm focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="Enter text...">
+        <h2 class="text-xs text-center font-semibold text-gray-700">
+          Good Area
+        </h2>
+        <button
+          (click)="textAreaDropDown()"
+          class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold"
+        >
+          +
+        </button>
+
+        <div class="my-4" *ngIf="testAreaVer">
+          <textarea
+            class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
+            type="text"
+            placeholder="Enter text..."
+          ></textarea>
+          <button
+            class="bg-blue-400 rounded-sm text-white text-xs px-1"
+            style="float: right"
+          >
+            send
+          </button>
+        </div>
+
+        <div
+          class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 hover:scale-105 transition-transform duration-300"
+        >
+          <p>the project is too good</p>
+          <p class="">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 20 20"
+              fill="currentColor"
+              class="w-5 h-5"
+            >
+              <path
+                d="M1 8.25a1.25 1.25 0 1 1 2.5 0v7.5a1.25 1.25 0 1 1-2.5 0v-7.5ZM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0 1 14 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 0 1-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 0 1-1.341-.317l-2.734-1.366A3 3 0 0 0 6.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 0 1 2.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388Z"
+              />
+            </svg>
+          </p>
+        </div>
+
+        <p
+          class="bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+        >
+          the project
+        </p>
       </div>
       <div class="bg-white p-2 shadow min-h-80 rounded-sm">
-        <h2 class="text-xs text-center font-semibold text-gray-700">Bad area</h2>
-        <button class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold">+</button>
-        <p class="bg-green-400 text-white rounded-sm font-semibold text-xs p-1">the project is too good</p>
-        <input class="border border-gray-300 mt-2 w-full rounded-sm focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="Enter text...">
+        <h2 class="text-xs text-center font-semibold text-gray-700">
+          Bad area
+        </h2>
+        <button
+          class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold"
+        >
+          +
+        </button>
+        <div class="my-4" *ngIf="testAreaVer">
+          <textarea
+            class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
+            type="text"
+            placeholder="Enter text..."
+          ></textarea>
+          <button
+            class="bg-blue-400 rounded-sm text-white text-xs px-1"
+            style="float: right"
+          >
+            send
+          </button>
+        </div>
+        <p
+          class="bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+        >
+          the project is too good
+        </p>
+        <p
+          class="bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+        >
+          the project is too good
+        </p>
       </div>
       <div class="bg-white p-2 shadow min-h-80 rounded-sm">
         <h2 class="text-xs text-center font-semibold">Avg</h2>
-        <button class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold">+</button>
-        <p class="bg-green-400 text-white rounded-sm font-semibold text-xs p-1">the project is too good</p>
-        <input class="border border-gray-300 mt-2 w-full rounded-sm focus:outline-none focus:ring focus:border-blue-500" type="text" placeholder="Enter text...">
+        <button
+          class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold"
+        >
+          +
+        </button>
+        <div class="my-4" *ngIf="testAreaVer">
+          <textarea
+            class="border font-bold text-white text-xs bg-blue-400 p-1 w-full rounded-sm focus:outline-none"
+            type="text"
+            placeholder="Enter text..."
+          ></textarea>
+          <button
+            class="bg-blue-400 rounded-sm text-white text-xs px-1"
+            style="float: right"
+          >
+            send
+          </button>
+        </div>
+
+        <p
+          class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1s hover:scale-105 transition-transform duration-300"
+        >
+          the project is Avg
+        </p>
+        <p
+          class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+        >
+          good colours
+        </p>
+        <p
+          class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+        >
+          nice team
+        </p>
       </div>
     </div>
 
-    <button (click)="sendMessage()"> send message</button>
+    <button (click)="sendMessage()">send message</button>
     <!-- group chat -->
     <div class="fixed bottom-0 right-0 mb-4 mr-4">
       <div>
         <div>
           <div *ngIf="groupChatToggleVer">
-            <!-- <app-chat></app-chat> -->
+            <app-chat></app-chat>
           </div>
           <div>
-            <button (click)="groupChatToggleVer()" class="chat-svg text-gray-800 shadow-lg hover:text-gray-600">
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            <button
+              (click)="groupChatToggle()"
+              class="chat-svg text-gray-800 shadow-lg hover:text-gray-600"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke-width="1.5"
+                stroke="currentColor"
+                class="w-6 h-6"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
+                />
               </svg>
             </button>
           </div>

@@ -4,32 +4,27 @@ import { Router } from '@angular/router';
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.css',
 })
-export class HomeComponent implements OnInit  {
-
-  roomData:any;
-  formToggleVer:boolean = false;
-
+export class HomeComponent implements OnInit {
+  roomData: any;
+  formToggleVer: boolean = false;
 
   constructor(private http: HttpClient, private router: Router) {}
 
-
   ngOnInit(): void {
-    this.getRoomData()
+    this.getRoomData();
   }
 
-  formToggle(){
-    this.formToggleVer = !this.formToggleVer
+  formToggle() {
+    this.formToggleVer = !this.formToggleVer;
   }
 
-getRoomData(){
-  const url = "http://localhost:8080/get";
-  this.http.get<any>(url).subscribe(
-    (response) => {
-      console.log(response)
-      this.roomData = response
-    }
-  )
-}
+  getRoomData() {
+    const url = 'http://10.10.10.26:8080/get';
+    this.http.get<any>(url).subscribe((response) => {
+      console.log(response);
+      this.roomData = response;
+    });
+  }
 }

@@ -1,63 +1,64 @@
-import { HttpClient } from '@angular/common/http';
-import { ArrayType } from '@angular/compiler';
 import { Component } from '@angular/core';
-import { FormGroup , FormBuilder, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-room-form',
   templateUrl: './room-form.component.html',
-  styleUrl: './room-form.component.css'
+  styleUrls: ['./room-form.component.css'],
 })
 export class RoomFormComponent {
   roomForm: FormGroup;
-  // topics:any = new FormControl('');
+  topicList: string[] = [
+    'What went well?',
+    'What did not go well?',
+    'Pros',
+    'Cons',
+    'Things Need To Be Improve',
+    'What did we learn?',
+    'What’s our weakest link as a team?',
+    'What ideas do you have?',
+    'How should we take action?',
+  ];
 
-  topicList: string[] = ['What went well?', 'What did not go well?', 'Pros', 'Cons', 'Things Need To Be Improve', 'What did we learn?', 'What’s our weakest link as a team?', 'What ideas do you have?', 'How should we take action?'];
-  
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
     private router: Router
   ) {
-     this.roomForm = this.formBuilder.group({
-      roomTitle: ['', [Validators.required, Validators.email]],
+    this.roomForm = this.formBuilder.group({
+      roomName: ['', [Validators.required, Validators.email]],
       roomDescription: ['', [Validators.required]],
-      roomStartDate : [''],
-      roomEndDate : [''],
-      // roomtopics : ArrayType[this.topics.value],
-      // roomtopics: this.formBuilder.array(this.topics.value) 
-      roomTopics : [[]],
+      roomStartDate: [null], // Set default value to null
+      roomEndDate: [null], // Set default value to null
+      roomTopics: [[]],
     });
   }
 
-  onsubmit(){
-    
-    console.log(this.roomForm.value)
-    
-    if (this.roomForm.invalid) {
-      return;
-    }
-    
+  onsubmit() {
+    console.log(this.roomForm.value);
 
-    this.http.post<any>('http://localhost:8085/user/add', this.roomForm.value)
+    // // Handle null values here if needed
+    // const requestData = {
+    //   ...this.roomForm.value,
+    //   roomStartDate: this.roomForm.value.roomStartDate || '', // Handle null value
+    //   roomEndDate: this.roomForm.value.roomEndDate || '', // Handle null value
+    // };
+
+    this.http
+      .post<any>('http://10.10.10.26:8085/add', this.roomForm.value)
       .subscribe(
-        response => {
-          if(response.Status === "OK"){
+        (response) => {
+          if (response.Status === 'OK') {
             console.log('successful');
-            // localStorage.setItem('token', response.token);
-            // console.log(response.token)
-          // Redirect to the desired page, e.g., home page
-          this.router.navigate(['/home']);
-          } else{
+            this.router.navigate(['/home']);
+          } else {
             console.error('failed:', response.error);
           }
-          
         },
-        error => {
-          // Handle login error
+        (error) => {
           console.error('HTTP error:', error);
-          // Optionally, display an error message to the user
         }
       );
   }

@@ -5,21 +5,18 @@ import { SocketService } from './socket.service';
 import { ChatRoomComponent } from './chat-room.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
-import { NavBarComponent } from "../nav-bar/nav-bar.component";
+import { NavBarComponent } from '../nav-bar/nav-bar.component';
+import { ChatComponent } from '../chat/chat.component';
 
 @NgModule({
-    declarations: [
-        ChatRoomComponent,
-    ],
-    providers: [SocketService],
-    imports: [
-        CommonModule,
-        FormsModule,
-        SocketIoModule, // No need to provide configuration here
-        RouterModule.forChild([
-            { path: 'chat', component: ChatRoomComponent }
-        ]),
-        NavBarComponent
-    ]
+  declarations: [ChatRoomComponent, ChatComponent],
+  providers: [SocketService],
+  imports: [
+    CommonModule,
+    FormsModule,
+    SocketIoModule, // No need to provide configuration here
+    RouterModule.forChild([{ path: 'chat', component: ChatRoomComponent }]),
+    NavBarComponent,
+  ],
 })
-export class ChatModule { }
+export class ChatModule {}

@@ -5,37 +5,37 @@ import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-chat-room',
   templateUrl: './chat-room.component.html',
-  styleUrls: ['./chat-room.component.css']
+  styleUrls: ['./chat-room.component.css'],
 })
-export class ChatRoomComponent implements OnInit ,OnDestroy {
-
+export class ChatRoomComponent implements OnInit, OnDestroy {
   connectionStatusSubscription: Subscription | undefined;
   isConnected: boolean | undefined;
-  groupChatToggleVer: any;
+  groupChatToggleVer: boolean = false;
   receivedMessageSubscription: any;
+  testAreaVer: boolean = false;
+  isHovered: boolean = true;
 
   constructor(private socketService: SocketService) {}
 
   ngOnInit(): void {
-    this.connectionStatusSubscription = this.socketService.connectionStatus$.subscribe((connected: boolean) => {
-      this.isConnected = connected;
-      if (connected) {
-        // Connection established, you can perform actions here if needed
-      } else {
-        // Connection lost, handle accordingly
-      }
-    });    
-
-    
+    this.connectionStatusSubscription =
+      this.socketService.connectionStatus$.subscribe((connected: boolean) => {
+        this.isConnected = connected;
+        if (connected) {
+          // Connection established, you can perform actions here if needed
+        } else {
+          // Connection lost, handle accordingly
+        }
+      });
   }
 
   sendMessage() {
     const data = {
-      "content": "vscode-data",
-      "room": "a",
-      "username": "vscode"
-  }
-   this.socketService.sendMessage(data)
+      content: 'vscode-data',
+      room: 'a',
+      username: 'vscode',
+    };
+    this.socketService.sendMessage(data);
   }
 
   ngOnDestroy(): void {
@@ -47,5 +47,11 @@ export class ChatRoomComponent implements OnInit ,OnDestroy {
       this.receivedMessageSubscription.unsubscribe();
     }
   }
-  
+
+  groupChatToggle() {
+    this.groupChatToggleVer = !this.groupChatToggleVer;
+  }
+  textAreaDropDown() {
+    this.testAreaVer = !this.testAreaVer;
+  }
 }

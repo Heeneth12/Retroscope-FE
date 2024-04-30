@@ -1,53 +1,78 @@
-<div class="row h-100 card  card-align">
-        <div class=" min-w-fit shadow ">
-            <div>
-                <h1 class="text-slate-700 font-bold heading-align">CREATE ROOM</h1>
-            </div>
-            <div class="px-8 ">
-                <form [formGroup]="roomForm" (ngSubmit)="onsubmit()">
-                    <div class="input-align">
-                    <mat-label >Title</mat-label>
-                    
-                    <input class="form-control" placeholder="Ex. project" value="" formControlName="roomTitle" height="30px">
-                    </div>
-                    <div class="input-align">
-                        <mat-label>Description</mat-label>
-                        <textarea class="form-control" placeholder="Ex. It makes me feel..." value="" formControlName="roomDescription"></textarea>
-                    </div>
-                    <div class="flex justify-between ">
-                        <div class="input-align">
-                            <mat-label for="startTime">Start Time</mat-label>
-                            <input  type="datetime-local" class="form-control" id="startTime" name="startTime" formControlName="roomStartDate">
-                            
-                          </div>
-                          <div class="input-align">
-                            <mat-label for="endTime">End Time</mat-label>
-                            <input type="datetime-local" class="form-control" id="endTime" name="endTime" formControlName="roomEndDate">
-                          </div>
-                        
-                    </div>
+<div class="row h-100 card card-align">
+  <div class="min-w-fit shadow">
+    <div>
+      <h1 class="text-slate-700 font-bold heading-align">CREATE ROOM</h1>
+    </div>
+    <div class="px-8">
+      <form [formGroup]="roomForm" (ngSubmit)="onsubmit()">
+        <div class="input-align">
+          <mat-label>Title</mat-label>
 
-                  <div class="input-align">
-                    <mat-label>Topics to Discuss</mat-label>
-                    <mat-form-field>
-                        <mat-select formControlName="roomTopics" multiple>
-                            <mat-select-trigger>
-                                {{roomForm.value.roomTopics?.[0] || ''}}
-                                @if ((roomForm.value.roomTopics?.length || 0) > 1) {
-                                    <span class="example-additional-selection">
-                                        (+{{(roomForm.value.roomTopics?.length || 0) - 1}} {{roomForm.value.roomTopics.value?.length === 2 ? 'other' : 'others'}})
-                                    </span>
-                                }
-                            </mat-select-trigger>
-                            @for (topic of topicList; track topic) {
-                                <mat-option [value]="topic">{{topic}}</mat-option>
-                            }
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                  <button type="submit" class="submit-button">Submit</button>
-                </form>
-
-              </div>
+          <input
+            class="form-control"
+            placeholder="Ex. project"
+            value=""
+            formControlName="roomName"
+            height="30px"
+          />
         </div>
+        <div class="input-align">
+          <mat-label>Description</mat-label>
+          <textarea
+            class="form-control"
+            placeholder="Ex. It makes me feel..."
+            value=""
+            formControlName="roomDescription"
+          ></textarea>
+        </div>
+        <div class="flex justify-between">
+          <div class="input-align">
+            <mat-label for="startTime">Start Time</mat-label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="startTime"
+              name="startTime"
+              formControlName="roomStartDate"
+            />
+          </div>
+          <div class="input-align">
+            <mat-label for="endTime">End Time</mat-label>
+            <input
+              type="datetime-local"
+              class="form-control"
+              id="endTime"
+              name="endTime"
+              formControlName="roomEndDate"
+            />
+          </div>
+        </div>
+
+        <div class="input-align">
+          <mat-label>Topics to Discuss</mat-label>
+          <mat-form-field>
+            <mat-select formControlName="roomTopics" multiple>
+              <mat-select-trigger>
+                {{roomForm.value.roomTopics?.[0] || ''}}
+                @if ((roomForm.value.roomTopics?.length || 0) > 1) {
+                <span class="example-additional-selection">
+                  (+{{ (roomForm.value.roomTopics?.length || 0) - 1 }}
+                  {{
+                    roomForm.value.roomTopics.value?.length === 2
+                      ? "other"
+                      : "others"
+                  }})
+                </span>
+                }
+              </mat-select-trigger>
+              @for (topic of topicList; track topic) {
+              <mat-option [value]="topic">{{ topic }}</mat-option>
+              }
+            </mat-select>
+          </mat-form-field>
+        </div>
+        <button type="submit" class="submit-button">Submit</button>
+      </form>
+    </div>
+  </div>
 </div>
