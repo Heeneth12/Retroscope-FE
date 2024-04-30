@@ -29,6 +29,7 @@ export class RoomFormComponent {
   ) {
     this.roomForm = this.formBuilder.group({
       roomName: ['', [Validators.required, Validators.email]],
+      roomCreator :"heeneth",
       roomDescription: ['', [Validators.required]],
       roomStartDate: [null], // Set default value to null
       roomEndDate: [null], // Set default value to null
@@ -47,7 +48,7 @@ export class RoomFormComponent {
     // };
 
     this.http
-      .post<any>('http://10.10.10.26:8085/add', this.roomForm.value)
+      .post<any>('http://localhost:8080/add', this.roomForm.value)
       .subscribe(
         (response) => {
           if (response.Status === 'OK') {

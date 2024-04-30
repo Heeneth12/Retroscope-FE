@@ -21,7 +21,7 @@ export class HomeComponent implements OnInit {
   }
 
   getRoomData() {
-    const url = 'http://10.10.10.26:8080/get';
+    const url = 'http://localhost:8080/get';
     this.http.get<any>(url).subscribe((response) => {
       console.log(response);
       this.roomData = response;

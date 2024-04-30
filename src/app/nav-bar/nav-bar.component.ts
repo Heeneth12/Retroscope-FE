@@ -10,26 +10,31 @@ import { Component } from '@angular/core';
 })
 export class NavBarComponent {
 
+  userEmail:string|null = localStorage.getItem('userEmail')
   user:boolean  = false;
   menu:boolean = false;
-showDropdown: any;
+  showDropdown: any;
 
   ngOnInit(): void {
     if (localStorage.getItem('jwtToken')) {
     this.user = true;
     // console.log(this.user)
     }
+
+   
+
+
   }
 
 
   showDropDown(){
-
     this.menu = !this.menu
     console.log(this.menu)
   }
 
   logout() {
     localStorage.removeItem('jwtToken');
+    localStorage.removeItem('userEmail');
   }
 
 }
