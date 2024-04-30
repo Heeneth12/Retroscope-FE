@@ -5,6 +5,7 @@ import { ChatRoomComponent } from './chat-room/chat-room.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegComponent } from './auth/reg/reg.component';
 import { RoomFormComponent } from './room-form/room-form.component';
+import { ProfileComponent } from './profile/profile.component';
 
 const routes: Routes = [
   {path:'' ,component:HomeComponent},
@@ -12,6 +13,7 @@ const routes: Routes = [
   {path:'login' , component :LoginComponent},
   {path :'reg' , component : RegComponent},
   {path :'roomform' , component : RoomFormComponent},
+  {path :'profile' , component : ProfileComponent},
 ];
 
 @NgModule({

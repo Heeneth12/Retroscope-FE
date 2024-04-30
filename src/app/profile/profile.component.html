@@ -1,0 +1,23 @@
+<div class="profile">
+  <div class="sidebar">
+    <ul>
+      <li [ngClass]="{'active': selectedTab === 0}" (click)="selectTab(0)">Profile</li>
+      <li [ngClass]="{'active': selectedTab === 1}" (click)="selectTab(1)">Security</li>
+      <li [ngClass]="{'active': selectedTab === 2}" (click)="selectTab(2)">Settings</li>
+    </ul>
+  </div>
+
+  <div class="card" *ngIf="selectedTab === 0">
+    <h1>ksdnksdnvos</h1>
+  </div>
+  <div class="card" *ngIf="selectedTab === 1">
+    <h1>ksdnksdnvos</h1>
+  </div>
+  <div class="card" *ngIf="selectedTab === 2">
+    <h1>ksdnksdnvos</h1>
+  </div>
+</div>
+
+
+  
+  
