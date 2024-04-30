@@ -8,7 +8,6 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./chat-room.component.css']
 })
 export class ChatRoomComponent implements OnInit ,OnDestroy {
-  message:string = "vs code test"
 
   connectionStatusSubscription: Subscription | undefined;
   isConnected: boolean | undefined;
@@ -25,19 +24,18 @@ export class ChatRoomComponent implements OnInit ,OnDestroy {
       } else {
         // Connection lost, handle accordingly
       }
-    });
+    });    
 
-    this.socketService.joinRoom("vscode" , "vscode");
-    // Subscribe to received messages
-    this.receivedMessageSubscription = this.socketService.receiveMessage$.subscribe((message: any) => {
-      console.log('Received message:', message);
-      // Handle received message here
-    });
     
   }
 
   sendMessage() {
-   this.socketService.sendMessage(this.message)
+    const data = {
+      "content": "vscode-data",
+      "room": "a",
+      "username": "vscode"
+  }
+   this.socketService.sendMessage(data)
   }
 
   ngOnDestroy(): void {

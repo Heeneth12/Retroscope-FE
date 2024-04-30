@@ -11,7 +11,8 @@ export class SocketService {
   receiveMessage$: BehaviorSubject<any> = new BehaviorSubject<any>(null); // Initialize receiveMessage$
 
   constructor() {
-    const socketUrl = 'http://10.10.10.26:9090';
+    // Adjust the socket URL and initialize the socket
+    const socketUrl = 'http://10.10.10.26:8085/?room=a&username=heeneth';
     this.socket = new Socket({ url: socketUrl });
 
     // Update connection status based on socket events
@@ -30,7 +31,6 @@ export class SocketService {
       // Emit received message to subscribers
       this.receiveMessage$.next(data);
     });
-    
   }
 
   // Method to send a message to the server
@@ -41,8 +41,9 @@ export class SocketService {
 
   // Method to join a room
   joinRoom(username: string, roomID: string) {
-    const data = username + "," + roomID;
+    const data = { username: username, room: roomID }; // Adjust the data format
     console.log('Joining room:', data);
+    // Emit the joinRoom event with the data
     this.socket.emit('joinRoom', data);
   }
 }
