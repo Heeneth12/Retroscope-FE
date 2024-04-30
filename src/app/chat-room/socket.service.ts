@@ -1,29 +1,36 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
-import { map } from 'rxjs';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SocketService {
+  private socket: Socket;
+  connectionStatus$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  receiveMessage$: BehaviorSubject<any> = new BehaviorSubject<any>(null); // Initialize receiveMessage$
 
-  connected: boolean = false;
+  constructor() {
+    const socketUrl = 'http://10.10.10.26:9090';
+    this.socket = new Socket({ url: socketUrl });
 
-  constructor(private socket: Socket) { }
-
-  // Method to establish connection with the Socket.IO server
-  connect() {
-    console.log('Attempting to connect to the Socket.IO server...');
-    this.socket.connect();
-
-    // Update connection status
+    // Update connection status based on socket events
     this.socket.on('connect', () => {
       console.log('Socket connected');
-      this.connected = true; // Update connection status flag
+      this.connectionStatus$.next(true); // Update connection status to true
     });
 
-    // Log current connection status
-    console.log('Connection status:', this.connected);
+    this.socket.on('disconnect', () => {
+      console.log('Socket disconnected');
+      this.connectionStatus$.next(false); // Update connection status to false
+    });
+
+    this.socket.on('receive_message', (data: any) => {
+      console.log('Received message from server:', data);
+      // Emit received message to subscribers
+      this.receiveMessage$.next(data);
+    });
+    
   }
 
   // Method to send a message to the server
@@ -32,33 +39,10 @@ export class SocketService {
     this.socket.emit('send_message', data);
   }
 
-  // Method to listen for incoming messages from the server
-  onReceiveMessage() {
-    return this.socket.fromEvent('receive_message').pipe(map(data =>console.log(data)))
-  }
-
-  // Method to handle user connection event
-  onConnect() {
-    return this.socket.fromEvent('connect');
-  }
-
-  // Method to handle user disconnection event
-  onDisconnect() {
-    return this.socket.fromEvent('disconnect');
-  }
-
-  // Method to handle user connection to a room event
-  onRoomJoin() {
-    return this.socket.fromEvent('room_join');
-  }
-
-  // Method to handle user disconnection from a room event
-  onRoomLeave() {
-    return this.socket.fromEvent('room_leave');
-  }
-
-  // Method to handle custom events sent by the server
-  onCustomEvent(eventName: string) {
-    return this.socket.fromEvent(eventName);
+  // Method to join a room
+  joinRoom(username: string, roomID: string) {
+    const data = username + "," + roomID;
+    console.log('Joining room:', data);
+    this.socket.emit('joinRoom', data);
   }
 }

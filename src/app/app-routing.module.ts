@@ -8,7 +8,6 @@ import { RoomFormComponent } from './room-form/room-form.component';
 
 const routes: Routes = [
   {path:'' ,component:HomeComponent},
-  {path:'chat', component : ChatRoomComponent},
   {path:'login' , component :LoginComponent},
   {path :'reg' , component : RegComponent},
   {path :'roomform' , component : RoomFormComponent},
