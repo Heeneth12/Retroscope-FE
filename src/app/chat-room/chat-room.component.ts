@@ -15,52 +15,56 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   receivedMessageSubscription: any;
   testAreaVer: boolean = false;
   isHovered: boolean = true;
-  // roomId: string | undefined;
-  // roomName: string | undefined;
+  username :string |null = localStorage.getItem('userName')
+  roomId : string |null = this.route.snapshot.params['roomId'];
+
+  newMessageText: any;
+  messages: any;
 
   constructor(private socketService: SocketService , private route:ActivatedRoute) {}
 
   ngOnInit(): void {
+    this.messages = []; // Initialize messages array here
+  
     const room = this.route.snapshot.params['roomId'];
-    const username = this.route.snapshot.params['roomName'];
-    // console.log(this.roomId)
-    // console.log(this.roomName)
-    // const room = this.route.snapshot.queryParamMap.get('room');
-    // const username = this.route.snapshot.queryParamMap.get('username');
-    this.socketService.initializeSocket(room!, username!);
+    // const username = this.route.snapshot.params['roomName'];
+    const username = localStorage.getItem('userName')
 
-      this.socketService.connectionStatus$.subscribe((connected: boolean) => {
-        this.isConnected = connected;
-        if (connected) {
-          // Connection established, you can perform actions here if needed
-        } else {
-          // Connection lost, handle accordingly
-        }
-      });
-     
-
-
+    this.socketService.initializeSocket(room, username!);
+    this.socketService.connectionStatus$.subscribe((connected: boolean) => {
+      this.isConnected = connected;
+      if (connected) {
+        // Connection established, you can perform actions here if needed
+      } else {
+        // Connection lost, handle accordingly
+      }
+    });
+  
+    this.socketService.receiveMessage$.subscribe((message: any) => {
+      // Handle received message
+      this.messages.push(message);
+    });
   }
-
+  //
   sendMessage() {
     const data = {
-      content: 'vscode-data',
-      room: 'a',
-      username: 'vscode',
+      content: this.newMessageText,
+      room: this.roomId,
+      username: this.username, // Change this to dynamically get the username
     };
     this.socketService.sendMessage(data);
+    this.newMessageText = ''; // Clear the input field after sending message
   }
+
 
   ngOnDestroy(): void {
     // Unsubscribe from subscriptions to avoid memory leaks
     if (this.connectionStatusSubscription) {
       this.connectionStatusSubscription.unsubscribe();
     }
-    if (this.receivedMessageSubscription) {
-      this.receivedMessageSubscription.unsubscribe();
-    }
   }
 
+  //toggle functions
   groupChatToggle() {
     this.groupChatToggleVer = !this.groupChatToggleVer;
   }

@@ -125,13 +125,40 @@
       </div>
     </div>
 
-    <button (click)="sendMessage()">send message</button>
+   
     <!-- group chat -->
+
     <div class="fixed bottom-0 right-0 mb-4 mr-4">
       <div>
         <div>
           <div *ngIf="groupChatToggleVer">
-            <app-chat></app-chat>
+            <div class="max-w-md  chat mx-auto my-2  bg-gray-100 rounded-sm shadow-md">
+              <div class="flex items-center px-2 my-2">
+                <div class="svg p-2">
+                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                  </svg>
+                </div>
+                <div class="px-1">
+                  <h2 class="text-mb text-gray-800 font-semibold mb-0">Chat Room</h2>
+                  <p class="m-0 font-thin text-gray-600 text-xs">online</p>
+                </div>
+              </div>
+              <div class="m-2 mt-4">
+                <div *ngFor="let message of messages" class="m-1">
+                  <div *ngIf="message" [ngClass]="{'justify-end': message.username === username, 'justify-start': message.sender !== 'user'}" class="flex">
+                    <div class="p-2 bg-white w-fit shadow-md rounded-lg">{{ message.content }}</div>
+                  </div>
+                </div>
+                
+              </div>
+                
+                <div class="flex bg-slate-300 mt-auto mt-min-50">
+                  <input type="text" [(ngModel)]="newMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
+                  <button (click)="sendMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
+                </div>
+              </div>
+              
           </div>
           <div>
             <button

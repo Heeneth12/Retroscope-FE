@@ -42,6 +42,8 @@ export class LoginComponent {
           // Save token to local storage
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('userEmail', response.userEmail);
+          localStorage.setItem('userName', response.userName);
+          
           console.log('JWT Token saved to local storage.');
           this.router.navigate(['/']); // Navigate to home page after successful login
         }

@@ -35,6 +35,7 @@ export class NavBarComponent {
   logout() {
     localStorage.removeItem('jwtToken');
     localStorage.removeItem('userEmail');
+    localStorage.removeItem('userName');
   }
 
 }
