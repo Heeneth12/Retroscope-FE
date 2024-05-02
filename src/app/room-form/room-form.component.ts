@@ -29,7 +29,7 @@ export class RoomFormComponent {
   ) {
     this.roomForm = this.formBuilder.group({
       roomName: ['', [Validators.required, Validators.email]],
-      roomCreator :"heeneth",
+      roomCreator :localStorage.getItem('userName'),
       roomDescription: ['', [Validators.required]],
       roomStartDate: [null], // Set default value to null
       roomEndDate: [null], // Set default value to null
@@ -43,9 +43,11 @@ export class RoomFormComponent {
       .post<any>('http://localhost:8080/add', this.roomForm.value)
       .subscribe(
         (response) => {
-          if (response.Status === 'OK') {
+          if (response.status === 'successfully crested room') {
             console.log('successful');
-            this.router.navigate(['/home']);
+            location.reload()
+            
+
           } else {
             console.error('failed:', response.error);
           }

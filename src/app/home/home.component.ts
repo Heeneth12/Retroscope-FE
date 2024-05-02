@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 @Component({
@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 export class HomeComponent implements OnInit {
   roomData: any;
   formToggleVer: boolean = false;
+  token:string|null = localStorage.getItem('jwtToken')
 
   constructor(private http: HttpClient, private router: Router) {}
 
@@ -22,7 +23,13 @@ export class HomeComponent implements OnInit {
 
   getRoomData() {
     const url = 'http://localhost:8080/get';
-    this.http.get<any>(url).subscribe((response) => {
+     // Define headers
+     const headers = new HttpHeaders()
+     .set('Content-Type', 'application/json')
+     .set('accept', '*/*')
+     .set('token' , this.token!);
+   
+    this.http.get<any>(url, {headers}).subscribe((response) => {
       console.log(response);
       this.roomData = response;
     });

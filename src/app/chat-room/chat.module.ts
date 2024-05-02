@@ -6,7 +6,7 @@ import { ChatRoomComponent } from './chat-room.component';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { NavBarComponent } from '../nav-bar/nav-bar.component';
-import { ChatComponent } from '../chat/chat.component';
+import { ChatComponent } from '../chatRoomBar/chat.component';
 
 @NgModule({
   declarations: [ChatRoomComponent, ChatComponent],

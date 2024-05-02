@@ -1,4 +1,5 @@
 <app-nav-bar></app-nav-bar>
+<app-chat></app-chat>
 <div>
   <div class="">
     <div
@@ -33,10 +34,15 @@
 
         <div *ngFor="let message of messages" class="m-1">
           <div *ngIf="message?.contentType === 'Good'">
-            <div><p
-              class="bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+            <div class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+              <p
             >{{ message?.content }}
-            </p></div>
+            </p>
+            <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 m-1">
+              <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
+            </svg>
+              {{ message?.username }}</p>
+          </div>
           </div>
         </div>
       </div>
@@ -52,7 +58,7 @@
         </button>
         <div class="my-4" *ngIf="badtestAreaVer">
           <textarea
-            class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
+            class="border font-bold text-white text-xs bg-red-400 p-1 w-full rounded-sm focus:outline-none"
             type="text"
             [(ngModel)]="badMessageText"
             placeholder="Enter text..."
@@ -67,10 +73,15 @@
         </div>
         <div *ngFor="let message of messages" class="m-1">
           <div *ngIf="message?.contentType === 'Bad'">
-            <div><p
-              class="bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+            <div class="flex justify-between bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+              <p
             >{{ message?.content }}
-            </p></div>
+            </p>
+            <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 m-1">
+              <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
+            </svg>
+              {{ message?.username }}</p>
+          </div>
           </div>
         </div>
         
@@ -88,7 +99,7 @@
           <textarea
             class="border font-bold text-white text-xs bg-blue-400 p-1 w-full rounded-sm focus:outline-none"
             type="text"
-            [(ngModel)]="badMessageText"
+            [(ngModel)]="avgMessageText"
             placeholder="Enter text..."
           ></textarea>
           <button
@@ -102,10 +113,15 @@
 
         <div *ngFor="let message of messages" class="m-1">
           <div *ngIf="message?.contentType === 'Avg'">
-            <div><p
-              class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+            <div class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+              <p
             >{{ message?.content }}
-            </p></div>
+            </p>
+            <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 m-1">
+              <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
+            </svg>
+              {{ message?.username }}</p>
+          </div>
           </div>
         </div>
       </div>
@@ -133,7 +149,8 @@
               <div class="m-2 mt-4">
                 <div *ngFor="let message of messages" class="m-1">
                   <div *ngIf="message?.contentType === 'Common'" [ngClass]="{'justify-end': message.username === username, 'justify-start': message.sender !== 'user'}" class="flex">
-                    <div class="p-2 bg-white w-fit shadow-md rounded-lg">{{ message.content }}</div>
+                    <div class="p-2 bg-white w-fit shadow-md rounded-lg">{{ message.content }} {{messages.username}} </div>
+                    
                   </div>
                 </div>
                 
