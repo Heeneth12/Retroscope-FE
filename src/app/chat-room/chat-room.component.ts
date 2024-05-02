@@ -13,13 +13,20 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   isConnected: boolean | undefined;
   groupChatToggleVer: boolean = false;
   receivedMessageSubscription: any;
-  testAreaVer: boolean = false;
   isHovered: boolean = true;
   username :string |null = localStorage.getItem('userName')
   roomId : string |null = this.route.snapshot.params['roomId'];
 
-  newMessageText: any;
+  commonMessageText: any;
+  goodMessageText: any;
+  badMessageText: any;
+  avgMessageText: any;
   messages: any;
+
+  //dropdown ver
+  goodtestAreaVer: boolean = false;
+  badtestAreaVer: boolean = false;
+  avgtestAreaVer: boolean = false;
 
   constructor(private socketService: SocketService , private route:ActivatedRoute) {}
 
@@ -45,15 +52,48 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       this.messages.push(message);
     });
   }
+
+
   //
-  sendMessage() {
+  sendCommonMessage() {
     const data = {
-      content: this.newMessageText,
+      content: this.commonMessageText,
       room: this.roomId,
       username: this.username, // Change this to dynamically get the username
+      contentType:"Common"
     };
     this.socketService.sendMessage(data);
-    this.newMessageText = ''; // Clear the input field after sending message
+    this.commonMessageText = ''; // Clear the input field after sending message
+  }
+  sendGoodMessage() {
+    const data = {
+      content: this.goodMessageText,
+      room: this.roomId,
+      username: this.username, // Change this to dynamically get the username
+      contentType:"Good"
+    };
+    this.socketService.sendMessage(data);
+    this.goodMessageText = ''; // Clear the input field after sending message
+  }
+  sendBadMessage() {
+    const data = {
+      content: this.badMessageText,
+      room: this.roomId,
+      username: this.username, // Change this to dynamically get the username
+      contentType:"Bad"
+    };
+    this.socketService.sendMessage(data);
+    this.badMessageText = ''; // Clear the input field after sending message
+  }
+  sendAvgMessage() {
+    const data = {
+      content: this.avgMessageText,
+      room: this.roomId,
+      username: this.username, // Change this to dynamically get the username
+      contentType:"Avg"
+    };
+    this.socketService.sendMessage(data);
+    this.avgMessageText = ''; // Clear the input field after sending message
   }
 
 
@@ -68,7 +108,13 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   groupChatToggle() {
     this.groupChatToggleVer = !this.groupChatToggleVer;
   }
-  textAreaDropDown() {
-    this.testAreaVer = !this.testAreaVer;
+  goodTextAreaDropDown() {
+    this.goodtestAreaVer = !this.goodtestAreaVer;
+  }
+  badTextAreaDropDown() {
+    this.badtestAreaVer = !this.badtestAreaVer;
+  }
+  avgTextAreaDropDown() {
+    this.avgtestAreaVer = !this.avgtestAreaVer;
   }
 }

@@ -9,49 +9,36 @@
           Good Area
         </h2>
         <button
-          (click)="textAreaDropDown()"
+          (click)="goodTextAreaDropDown()"
           class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold"
         >
           +
         </button>
 
-        <div class="my-4" *ngIf="testAreaVer">
+        <div class="my-4" *ngIf="goodtestAreaVer">
           <textarea
             class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
             type="text"
+            [(ngModel)]="goodMessageText"
             placeholder="Enter text..."
           ></textarea>
           <button
             class="bg-blue-400 rounded-sm text-white text-xs px-1"
             style="float: right"
+            (click)="sendGoodMessage()"
           >
             send
           </button>
         </div>
 
-        <div
-          class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 hover:scale-105 transition-transform duration-300"
-        >
-          <p>the project is too good</p>
-          <p class="">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              viewBox="0 0 20 20"
-              fill="currentColor"
-              class="w-5 h-5"
-            >
-              <path
-                d="M1 8.25a1.25 1.25 0 1 1 2.5 0v7.5a1.25 1.25 0 1 1-2.5 0v-7.5ZM11 3V1.7c0-.268.14-.526.395-.607A2 2 0 0 1 14 3c0 .995-.182 1.948-.514 2.826-.204.54.166 1.174.744 1.174h2.52c1.243 0 2.261 1.01 2.146 2.247a23.864 23.864 0 0 1-1.341 5.974C17.153 16.323 16.072 17 14.9 17h-3.192a3 3 0 0 1-1.341-.317l-2.734-1.366A3 3 0 0 0 6.292 15H5V8h.963c.685 0 1.258-.483 1.612-1.068a4.011 4.011 0 0 1 2.166-1.73c.432-.143.853-.386 1.011-.814.16-.432.248-.9.248-1.388Z"
-              />
-            </svg>
-          </p>
+        <div *ngFor="let message of messages" class="m-1">
+          <div *ngIf="message?.contentType === 'Good'">
+            <div><p
+              class="bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+            >{{ message?.content }}
+            </p></div>
+          </div>
         </div>
-
-        <p
-          class="bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
-        >
-          the project
-        </p>
       </div>
       <div class="bg-white p-2 shadow min-h-80 rounded-sm">
         <h2 class="text-xs text-center font-semibold text-gray-700">
@@ -59,69 +46,68 @@
         </h2>
         <button
           class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold"
+          (click)="badTextAreaDropDown()"
         >
           +
         </button>
-        <div class="my-4" *ngIf="testAreaVer">
+        <div class="my-4" *ngIf="badtestAreaVer">
           <textarea
             class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
             type="text"
+            [(ngModel)]="badMessageText"
             placeholder="Enter text..."
           ></textarea>
           <button
             class="bg-blue-400 rounded-sm text-white text-xs px-1"
             style="float: right"
+            (click)="sendBadMessage()"
           >
             send
           </button>
         </div>
-        <p
-          class="bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
-        >
-          the project is too good
-        </p>
-        <p
-          class="bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
-        >
-          the project is too good
-        </p>
+        <div *ngFor="let message of messages" class="m-1">
+          <div *ngIf="message?.contentType === 'Bad'">
+            <div><p
+              class="bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+            >{{ message?.content }}
+            </p></div>
+          </div>
+        </div>
+        
+     
       </div>
       <div class="bg-white p-2 shadow min-h-80 rounded-sm">
         <h2 class="text-xs text-center font-semibold">Avg</h2>
         <button
           class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold"
+          (click)="avgTextAreaDropDown()"
         >
           +
         </button>
-        <div class="my-4" *ngIf="testAreaVer">
+        <div class="my-4" *ngIf="avgtestAreaVer">
           <textarea
             class="border font-bold text-white text-xs bg-blue-400 p-1 w-full rounded-sm focus:outline-none"
             type="text"
+            [(ngModel)]="badMessageText"
             placeholder="Enter text..."
           ></textarea>
           <button
             class="bg-blue-400 rounded-sm text-white text-xs px-1"
             style="float: right"
+            (click)="sendAvgMessage()"
           >
             send
           </button>
         </div>
 
-        <p
-          class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1s hover:scale-105 transition-transform duration-300"
-        >
-          the project is Avg
-        </p>
-        <p
-          class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
-        >
-          good colours
-        </p>
-        <p
-          class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
-        >
-          nice team
-        </p>
+        <div *ngFor="let message of messages" class="m-1">
+          <div *ngIf="message?.contentType === 'Avg'">
+            <div><p
+              class="bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300"
+            >{{ message?.content }}
+            </p></div>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -146,7 +132,7 @@
               </div>
               <div class="m-2 mt-4">
                 <div *ngFor="let message of messages" class="m-1">
-                  <div *ngIf="message" [ngClass]="{'justify-end': message.username === username, 'justify-start': message.sender !== 'user'}" class="flex">
+                  <div *ngIf="message?.contentType === 'Common'" [ngClass]="{'justify-end': message.username === username, 'justify-start': message.sender !== 'user'}" class="flex">
                     <div class="p-2 bg-white w-fit shadow-md rounded-lg">{{ message.content }}</div>
                   </div>
                 </div>
@@ -154,8 +140,8 @@
               </div>
                 
                 <div class="flex bg-slate-300 mt-auto mt-min-50">
-                  <input type="text" [(ngModel)]="newMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
-                  <button (click)="sendMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
+                  <input type="text" [(ngModel)]="commonMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
+                  <button (click)="sendCommonMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
                 </div>
               </div>
               
