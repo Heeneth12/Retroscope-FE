@@ -15,7 +15,10 @@ import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { FooterComponent } from './footer/footer.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import { DialogComponent } from './dialog/dialog.component';
+import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { SnackbarComponent } from './snackbar/snackbar.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -27,6 +30,8 @@ import { ProfileComponent } from './profile/profile.component';
     RoomFormComponent,
     FooterComponent,
     ProfileComponent,
+    DialogComponent,
+    SnackbarComponent,
   ],
   imports: [
     BrowserModule,
@@ -35,7 +40,9 @@ import { ProfileComponent } from './profile/profile.component';
     ReactiveFormsModule,
     HttpClientModule,
     MatInputModule,
-    MatSelectModule
+    MatSelectModule,
+    MatDialogModule,
+    MatSnackBarModule
   ],
   providers: [
     provideAnimationsAsync()
