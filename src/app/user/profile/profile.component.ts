@@ -18,6 +18,8 @@ export class ProfileComponent implements OnInit {
   Uname: string | undefined; // Example name
   email: string | undefined; // Example email
   password: string = "********"; // Example password
+
+  token:string|null = localStorage.getItem('jwtToken')
   selectTab(tab: number) {
     this.selectedTab = tab;
     console.log(this.selectedTab)
@@ -48,7 +50,7 @@ throw new Error('Method not implemented.');
     const headers = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
-  .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Im5pa2hpbCJ9.59lIdod1HHMnBjKLuxLeyJAxuUHyWIsGYuMsDSUM-YQ');
+  .set('token', this.token!);
 
      const url = 'http://localhost:8080/user/getUserByToken';
     

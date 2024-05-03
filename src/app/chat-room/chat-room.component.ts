@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { SocketService } from './socket.service';
-import { Subscription } from 'rxjs';
+import { BehaviorSubject, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -22,7 +22,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   badMessageText: any;
   avgMessageText: any;
   messages: any;
-
+  filteredMessages: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
+  
   //dropdown ver
   goodtestAreaVer: boolean = false;
   badtestAreaVer: boolean = false;
@@ -31,11 +32,17 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   constructor(private socketService: SocketService , private route:ActivatedRoute) {}
 
   ngOnInit(): void {
-    this.messages = []; // Initialize messages array here
-  
+    // this.messages = []; // Initialize messages array here
     const room = this.route.snapshot.params['roomId'];
-    // const username = this.route.snapshot.params['roomName'];
     const username = localStorage.getItem('userName')
+
+  
+    this.messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+    
+    if (this.messages) {
+      this.filteredMessages.next(this.messages.filter((message: any) => message && message.room === room));
+    }
+    
 
     this.socketService.initializeSocket(room, username!);
     this.socketService.connectionStatus$.subscribe((connected: boolean) => {
@@ -50,6 +57,9 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     this.socketService.receiveMessage$.subscribe((message: any) => {
       // Handle received message
       this.messages.push(message);
+      // Save messages to localStorage
+      localStorage.setItem('chatMessages', JSON.stringify(this.messages));
+      this.filteredMessages.next(this.messages.filter((msg: any) =>msg && msg.room === room));
     });
   }
 

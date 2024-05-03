@@ -33,7 +33,7 @@
         </div>
 
         
-        <div *ngFor="let message of messages" class="m-1">
+        <div *ngFor="let message of filteredMessages | async" class="m-1">
           <div *ngIf="message?.contentType === 'Good'">
             <div class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
               <p
@@ -73,7 +73,8 @@
             send
           </button>
         </div>
-        <div *ngFor="let message of messages" class="m-1">
+
+        <div *ngFor="let message of filteredMessages | async" class="m-1">
           <div *ngIf="message?.contentType === 'Bad'">
             <div class="flex justify-between bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
               <p
@@ -113,9 +114,9 @@
           </button>
         </div>
 
-        <div *ngFor="let message of messages" class="m-1">
+        <div *ngFor="let message of filteredMessages | async" class="m-1">
           <div *ngIf="message?.contentType === 'Avg'">
-            <div class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+            <div class="flex justify-between bg-bule-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
               <p
             >{{ message?.content }}
             </p>
