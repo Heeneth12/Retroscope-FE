@@ -12,3 +12,7 @@
 .user{
     float: right;
 }
+
+.url{
+    border: 1px solid #a9a5a5  ;
+}

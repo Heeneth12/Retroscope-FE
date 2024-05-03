@@ -32,6 +32,7 @@
           </button>
         </div>
 
+        
         <div *ngFor="let message of messages" class="m-1">
           <div *ngIf="message?.contentType === 'Good'">
             <div class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
@@ -45,6 +46,7 @@
           </div>
           </div>
         </div>
+      
       </div>
       <div class="bg-white p-2 shadow min-h-80 rounded-sm">
         <h2 class="text-xs text-center font-semibold text-gray-700">
