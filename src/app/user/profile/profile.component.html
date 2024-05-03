@@ -1,0 +1,83 @@
+<app-nav-bar ></app-nav-bar>
+<div class="profile">
+  <div class="sidebar">
+    <ul>
+      <li [ngClass]="{'active': selectedTab === 0}" (click)="selectTab(0)">Profile</li>
+      
+      <li [ngClass]="{'active': selectedTab === 1}" (click)="selectTab(1)">Groups</li>
+    </ul>
+  </div>
+
+
+  <div class="card-align">
+    <div class="card shadow" *ngIf="selectedTab === 0">
+      <div>
+        <h1>Your Profile</h1>
+      </div>
+
+      <div class="multi-align">
+      <div class="all-input-align">
+
+        <div class="input-button-align">
+          <div class="input-align">
+            <label>Name:</label>
+            <div>
+              <input type="text" [value]="Uname" disabled>
+            </div>
+          </div>
+          <button class="changeButton" [disabled]=true (click)="openchangeNameDialog()">Change Name</button>
+        </div>
+
+
+        <div class="input-button-align">
+          <div class="input-align">
+            <label>Email:</label>
+            <div>
+              <input type="email" [value]="email" disabled>
+            </div>
+          </div>
+          <button class="changeButton" (click)="openChangeEmailDialog()">Change Email</button>
+        </div>
+
+
+        <div class="input-button-align">
+          <div class="input-align">
+            <label>Password:</label>
+            <div>
+              <input type="password" [value]="password" disabled>
+            </div>
+          </div>
+          <button class="changeButton" (click)="openChangePasswordDialog()">Change Password</button>
+        </div>
+      </div>
+      <div>
+        <img class="user-image" src="https://img.freepik.com/premium-vector/empty-face-icon-avatar-with-black-hair-vector-illustration_601298-13402.jpg?w=740" >
+       
+          <button class="delete-container">
+            <img class="delete-image" src="../../assets/images/delete.png">
+            <div class="delete-txt">
+            Delete Pic
+            </div>
+          </button>
+        
+        
+          <button class="uploadButton" (click)="changePic()">Upload New Pic</button>
+        
+      </div>
+
+    </div>
+  </div>
+ 
+  <!-- <div class="card-align"> -->
+    <!-- <div class="card shadow" *ngIf="selectedTab === 1">
+      <div>
+        <h1>Your Settings</h1>
+      </div>
+    </div> -->
+<!--     
+  </div> -->
+  <div class="group-align" *ngIf="selectedTab === 1">
+      <img height="100px" width="100px" src="../../assets/images/greeting-card.png"/>
+      <h2>Add a group of people and simplify email communication with them.</h2>
+      <button class="groupButton">Create New Group</button>
+  </div>

@@ -13,7 +13,11 @@ import { provideAnimationsAsync } from '@angular/platform-browser/animations/asy
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
 import { ChatModule } from './chat-room/chat.module';
-
+import { ProfileComponent } from './user/profile/profile.component';
+import { DialogComponent } from './user/dialog/dialog.component';
+import { SnackbarComponent } from './user/snackbar/snackbar.component';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDialogModule} from '@angular/material/dialog';
 
 @NgModule({
     declarations: [
@@ -22,6 +26,9 @@ import { ChatModule } from './chat-room/chat.module';
         LoginComponent,
         RegComponent,
         RoomFormComponent,
+        ProfileComponent,
+        DialogComponent,
+        SnackbarComponent,
     ],
     providers: [
         provideAnimationsAsync()
@@ -36,7 +43,9 @@ import { ChatModule } from './chat-room/chat.module';
         MatInputModule,
         MatSelectModule,
         ChatModule,
-        NavBarComponent
+        NavBarComponent,
+        MatDialogModule,
+        MatSnackBarModule
     ]
 })
 export class AppModule { }

@@ -1,0 +1,12 @@
+.bar-align{
+   
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    color: hotpink;
+ 
+ }
+ 
+ button{
+     margin-left: 20px;
+ }

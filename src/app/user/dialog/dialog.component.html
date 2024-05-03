@@ -1,0 +1,21 @@
+<div class="dialog-align">
+    <h1>Change  {{data.name}}</h1>
+    @if(data.name === "New Password"){
+    
+      <div>
+        
+        <input type="email" [(ngModel)]="data.pass" placeholder="Old Password" >
+      </div>
+    }
+    
+      
+      <div>
+        <input type="email" [(ngModel)]="data.content" placeholder="{{data.name}}" >
+      </div>
+    
+    </div>
+    
+    <mat-dialog-actions class="button-align">
+      <button class="exitButton" (click)="onNoClick()">Exit</button>
+      <button class="saveButton" [mat-dialog-close]="data" cdkFocusInitial>Save</button>
+    </mat-dialog-actions>
