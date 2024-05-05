@@ -17,7 +17,14 @@
         <div  class="flex justify-between">
             <h4 class="font-thin text-gray-700" >Public boards collaborate by sharing room ID</h4>
             <div class="flex items-center">
-                <button class="mx-4"><img src="https://static.wixstatic.com/media/17ac83_810739dfef3941449effd1751ba1c080~mv2.gif" width="64" height="32"></button>
+                <div *ngIf="true" class="flex space-x-4">
+                    <p class="bg-green-400 text-white px-2 py-1 rounded">Good: {{messageTypeCount?.Good}}</p>
+                    <p class="bg-blue-400 text-white px-2 py-1 rounded">Avg: {{messageTypeCount?.Avg}}</p>
+                    <p class="bg-red-400 text-white px-2 py-1 rounded">Bad: {{messageTypeCount?.Bad}}</p>
+                    <p class="bg-yellow-400 text-white px-2 py-1 rounded">Common: {{messageTypeCount?.Common}}</p>
+                </div>
+                
+                <button (click)="reportData()" class="mx-4"><img src="https://static.wixstatic.com/media/17ac83_810739dfef3941449effd1751ba1c080~mv2.gif" width="64" height="32"></button>
                 <div class="">
                     <button class="flex px-4 items-center text-gray-800 bg-slate-300 border-gray-600 hover:bg-slate-350">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 m-1">

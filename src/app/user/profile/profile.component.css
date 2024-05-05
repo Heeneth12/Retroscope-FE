@@ -1,9 +1,9 @@
 .profile{
-    background-color: rgb(214, 190, 190);
+    background-color: rgb(219, 212, 212);
     background-size: cover;
     height: 100vh;
     display: flex;
-    
+    align-items: center;
   }
   
   
@@ -30,10 +30,11 @@
       background-color: #555;
     }
     .card{
-      margin-left: 100px;
       width: 100%;
       color: black;
       display: flex;
+      justify-content: center;
+      align-items: center;
       flex-direction: column;
       justify-content: start;
       align-items: start;
@@ -43,10 +44,9 @@
       
     }
     .card-align{
-      display: flex;
+     
       
-      justify-content: center;
-      align-items: center;
+    
     }
     h1{
       margin-left: 20px;

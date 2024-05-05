@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, output } from '@angular/core';
 import { SocketService } from './socket.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
@@ -17,6 +17,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   username :string |null = localStorage.getItem('userName')
   roomId : string |null = this.route.snapshot.params['roomId'];
 
+  
   commonMessageText: any;
   goodMessageText: any;
   badMessageText: any;
@@ -28,6 +29,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   goodtestAreaVer: boolean = false;
   badtestAreaVer: boolean = false;
   avgtestAreaVer: boolean = false;
+  chartData: any = this.roomId;
 
   constructor(private socketService: SocketService , private route:ActivatedRoute) {}
 
