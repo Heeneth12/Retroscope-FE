@@ -44,7 +44,7 @@ export class LoginComponent {
           // Save token to local storage
           this._snackBar.openFromComponent(SnackbarComponent, {
             duration: this.durationInSeconds * 1000,
-            data: { loggedIn: true } 
+            data: { loggedIn: 0 } 
           });
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('userEmail', response.userEmail);

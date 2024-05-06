@@ -1,6 +1,8 @@
 import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
+import { SnackbarComponent } from '../user/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-chat',
@@ -13,10 +15,11 @@ export class ChatComponent  {
 
   dropdownOpen:boolean  =false;
   emails = [ ]
+  durationInSeconds = 5;
 
 
   url :string = "";
-  constructor(private http: HttpClient , private router : Router) {
+  constructor(private http: HttpClient , private router : Router, private _snackBar: MatSnackBar) {
     console.log(this.router.url);
     this.url = this.router.url
   } // Inject Router module
@@ -56,8 +59,11 @@ export class ChatComponent  {
     console.log(emailId)
     this.http.post<any>(url,emailId, {headers}).subscribe(
       (response) => {
-        if(response!=null){
-          console.log(response)
+        if(response.Status == "OK"){
+          this._snackBar.openFromComponent(SnackbarComponent, {
+            duration: this.durationInSeconds * 1000,
+            data: { loggedIn: 2 } 
+          });
         }else{
           console.log("error")
         }

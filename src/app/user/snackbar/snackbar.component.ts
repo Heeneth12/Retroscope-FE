@@ -7,7 +7,7 @@ import { MAT_SNACK_BAR_DATA, MatSnackBarRef } from '@angular/material/snack-bar'
   styleUrl: './snackbar.component.css'
 })
 export class SnackbarComponent {
-  loggedIn: boolean;
+  loggedIn: number;
 
   constructor(@Inject(MAT_SNACK_BAR_DATA) public data: any) {
     this.loggedIn = data.loggedIn;
