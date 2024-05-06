@@ -21,6 +21,7 @@
             class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
             type="text"
             [(ngModel)]="goodMessageText"
+            (keydown.enter)="sendGoodMessage()"
             placeholder="Enter text..."
           ></textarea>
           <button
@@ -64,6 +65,7 @@
             type="text"
             [(ngModel)]="badMessageText"
             placeholder="Enter text..."
+            (keydown.enter)="sendBadMessage()"
           ></textarea>
           <button
             class="bg-blue-400 rounded-sm text-white text-xs px-1"
@@ -104,6 +106,7 @@
             type="text"
             [(ngModel)]="avgMessageText"
             placeholder="Enter text..."
+            (keydown.enter)="sendAvgMessage()"
           ></textarea>
           <button
             class="bg-blue-400 rounded-sm text-white text-xs px-1"
@@ -177,8 +180,8 @@
               </div>
                 
                 <div class="flex bg-slate-300 mt-auto mt-min-50">
-                  <input type="text" [(ngModel)]="commonMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
-                  <button (click)="sendCommonMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
+                  <input type="text" (keydown.enter)="sendCommonMessage()"  [(ngModel)]="commonMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
+                  <button (click)="sendCommonMessage()"  class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
                 </div>
               </div>
               

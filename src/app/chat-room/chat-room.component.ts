@@ -17,7 +17,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   username :string |null = localStorage.getItem('userName')
   roomId : string |null = this.route.snapshot.params['roomId'];
 
-  
+
+ 
   commonMessageText: any;
   goodMessageText: any;
   badMessageText: any;

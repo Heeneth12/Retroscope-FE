@@ -21,6 +21,20 @@ export class RoomFormComponent {
     'What ideas do you have?',
     'How should we take action?',
   ];
+  
+
+  topicListData(){
+    const url = "http://localhost:8080/topic/getAllTopic";
+    this.http.get<any>(url).subscribe(Response =>{
+      console.log(Response)
+    })
+
+  }
+
+  ngOnInit(): void {
+    
+  }
+  
 
   constructor(
     private formBuilder: FormBuilder,
@@ -46,8 +60,6 @@ export class RoomFormComponent {
           if (response.status === 'successfully crested room') {
             console.log('successful');
             location.reload()
-            
-
           } else {
             console.error('failed:', response.error);
           }

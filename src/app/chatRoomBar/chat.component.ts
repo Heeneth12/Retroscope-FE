@@ -1,17 +1,38 @@
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.css']
 })
-export class ChatComponent {
+export class ChatComponent  {
   @Input() data: string | null = null;
 
-  constructor(private http: HttpClient) {} // Inject Router module
+  dropdownOpen:boolean  =false;
 
 
+
+  url :string = "";
+  constructor(private http: HttpClient , private router : Router) {
+    console.log(this.router.url);
+    this.url = this.router.url
+  } // Inject Router module
+
+
+  toggleDropdown(){
+
+    this.dropdownOpen = !this.dropdownOpen;
+    console.log(this.dropdownOpen)
+
+  }
+
+
+
+
+
+  
   dataToggle:boolean =false;
 
   messageTypeCount:any= {};
