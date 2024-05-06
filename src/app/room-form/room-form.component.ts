@@ -31,8 +31,8 @@ export class RoomFormComponent {
       roomName: ['', [Validators.required, Validators.email]],
       roomCreator :localStorage.getItem('userName'),
       roomDescription: ['', [Validators.required]],
-      roomStartDate: [null], // Set default value to null
-      roomEndDate: [null], // Set default value to null
+      startDate: [], 
+      endDate: [], 
       roomTopics: [[]],
     });
   }

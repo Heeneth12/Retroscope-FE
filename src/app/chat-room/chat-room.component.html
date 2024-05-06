@@ -149,7 +149,7 @@
     <div class="fixed bottom-0 right-0 mb-4 mr-4">
       <div>
         <div>
-          <div *ngIf="groupChatToggleVer">
+          <div class="min-w-48" *ngIf="groupChatToggleVer">
             <div class="max-w-md  chat mx-auto my-2  bg-gray-100 rounded-sm shadow-md">
               <div class="flex items-center px-2 my-2">
                 <div class="svg p-2">
@@ -163,11 +163,15 @@
                 </div>
               </div>
               <div class="m-2 mt-4">
-                <div *ngFor="let message of messages" class="m-1">
+                <div *ngFor="let message of filteredMessages | async" class="m-1">
                   <div *ngIf="message?.contentType === 'Common'" [ngClass]="{'justify-end': message.username === username, 'justify-start': message.sender !== 'user'}" class="flex">
-                    <div class="p-2 bg-white w-fit shadow-md rounded-lg">{{ message.content }} {{messages.username}} </div>
-                    
+                    <div class="p-3 bg-gray-100 shadow-md rounded-lg">
+                      <p class="text-sm text-gray-800 font-semibold">{{ message.content }}</p> 
+                      <p class="text-xs font-thin text-gray-600">{{ message.username }}</p>
+                    </div>
                   </div>
+                  
+                  
                 </div>
                 
               </div>
