@@ -112,7 +112,7 @@ throw new Error('Method not implemented.');
               this.email = this.newEmail;
               this._snackBar.openFromComponent(SnackbarComponent, {
                 duration: this.durationInSeconds * 1000,
-                
+                data: { loggedIn: false }
               });
             
             } else{
@@ -168,7 +168,7 @@ throw new Error('Method not implemented.');
               console.log('successful');
               this._snackBar.openFromComponent(SnackbarComponent, {
                 duration: this.durationInSeconds * 1000,
-                
+                data: { loggedIn: false }
               });
             
             } else{

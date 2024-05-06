@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router'; // Import Router module
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackbarComponent } from '../../user/snackbar/snackbar.component';
 
 @Component({
   selector: 'app-login',
@@ -12,8 +14,8 @@ export class LoginComponent {
   password: string = '';
 
   data: any;
-
-  constructor(private http: HttpClient, private router: Router) {} // Inject Router module
+  durationInSeconds = 5;
+  constructor(private http: HttpClient, private router: Router, private _snackBar: MatSnackBar) {} // Inject Router module
 
   sendData() {
     console.log('Received email:', this.email);
@@ -40,6 +42,10 @@ export class LoginComponent {
         // Check if response has a token
         if (response && response.token) {
           // Save token to local storage
+          this._snackBar.openFromComponent(SnackbarComponent, {
+            duration: this.durationInSeconds * 1000,
+            data: { loggedIn: true } 
+          });
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('userEmail', response.userEmail);
           localStorage.setItem('userName', response.userName);

@@ -178,7 +178,7 @@
     }
     .group-align{
       display: flex;
-      margin-left: 300px;
+      
       flex-direction: column;
       justify-content: center;
       align-items: center;
