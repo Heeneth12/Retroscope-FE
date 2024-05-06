@@ -16,3 +16,9 @@
 .url{
     border: 1px solid #a9a5a5  ;
 }
+.dropEmailAlign{
+     /* Adjust the height as needed */
+    overflow-y: auto;
+    max-height: 150px;
+    /* Enable vertical scrollbar */
+}

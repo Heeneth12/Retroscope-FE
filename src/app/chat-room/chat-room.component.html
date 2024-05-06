@@ -147,68 +147,56 @@
     </div>
 
    
-    <!-- group chat -->
+<!-- group chat -->
 
-    <div class="fixed bottom-0 right-0 mb-4 mr-4">
+<div class="fixed bottom-0 right-0 mb-4 mr-4">
+  <div>
+    <div>
       <div>
-        <div>
-          <div class="min-w-48" *ngIf="groupChatToggleVer">
-            <div class="max-w-md  chat mx-auto my-2  bg-gray-100 rounded-sm shadow-md">
-              <div class="flex items-center px-2 my-2">
-                <div class="svg p-2">
-                  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
-                  </svg>
-                </div>
-                <div class="px-1">
-                  <h2 class="text-mb text-gray-800 font-semibold mb-0">Chat Room</h2>
-                  <p class="m-0 font-thin text-gray-600 text-xs">online</p>
-                </div>
+        <div class="min-w-48" *ngIf="groupChatToggleVer" style="overflow-y: auto;">
+          <div class="max-w-md chat mx-auto my-2 bg-gray-100 rounded-sm shadow-md">
+            <!-- Chat header -->
+            <div class="flex items-center px-2 my-2">
+              <div class="svg p-2">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                </svg>
               </div>
-              <div class="m-2 mt-4">
-                <div *ngFor="let message of filteredMessages | async" class="m-1">
-                  <div *ngIf="message?.contentType === 'Common'" [ngClass]="{'justify-end': message.username === username, 'justify-start': message.sender !== 'user'}" class="flex">
-                    <div class="p-3 bg-gray-100 shadow-md rounded-lg">
-                      <p class="text-sm text-gray-800 font-semibold">{{ message.content }}</p> 
-                      <p class="text-xs font-thin text-gray-600">{{ message.username }}</p>
-                    </div>
+              <div class="px-1">
+                <h2 class="text-mb text-gray-800 font-semibold mb-0">Chat Room</h2>
+                <p class="m-0 font-thin text-gray-600 text-xs">online</p>
+              </div>
+            </div>
+            <!-- Chat messages -->
+            <div class="m-2 mt-4 min-h-36 max-h-96 overflow-y-auto">
+              <div *ngFor="let message of filteredMessages | async" class="m-1">
+                <div *ngIf="message?.contentType === 'Common'" [ngClass]="{'justify-end': message.username === username, 'justify-start': message.sender !== 'user'}" class="flex">
+                  <div class="p-3 bg-gray-100 shadow-md rounded-lg">
+                    <p class="text-sm text-gray-800 font-semibold">{{ message.content }}</p> 
+                    <p class="text-xs font-thin text-gray-600">{{ message.username }}</p>
                   </div>
-                  
-                  
-                </div>
-                
-              </div>
-                
-                <div class="flex bg-slate-300 mt-auto mt-min-50">
-                  <input type="text" (keydown.enter)="sendCommonMessage()"  [(ngModel)]="commonMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
-                  <button (click)="sendCommonMessage()"  class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
                 </div>
               </div>
-              
+            </div>
+            <!-- Input box -->
+            <div class="flex bg-slate-300 mt-auto mt-min-50">
+              <input type="text" (keydown.enter)="sendCommonMessage()" [(ngModel)]="commonMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
+              <button (click)="sendCommonMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
+            </div>
           </div>
-          <div>
-            <button
-              (click)="groupChatToggle()"
-              class="chat-svg text-gray-800 shadow-lg hover:text-gray-600"
-            >
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                fill="none"
-                viewBox="0 0 24 24"
-                stroke-width="1.5"
-                stroke="currentColor"
-                class="w-6 h-6"
-              >
-                <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155"
-                />
-              </svg>
-            </button>
-          </div>
+        </div>
+        <div>
+          <!-- Chat toggle button -->
+          <button (click)="groupChatToggle()" class="chat-svg text-gray-800 shadow-lg hover:text-gray-600">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M20.25 8.511c.884.284 1.5 1.128 1.5 2.097v4.286c0 1.136-.847 2.1-1.98 2.193-.34.027-.68.052-1.02.072v3.091l-3-3c-1.354 0-2.694-.055-4.02-.163a2.115 2.115 0 0 1-.825-.242m9.345-8.334a2.126 2.126 0 0 0-.476-.095 48.64 48.64 0 0 0-8.048 0c-1.131.094-1.976 1.057-1.976 2.192v4.286c0 .837.46 1.58 1.155 1.951m9.345-8.334V6.637c0-1.621-1.152-3.026-2.76-3.235A48.455 48.455 0 0 0 11.25 3c-2.115 0-4.198.137-6.24.402-1.608.209-2.76 1.614-2.76 3.235v6.226c0 1.621 1.152 3.026 2.76 3.235.577.075 1.157.14 1.74.194V21l4.155-4.155" />
+            </svg>
+          </button>
         </div>
       </div>
     </div>
+    
+  </div>
+</div>
   </div>
 </div>

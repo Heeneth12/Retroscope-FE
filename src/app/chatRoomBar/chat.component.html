@@ -21,9 +21,21 @@
                                 <button class="bg-blue-500 text-white px-2 py-1 rounded hover:bg-blue-600">Send</button>
                               </div>
                             </li>
-                            <li><a href="#" class="block px-2 py-2 text-gray-800 hover:bg-gray-200">Option 1</a></li>
-                            <li><a href="#" class="block px-2 py-2 text-gray-800 hover:bg-gray-200">Option 2</a></li>
+                            <div class="dropEmailAlign">
+                              <div class=" flex justify-between" *ngFor="let email of emails">
+                                
+                                <li><p href="#" class="block px-2 py-2 text-gray-800 hover:bg-gray-200">{{email}}</p>
+                                </li>
+                                <button (click)="SendEmail(email)" class="block px-2 py-2 text-gray-800 hover:bg-gray-200">
+                                  <img height="16px" width="16px" src="../../assets/images/paper-plane.png"> 
+                                </button>
+                              </div>
+                            </div>
+                            
+                            
+                            
                             <!-- Add more options as needed -->
+                          
                           </ul>
                         </div>
                       </div>

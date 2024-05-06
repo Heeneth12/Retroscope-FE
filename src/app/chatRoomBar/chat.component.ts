@@ -1,4 +1,4 @@
-import { HttpClient, HttpClientModule } from '@angular/common/http';
+import { HttpClient, HttpClientModule, HttpHeaders } from '@angular/common/http';
 import { Component, Input } from '@angular/core';
 import { Router } from '@angular/router';
 
@@ -8,10 +8,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./chat.component.css']
 })
 export class ChatComponent  {
+
   @Input() data: string | null = null;
 
   dropdownOpen:boolean  =false;
-
+  emails = [ ]
 
 
   url :string = "";
@@ -24,12 +25,45 @@ export class ChatComponent  {
   toggleDropdown(){
 
     this.dropdownOpen = !this.dropdownOpen;
+    if(this.dropdownOpen){
+      this.http.get<any>('http://localhost:8080/user/getEmail').subscribe(
+        (response) => {
+          console.log(response)
+          if(response != null){
+            this.emails = response
+          }
+          else{
+            console.log("error")
+          }
+        }
+      )
+    }
     console.log(this.dropdownOpen)
 
   }
 
 
-
+  SendEmail(email:string) {
+    const url = 'http://localhost:8080/user/sendEmail'
+    const headers = new HttpHeaders()
+  .set('Content-Type', 'application/json')
+  .set('Accept', 'application/json')
+  .set('link', this.router.url);
+    const emailId = {
+      "userEmail" : email
+    }
+    console.log(this.router.url)
+    console.log(emailId)
+    this.http.post<any>(url,emailId, {headers}).subscribe(
+      (response) => {
+        if(response!=null){
+          console.log(response)
+        }else{
+          console.log("error")
+        }
+      }
+    )
+  }
 
 
   
