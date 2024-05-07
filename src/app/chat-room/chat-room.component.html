@@ -3,9 +3,9 @@
 <div>
   <div class="">
     <div
-      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-3 gap-2 mt-6 px-2 lg:px-12"
+      class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 min-h-svh lg:grid-cols-3 gap-2 mt-2 px-2 lg:px-12"
     >
-      <div class="bg-white p-2 shadow min-h-80 rounded-sm chat-card">
+      <div class="bg-white p-2 shadow min-h-96 rounded-sm chat-card">
         <h2 class="text-xs text-center font-semibold text-gray-700">
           Good Area
         </h2>
@@ -17,13 +17,18 @@
         </button>
 
         <div class="my-4" *ngIf="goodtestAreaVer">
-          <textarea
+          <div>
+            <textarea
             class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
             type="text"
             [(ngModel)]="goodMessageText"
             (keydown.enter)="sendGoodMessage()"
             placeholder="Enter text..."
+            
           ></textarea>
+          </div>
+          
+          
           <button
             class="bg-blue-400 rounded-sm text-white text-xs px-1"
             style="float: right"
@@ -36,14 +41,30 @@
         
         <div *ngFor="let message of filteredMessages | async" class="m-1">
           <div *ngIf="message?.contentType === 'Good'">
-            <div class="flex justify-between bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
-              <p
+            <div class=" bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+              <div class="flex justify-between">
+                <p
             >{{ message?.content }}
             </p>
+            
             <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 m-1">
               <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
             </svg>
-              {{ message?.username }}</p>
+              {{ message?.username }}
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                </svg>
+              </button>
+            </p>
+              </div>
+              <div  class="flex justify-start">
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                  </svg>
+                </button>
+              </div>
           </div>
           </div>
         </div>
@@ -78,14 +99,30 @@
 
         <div *ngFor="let message of filteredMessages | async" class="m-1">
           <div *ngIf="message?.contentType === 'Bad'">
-            <div class="flex justify-between bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
-              <p
+            <div class=" bg-red-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+              <div class="flex justify-between">
+                <p
             >{{ message?.content }}
             </p>
+            
             <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 m-1">
               <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
             </svg>
-              {{ message?.username }}</p>
+              {{ message?.username }}
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                </svg>
+              </button>
+            </p>
+              </div>
+              <div  class="flex justify-start">
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                  </svg>
+                </button>
+              </div>
           </div>
           </div>
         </div>
@@ -116,30 +153,32 @@
             send
           </button>
         </div>
-
-        <!-- <div *ngFor="let message of filteredMessages | async" class="m-1">
-          <div *ngIf="message?.contentType === 'Avg'">
-            <div class="flex justify-between bg-bule-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
-              <p
-            >{{ message?.content }}
-            </p>
-            <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 m-1">
-              <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
-            </svg>
-              {{ message?.username }}</p>
-          </div>
-          </div>
-        </div> -->
         <div *ngFor="let message of filteredMessages | async" class="m-1">
           <div *ngIf="message?.contentType === 'Avg'">
-            <div class="flex justify-between bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
-              <p
+            <div class=" bg-blue-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+              <div class="flex justify-between">
+                <p
             >{{ message?.content }}
             </p>
+            
             <p class="flex items-center"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" fill="currentColor" class="w-4 h-4 m-1">
               <path fill-rule="evenodd" d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z" clip-rule="evenodd" />
             </svg>
-              {{ message?.username }}</p>
+              {{ message?.username }}
+              <button>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 12.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5ZM12 18.75a.75.75 0 1 1 0-1.5.75.75 0 0 1 0 1.5Z" />
+                </svg>
+              </button>
+            </p>
+              </div>
+              <div  class="flex justify-start">
+                <button>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-4 h-4">
+                    <path d="M10.75 4.75a.75.75 0 0 0-1.5 0v4.5h-4.5a.75.75 0 0 0 0 1.5h4.5v4.5a.75.75 0 0 0 1.5 0v-4.5h4.5a.75.75 0 0 0 0-1.5h-4.5v-4.5Z" />
+                  </svg>
+                </button>
+              </div>
           </div>
           </div>
         </div>
@@ -154,9 +193,9 @@
     <div>
       <div>
         <div class="min-w-48" *ngIf="groupChatToggleVer" style="overflow-y: auto;">
-          <div class="max-w-md chat mx-auto my-2 bg-gray-100 rounded-sm shadow-md">
+          <div class="max-w-md chat mx-auto my-2 bg-gray-100 rounded-sm shadow-lg">
             <!-- Chat header -->
-            <div class="flex items-center px-2 my-2">
+            <div class="flex items-center bg-slate-300  px-2 p-2 ">
               <div class="svg p-2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
                   <path stroke-linecap="round" stroke-linejoin="round" d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
@@ -179,9 +218,9 @@
               </div>
             </div>
             <!-- Input box -->
-            <div class="flex bg-slate-300 mt-auto mt-min-50">
-              <input type="text" (keydown.enter)="sendCommonMessage()" [(ngModel)]="commonMessageText" placeholder="Type your message..." class="flex-1 px-4 py-2 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
-              <button (click)="sendCommonMessage()" class="px-4 py-2 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
+            <div class="flex p-1 bg-slate-100 mt-auto mt-min-50">
+              <input type="text" (keydown.enter)="sendCommonMessage()" [(ngModel)]="commonMessageText" placeholder="Type your message..." class="flex-1 px-4 py-1 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
+              <button (click)="sendCommonMessage()" class="px-4 py-1 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
             </div>
           </div>
         </div>

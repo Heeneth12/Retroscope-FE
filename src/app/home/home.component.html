@@ -39,8 +39,7 @@
         <div *ngFor="let item of roomData" [routerLink]="['/chat', item.roomId, item.roomName]" class="card p-4 bg-white hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
             <div class="flex justify-between items-center">
                 <h3 class="text-sm font-semibold text-gray-700">Room-id : {{item.roomId}}</h3>
-            <p class="text-sm text-gray-600">
-                Active:
+            <p class=" items-center justify-center text-xs text-gray-600">
                 <span class="inline-block h-3 w-3 rounded-full ml-1 {{item.active ? 'bg-green-500' : 'bg-red-500'}}"></span>
             </p>
 
@@ -50,10 +49,7 @@
             <h3 class="text-sm font-semibold text-gray-700">Room Name: {{item.roomName}}</h3>
             <h3 class="text-sm font-semibold text-gray-700">Description</h3>
             <p class=" font-thin text-sm bg-slate-100 p-2 rounded-sm">{{item.roomDescription}}</p>
-            <div class="flex justify-end">
-                <p class="text-sm text-gray-600">6:30 - </p>
-                <p class="text-sm text-gray-600">7:30</p>
-            </div>
+            
         </div>
     </div>
     <div *ngIf="formToggleVer"  class="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">

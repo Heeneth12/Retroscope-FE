@@ -14,11 +14,15 @@ export class ChatComponent  {
   @Input() data: string | null = null;
 
   dropdownOpen:boolean  =false;
+  dropdownPeople: boolean = false;
   emails = [ ]
   durationInSeconds = 5;
 
+  roomName:string = "Demo project"
+
 
   url :string = "";
+
   constructor(private http: HttpClient , private router : Router, private _snackBar: MatSnackBar) {
     console.log(this.router.url);
     this.url = this.router.url
@@ -70,21 +74,27 @@ export class ChatComponent  {
       }
     )
   }
+  
+  showJoinedUsers(){
+    this.dropdownPeople = !this.dropdownPeople
+    console.log(this.dropdownPeople)
+
+  }
 
 
   
   dataToggle:boolean =false;
 
-  messageTypeCount:any= {};
-  reportData() {
-    const url = `http://localhost:8080/message/analysisMessage/${this.data}`;
-    this.http.get<any>(url).subscribe((Response) => {
-      console.log(Response);
-      this.messageTypeCount = Response
-      this.dataToggle = !this.dataToggle
-      console.log(this.dataToggle)
+  // messageTypeCount:any= {};
+  // reportData() {
+  //   const url = `http://localhost:8080/message/analysisMessage/${this.data}`;
+  //   this.http.get<any>(url).subscribe((Response) => {
+  //     console.log(Response);
+  //     this.messageTypeCount = Response
+  //     this.dataToggle = !this.dataToggle
+  //     console.log(this.dataToggle)
       
-    });
-  }
+  //   });
+  // }
 
 }

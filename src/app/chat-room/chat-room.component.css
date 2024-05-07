@@ -49,4 +49,9 @@ textarea{
     float: right;
   }
 
+  .chat{
+    border: 2px solid rgb(194, 192, 192);
+   
+  }
+
   
