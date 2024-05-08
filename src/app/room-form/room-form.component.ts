@@ -10,6 +10,7 @@ import { Router } from '@angular/router';
 })
 export class RoomFormComponent {
   roomForm: FormGroup;
+  
   topicList: string[] = [
     'What went well?',
     'What did not go well?',
@@ -43,21 +44,18 @@ export class RoomFormComponent {
   ) {
     this.roomForm = this.formBuilder.group({
       roomName: ['', [Validators.required, Validators.email]],
-      roomCreator :localStorage.getItem('userName'),
       roomDescription: ['', [Validators.required]],
-      startDate: [], 
-      endDate: [], 
-      roomTopics: [[]],
+      user : [localStorage.getItem('userId')]
     });
   }
 
   onsubmit() {
-    console.log(this.roomForm.value);
+    console.log(this.roomForm.value)
     this.http
-      .post<any>('http://localhost:8080/add', this.roomForm.value)
+      .post<any>('http://localhost:8080/create', this.roomForm.value)
       .subscribe(
         (response) => {
-          if (response.status === 'successfully crested room') {
+          if (response.status === 'successfully created') {
             console.log('successful');
             location.reload()
           } else {

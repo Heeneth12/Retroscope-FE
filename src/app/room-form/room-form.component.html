@@ -1,5 +1,5 @@
 <div class="row h-100 card card-align">
-  <div class="min-w-fit shadow">
+  <div class="shadow w-full">
     <div>
       <h1 class="text-slate-700 font-bold heading-align">CREATE ROOM</h1>
     </div>
@@ -7,13 +7,11 @@
       <form [formGroup]="roomForm" (ngSubmit)="onsubmit()">
         <div class="input-align">
           <mat-label>Title</mat-label>
-
-          <input
+          <input 
             class="form-control"
             placeholder="Ex. project"
             value=""
             formControlName="roomName"
-            height="30px"
           />
         </div>
         <div class="input-align">
@@ -25,33 +23,17 @@
             formControlName="roomDescription"
           ></textarea>
         </div>
-        <div class="flex justify-between">
-          <div class="input-align">
-            <mat-label for="startTime">Start Time</mat-label>
-            <input
-              type="datetime-local"
-              class="form-control"
-              id="startTime"
-              name="startTime"
-              formControlName="startDate"
-            />
-          </div>
-          <div class="input-align">
-            <mat-label for="endTime">End Time</mat-label>
-            <input
-              type="datetime-local"
-              class="form-control"
-              id="endTime"
-              name="endTime"
-              formControlName="endDate"
-            />
-          </div>
+        <div class="input-align">
+          <label class="inline-flex items-center">
+            <input type="checkbox" class="form-checkbox h-5 w-5 text-indigo-600">
+            <span class="ml-2 text-sm text-gray-600">Restricted Room</span>
+          </label>
         </div>
-
         <div class="input-align">
           <mat-label>Topics to Discuss</mat-label>
           <mat-form-field>
-            <mat-select formControlName="roomTopics" multiple>
+            <!-- <mat-select formControlName="roomTopics" multiple></mat-select> -->
+            <mat-select  multiple>
               <mat-select-trigger>
                 {{roomForm.value.roomTopics?.[0] || ''}}
                 @if ((roomForm.value.roomTopics?.length || 0) > 1) {

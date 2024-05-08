@@ -38,6 +38,7 @@ export class LoginComponent {
       (response) => {
         data = response;
         console.log('Response from server:', response);
+        console.log(response.userId)
 
         // Check if response has a token
         if (response && response.token) {
@@ -49,6 +50,7 @@ export class LoginComponent {
           localStorage.setItem('jwtToken', response.token);
           localStorage.setItem('userEmail', response.userEmail);
           localStorage.setItem('userName', response.userName);
+          localStorage.setItem('userId', response.userId);
           
           console.log('JWT Token saved to local storage.');
           this.router.navigate(['/']); // Navigate to home page after successful login
