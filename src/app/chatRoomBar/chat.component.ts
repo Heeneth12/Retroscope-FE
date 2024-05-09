@@ -17,11 +17,13 @@ export class ChatComponent  {
   dropdownPeople: boolean = false;
   emails = [ ]
   durationInSeconds = 5;
+  
 
   roomName:string = "Demo project"
 
 
   url :string = "";
+users: any;
 
   constructor(private http: HttpClient , private router : Router, private _snackBar: MatSnackBar) {
     console.log(this.router.url);
@@ -32,6 +34,7 @@ export class ChatComponent  {
   toggleDropdown(){
 
     this.dropdownOpen = !this.dropdownOpen;
+
     if(this.dropdownOpen){
       this.http.get<any>('http://localhost:8080/user/getEmail').subscribe(
         (response) => {
@@ -77,6 +80,21 @@ export class ChatComponent  {
   
   showJoinedUsers(){
     this.dropdownPeople = !this.dropdownPeople
+    console.log(typeof(this.data))
+    if(this.dropdownPeople){
+      this.http.get<any>(`http://localhost:8080/usersInRoom/${this.data}`).subscribe(
+        (response) => {
+          console.log(response)
+          if(response != null){
+            this.users = response
+          }
+          else{
+            console.log("error")
+          }
+        }
+      )
+    }
+    
     console.log(this.dropdownPeople)
 
   }

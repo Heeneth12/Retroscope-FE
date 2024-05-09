@@ -52,21 +52,22 @@
                       <!-- Dropdown content -->
                       <ul class="py-1 px-1">
                         <!-- Input for sending emails -->
-                        <li class="mb-2">
+                        <!-- <li class="mb-2">
                             <div class="flex items-center p-1 border border-gray-300 rounded hover:bg-gray-100">
-                                <input class="flex-grow py-1 px-2 mr-2 focus:outline-none" placeholder="Enter Email" type="email">
+                                <input class="flex-grow py-1 px-2 mr-2 focus:outline-none" placeholder="Enter" type="email">
                                 <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Send</button>
                             </div>
-                        </li>
+                        </li> -->
+                        
                         <!-- Email list -->
                         <div class="dropEmailAlign">
-                            <div class="flex justify-between" *ngFor="let email of emails">
+                            <div class="flex justify-between" *ngFor="let user of users">
                                 <li>
-                                    <p href="#" class="block px-2 py-2 text-gray-800 hover:bg-gray-100">{{email}}</p>
+                                    <p href="#" class="block px-2 py-2 text-gray-800 hover:bg-gray-100">{{user.userName}}</p>
                                 </li>
-                                <button (click)="SendEmail(email)" class="px-2 py-2 text-gray-800 hover:bg-gray-100">
+                                <!-- <button (click)="SendEmail()" class="px-2 py-2 text-gray-800 hover:bg-gray-100">
                                     <img height="16px" width="16px" src="../../assets/images/paper-plane.png"> 
-                                </button>
+                                </button> -->
                             </div>
                         </div>
                         <!-- Add more options as needed -->
