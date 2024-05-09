@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy, output } from '@angular/core';
 import { SocketService } from './socket.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
+import { HttpClient } from '@angular/common/http';
 
 @Component({
   selector: 'app-chat-room',
@@ -32,19 +33,56 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   avgtestAreaVer: boolean = false;
   chartData: any = this.roomId;
 
-  constructor(private socketService: SocketService , private route:ActivatedRoute) {}
+  constructor(private socketService: SocketService , private route:ActivatedRoute ,private http: HttpClient,) {}
 
   ngOnInit(): void {
     // this.messages = []; // Initialize messages array here
     const room = this.route.snapshot.params['roomId'];
     const username = localStorage.getItem('userName')
 
-  
-    this.messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+    //user join methode
+    const data = {
+      "userId": localStorage.getItem('userId'),
+      "roomId": room
+    };
+    console.log(data);
     
-    if (this.messages) {
-      this.filteredMessages.next(this.messages.filter((message: any) => message && message.room === room));
+    const url = "http://localhost:8080/userJoinRoom";
+    this.http.post<any>(url, data).subscribe(
+      (response) => {
+        console.log(response);
+      }
+    );
+
+    //Getmessages -->
+    const geturl = `http://localhost:8080/message/${this.roomId}`;
+    this.http.get<any>(geturl).subscribe(
+      (Response)=>{
+        console.log(Response)
+      }
+    )
+    
+
+
+  
+    // this.messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
+    
+    // if (this.messages) {
+    //   this.filteredMessages.next(this.messages.filter((message: any) => message && message.room === room));
+    // }
+    // Get messages from the server
+  const getMessagesUrl = `http://localhost:8080/message/${this.roomId}`;
+  this.http.get<any>(getMessagesUrl).subscribe(
+    (response) => {
+      // Assuming the response contains an array of messages
+      this.messages = response;
+      // Filter messages for the current room
+      this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === room));
+    },
+    (error) => {
+      console.error("Error fetching messages:", error);
     }
+  );
     
 
     this.socketService.initializeSocket(room, username!);
@@ -61,7 +99,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       // Handle received message
       this.messages.push(message);
       // Save messages to localStorage
-      localStorage.setItem('chatMessages', JSON.stringify(this.messages));
+      // localStorage.setItem('chatMessages', JSON.stringify(this.messages));
       this.filteredMessages.next(this.messages.filter((msg: any) =>msg && msg.room === room));
     });
   }
@@ -130,4 +168,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   avgTextAreaDropDown() {
     this.avgtestAreaVer = !this.avgtestAreaVer;
   }
+
+
+
 }
