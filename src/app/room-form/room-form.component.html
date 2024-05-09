@@ -4,7 +4,7 @@
       <h1 class="text-slate-700 font-bold heading-align">CREATE ROOM</h1>
     </div>
     <div class="px-8">
-      <form [formGroup]="roomForm" (ngSubmit)="onsubmit()">
+      <form [formGroup]="roomForm" (ngSubmit)="onSubmit()">
         <div class="input-align">
           <mat-label>Title</mat-label>
           <input 
@@ -33,24 +33,21 @@
           <mat-label>Topics to Discuss</mat-label>
           <mat-form-field>
             <!-- <mat-select formControlName="roomTopics" multiple></mat-select> -->
-            <mat-select  multiple>
+            <mat-select formControlName="roomTopics" multiple [compareWith]="compareTopics">
               <mat-select-trigger>
-                {{roomForm.value.roomTopics?.[0] || ''}}
-                @if ((roomForm.value.roomTopics?.length || 0) > 1) {
-                <span class="example-additional-selection">
-                  (+{{ (roomForm.value.roomTopics?.length || 0) - 1 }}
-                  {{
-                    roomForm.value.roomTopics.value?.length === 2
-                      ? "other"
-                      : "others"
-                  }})
+                {{ roomForm.get('roomTopics')?.value?.[0]?.topicName || '' }}
+                <span *ngIf="roomForm.get('roomTopics')?.value && roomForm.get('roomTopics')?.value.length > 1" class="example-additional-selection">
+                  (+{{ roomForm.get('roomTopics')?.value?.length - 1 }} {{ roomForm.get('roomTopics')?.value?.length === 2 ? 'other' : 'others' }})
                 </span>
-                }
               </mat-select-trigger>
-              @for (topic of topicList; track topic) {
-              <mat-option [value]="topic">{{ topic }}</mat-option>
-              }
+              <mat-option *ngFor="let topic of topicList" [value]="topic">
+                {{ topic.topicName }}
+              </mat-option>
             </mat-select>
+            
+            
+            
+            
           </mat-form-field>
         </div>
         <button type="submit" class="submit-button">Submit</button>

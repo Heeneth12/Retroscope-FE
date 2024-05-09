@@ -36,7 +36,7 @@
                     </svg>
                 </button>
         </div>
-        <div *ngFor="let item of roomData" [routerLink]="['/chat', item.roomId, item.roomName]" class="card p-4 px-8 bg-blue-400 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+        <div *ngFor="let item of roomData"  class="card p-4 px-8 bg-blue-400 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
             <div class="flex justify-between items-center mt-2">
                 <h3 class="text-xl text-white font-bold">{{item.roomName}}</h3>
             <p class=" items-center justify-center text-xs text-gray-600">
@@ -48,7 +48,7 @@
 
             <p class="text-sm text-white  my-4 rounded-sm">{{item.roomDescription}}</p>
 
-            <h3 class="flex items-center mt-2  text-sm font-semibold text-white"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
+            <h3 class="flex  items-center mt-2 bg-blue-700 w-fit p-1 px-2 rounded-2xl text-sm font-semibold text-white"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
                 <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
               </svg>
               {{item.user.userName}}</h3>
@@ -56,7 +56,7 @@
             </div>
             
             <div class="flex justify-end items-center">
-                <button class="text-white bg-blue-800 rounded-sm px-6 p-1" >Join</button>
+                <button [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1" >Join</button>
             </div>
             
             
