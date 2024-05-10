@@ -1,4 +1,12 @@
-<div class="bg-gray-100 flex items-center justify-center h-screen">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div class="bg-gray-100 flex items-center justify-center h-screen">
     <div class="bg-white p-6 rounded shadow-md max-w-md w-full">
       <h2 class="text-2xl font-semibold mb-6 text-gray-700 text-center">
         Sign in
@@ -58,6 +66,29 @@
           </a></ng-template
         >
       </form>
+
+      <!-- <asl-google-signin-button></asl-google-signin-button> -->
+
+      <div id="g_id_onload"
+        data-client_id="542465983709-8s5ep3arlm84vug6549eg3qgck14a6tv.apps.googleusercontent.com" 
+        data-context="signin"
+        data-ux_mode="popup"
+        data-itp_support="true"
+        data-callback="handleOauthResponse"
+      >
+      </div>
+
+    <br>
+
+      <div class="g_id_signin flex items-center justify-center"
+          data-type="standard"
+          data-shape="rectangular"
+          data-theme="filled_blue"
+          data-text="signin_with"
+          data-size="large"
+          data-logo_alignment="left">
+      </div>
+
       <div class="mt-6 text-center">
         <p class="text-sm text-gray-600">
           Don't have an account?
@@ -70,3 +101,5 @@
       </div>
     </div>
   </div>
+</body>
+</html>

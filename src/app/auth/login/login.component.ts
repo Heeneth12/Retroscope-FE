@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router'; // Import Router module
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from '../../user/snackbar/snackbar.component';
+import { SocialAuthService } from '@abacritt/angularx-social-login'; 
 
 @Component({
   selector: 'app-login',
@@ -10,12 +11,17 @@ import { SnackbarComponent } from '../../user/snackbar/snackbar.component';
   styleUrl: './login.component.css'
 })
 export class LoginComponent {
+
+  user:any;
+  loggedIn:any;
+
   email: string = '';
   password: string = '';
 
   data: any;
   durationInSeconds = 5;
-  constructor(private http: HttpClient, private router: Router, private _snackBar: MatSnackBar) {} // Inject Router module
+
+  constructor(private http: HttpClient, private router: Router, private _snackBar: MatSnackBar,private authService: SocialAuthService) {} // Inject Router module
 
   sendData() {
     console.log('Received email:', this.email);
@@ -63,11 +69,16 @@ export class LoginComponent {
     );
   }
 
-  // logic to not to route login page when user already login
+    // logic to not to route login page when user already login
   ngOnInit(): void {
     if (localStorage.getItem('jwtToken')) {
       this.router.navigate(['/']);
     }
+    this.authService.authState.subscribe((user)=>{
+      this.user=user;
+      this.loggedIn=(user != null);
+      console.log(this.user)
+    });
   }
-
+  
 }

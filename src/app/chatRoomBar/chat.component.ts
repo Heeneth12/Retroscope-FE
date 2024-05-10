@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SnackbarComponent } from '../user/snackbar/snackbar.component';
+import { saveAs } from 'file-saver';
 
 @Component({
   selector: 'app-chat',
@@ -27,7 +28,6 @@ export class ChatComponent  {
     console.log(this.router.url);
     this.url = this.router.url
   } // Inject Router module
-
 
   toggleDropdown(){
 
@@ -81,6 +81,33 @@ export class ChatComponent  {
 
   }
 
+  downloadMessages() {
+    // Call your backend API to fetch messages for the given roomId
+    this.http.get<any[]>(`http://localhost:8080/message/${this.data}`).subscribe(
+      (messages) => {
+        // Process messages as needed
+        const formattedMessages = this.formatMessages(messages);
+
+        // Convert messages to a string (e.g., JSON or CSV format)
+        const messagesString = JSON.stringify(formattedMessages,null,4);
+
+        // Create a Blob object from the messages string
+        const blob = new Blob([messagesString], { type: 'application/json' });
+        console.table(messagesString)
+        // Trigger download of the Blob as a file
+        saveAs(blob, 'messages.pdf');
+      },
+      (error) => {
+        console.error('Error downloading messages:', error);
+        // Handle error
+      }
+    );
+  }
+
+  formatMessages(messages: any[]): any[] {
+    // Implement message formatting logic here if needed
+    return messages;
+  }
 
   
   dataToggle:boolean =false;

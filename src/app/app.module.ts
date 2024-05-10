@@ -18,6 +18,12 @@ import { DialogComponent } from './user/dialog/dialog.component';
 import { SnackbarComponent } from './user/snackbar/snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import {
+    SocialLoginModule,
+    SocialAuthServiceConfig,
+  } from '@abacritt/angularx-social-login';
+  import { GoogleLoginProvider } from '@abacritt/angularx-social-login';
+import {  GoogleSigninButtonModule,GoogleSigninButtonDirective } from '@abacritt/angularx-social-login';
 
 @NgModule({
     declarations: [
@@ -31,10 +37,24 @@ import {MatDialogModule} from '@angular/material/dialog';
         SnackbarComponent,
     ],
     providers: [
-        provideAnimationsAsync()
+        provideAnimationsAsync(),
+        {
+            provide: 'SocialAuthServiceConfig',
+            useValue: {
+              autoLogin: false,
+              providers: [
+                {
+                  id: GoogleLoginProvider.PROVIDER_ID,
+                  provider: new GoogleLoginProvider('542465983709-8s5ep3arlm84vug6549eg3qgck14a6tv.apps.googleusercontent.com'),
+                },
+              ],
+            } as SocialAuthServiceConfig
+          },
+          GoogleSigninButtonDirective
     ],
     bootstrap: [AppComponent],
     imports: [
+        GoogleSigninButtonModule,
         BrowserModule,
         AppRoutingModule,
         FormsModule,
@@ -45,7 +65,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         ChatModule,
         NavBarComponent,
         MatDialogModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        SocialLoginModule
     ]
 })
 export class AppModule { }
