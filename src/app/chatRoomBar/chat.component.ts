@@ -23,13 +23,13 @@ export class ChatComponent  {
 
 
   url :string = "";
-users: any;
+  users: any;
+
 
   constructor(private http: HttpClient , private router : Router, private _snackBar: MatSnackBar) {
     console.log(this.router.url);
     this.url = this.router.url
   } // Inject Router module
-
 
   toggleDropdown(){
 
@@ -78,26 +78,30 @@ users: any;
     )
   }
   
-  showJoinedUsers(){
-    this.dropdownPeople = !this.dropdownPeople
-    console.log(typeof(this.data))
-    if(this.dropdownPeople){
+  showJoinedUsers() {
+    this.dropdownPeople = !this.dropdownPeople;
+    console.log(typeof (this.data));
+    if (this.dropdownPeople) {
       this.http.get<any>(`http://localhost:8080/usersInRoom/${this.data}`).subscribe(
         (response) => {
-          console.log(response)
-          if(response != null){
-            this.users = response
-          }
-          else{
-            console.log("error")
+          console.log(response);
+          if (response != null) {
+            // Remove duplicates from the response array
+            this.users = response.filter((user: any, index: number, self: any[]) =>
+              index === self.findIndex((t: any) => (
+                t.userId === user.userId
+              ))
+            );
+          } else {
+            console.log("error");
           }
         }
-      )
+      );
     }
-    
-    console.log(this.dropdownPeople)
-
+  
+    console.log(this.dropdownPeople);
   }
+  
 
 
   

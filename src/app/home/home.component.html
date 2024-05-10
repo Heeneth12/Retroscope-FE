@@ -36,32 +36,48 @@
                     </svg>
                 </button>
         </div>
-        <div *ngFor="let item of roomData"  class="card p-4 px-8 bg-blue-400 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+        <div *ngFor="let item of roomData" class="card p-4 px-8 bg-blue-400 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
             <div class="flex justify-between items-center mt-2">
                 <h3 class="text-xl text-white font-bold">{{item.roomName}}</h3>
-            <p class=" items-center justify-center text-xs text-gray-600">
-                <span class="inline-block h-3 w-3 rounded-full ml-1 {{item.active ? 'bg-green-500' : 'bg-red-500'}}"></span>
-            </p>
-
+                <p class=" items-center justify-center text-xs text-gray-600">
+                    <span class="inline-block h-3 w-3 rounded-full ml-1 {{item.active ? 'bg-green-500' : 'bg-red-500'}}"></span>
+                </p>
             </div>
             <div class="my-2">
-
-            <p class="text-sm text-white  my-4 rounded-sm">{{item.roomDescription}}</p>
-
-            <h3 class="flex  items-center mt-2 bg-blue-700 w-fit p-1 px-2 rounded-2xl text-sm font-semibold text-white"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
-                <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
-              </svg>
-              {{item.user.userName}}</h3>
-
+                <p class="text-sm text-white my-4 rounded-sm">{{item.roomDescription}}</p>
+                <div class="flex items-center">
+                    <h3 class="flex items-center mt-2 bg-blue-700 w-fit p-1 px-2 rounded-2xl text-sm font-semibold text-white">
+                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
+                            <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
+                        </svg>
+                        {{item.user.userName}}
+                    </h3>
+                    <div *ngIf="item.restrictedRoom" class="mt-1 mx-3">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+                        </svg>
+                    </div>
+                </div>
             </div>
-            
             <div class="flex justify-end items-center">
-                <button [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1" >Join</button>
+                <div>
+                    <button *ngIf="!item.passKeyEntered && item.restrictedRoom && !item.showPasskeyInput" (click)="showPasskeyInput(item)" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button>
+                    <div *ngIf="item.showPasskeyInput">
+                        <input placeholder="Enter Passkey" type="password" class="rounded-sm px-2 py-1 border-gray-400 border" [(ngModel)]="passkeyInput">
+                        <button (click)="checkRoomPassKey(item.roomId, passkeyInput , item.roomName)" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Submit</button>
+                    </div>
+                </div>
+                <!-- <button *ngIf="!item.restrictedRoom || item.passKeyEntered" [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button> -->
+                <!-- <button *ngIf="joinButtonVisible || !item.restrictedRoom || item.passKeyEntered" [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button> -->
+                <button #joinButton *ngIf="!item.restrictedRoom || item.passKeyEntered" [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button>
+
             </div>
-            
-            
         </div>
+        
+        
     </div>
+
+
     <div *ngIf="formToggleVer"  class="fixed w-full inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
         <!-- Center the form horizontally and vertically -->
         <div class="" style="width: 40%;">

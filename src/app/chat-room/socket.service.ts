@@ -26,6 +26,11 @@ export class SocketService {
       this.connectionStatus$.next(false);
     });
 
+    
+    this.socket.on('onConnected', (data: string)=>{
+      console.log("user connected" + data)
+    })
+
     this.socket.on('receive_message', (data: any) => {
       console.log('Received message from server:', data);
       this.receiveMessage$.next(data);

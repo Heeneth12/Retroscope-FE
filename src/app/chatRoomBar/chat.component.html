@@ -49,30 +49,30 @@
                          people
                     </button>
                     <div *ngIf="dropdownPeople" class="absolute mt-1 mr-12 bg-white border border-gray-300 rounded shadow-md">
-                      <!-- Dropdown content -->
-                      <ul class="py-1 px-1">
-                        <!-- Input for sending emails -->
-                        <!-- <li class="mb-2">
-                            <div class="flex items-center p-1 border border-gray-300 rounded hover:bg-gray-100">
-                                <input class="flex-grow py-1 px-2 mr-2 focus:outline-none" placeholder="Enter" type="email">
-                                <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Send</button>
-                            </div>
-                        </li> -->
-                        
-                        <!-- Email list -->
-                        <div class="dropEmailAlign">
+                     <!-- Dropdown content -->
+                        <ul class="py-1 px-1">
+                            <!-- Email list -->
+                            <div class="dropEmailAlign">
                             <div class="flex justify-between" *ngFor="let user of users">
                                 <li>
-                                    <p href="#" class="block px-2 py-2 text-gray-800 hover:bg-gray-100">{{user.userName}}</p>
+                                    <div class="flex items-center bg-slate-100  px-2 my-1 rounded-md hover:bg-slate-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                          </svg>
+                                          
+                                        <p href="#" class="block w-36 px-2 py-2 rounded-lg  my-1 text-gray-800">{{user.userName}}</p>
+                                        <img src="../assets/images/demo.svg" width="22px" style="border-radius: 50%;">
+
+                                    </div>
+                               
                                 </li>
                                 <!-- <button (click)="SendEmail()" class="px-2 py-2 text-gray-800 hover:bg-gray-100">
                                     <img height="16px" width="16px" src="../../assets/images/paper-plane.png"> 
                                 </button> -->
                             </div>
-                        </div>
-                        <!-- Add more options as needed -->
-                    </ul>
-                    
+                            </div>
+                            <!-- Add more options as needed -->
+                        </ul>
                     </div>
                 </div>
                 <div>

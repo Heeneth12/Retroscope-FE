@@ -26,6 +26,8 @@ export class RoomFormComponent implements OnInit {
       roomName: ['', [Validators.required]],
       roomDescription: ['', [Validators.required]],
       user: [localStorage.getItem('userId')],
+      restrictedRoom: [false],
+      restrictedRoomPassKey: '',
       roomTopics: [[]] // Initialize roomTopics as FormControl with null value
     });
   }

@@ -19,6 +19,7 @@ import { SnackbarComponent } from './user/snackbar/snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
 
+
 @NgModule({
     declarations: [
         AppComponent,
@@ -29,6 +30,7 @@ import {MatDialogModule} from '@angular/material/dialog';
         ProfileComponent,
         DialogComponent,
         SnackbarComponent,
+        
     ],
     providers: [
         provideAnimationsAsync()
