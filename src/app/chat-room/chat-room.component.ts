@@ -18,7 +18,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   username :string |null = localStorage.getItem('userName')
   roomId : string |null = this.route.snapshot.params['roomId'];
 
-
  
   commonMessageText: any;
   goodMessageText: any;
@@ -90,8 +89,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     )
     
 
-
-  
     // this.messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
     
     // if (this.messages) {
@@ -111,7 +108,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     }
   );
     
-
     this.socketService.initializeSocket(room, username!);
     this.socketService.connectionStatus$.subscribe((connected: boolean) => {
       this.isConnected = connected;
@@ -130,7 +126,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       this.filteredMessages.next(this.messages.filter((msg: any) =>msg && msg.room === room));
     });
   }
-
 
   //
   sendCommonMessage() {
@@ -174,6 +169,27 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     this.avgMessageText = ''; // Clear the input field after sending message
   }
 
+  selectedMessageIndex: number = -1; // Initialize with an invalid index
+  optionsDropDown(index: number){
+    this.selectedMessageIndex = (this.selectedMessageIndex === index) ? -1 : index;
+  }
+
+  deleteMessage(message : any){
+    this.http.delete<any[]>(`http://localhost:8080/message/delete/${message.id}/${message.username}/${localStorage.getItem('userName')}`).subscribe((response: any) => {
+      console.log("message deleted successfully");
+    },
+    (error)=>{
+      console.error("Failed to delete message :",error);   
+    });
+    }
+
+  editMessage(message : any){
+
+  }
+
+  likeMessage(message : any){
+
+  }
 
   ngOnDestroy(): void {
     // Unsubscribe from subscriptions to avoid memory leaks

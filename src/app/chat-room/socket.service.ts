@@ -13,7 +13,7 @@ export class SocketService {
   constructor() {}
 
   initializeSocket(room: string, username: string) {
-    const socketUrl = `http://1192.168.0.42:8085/?room=${room}&username=${username}`;
+    const socketUrl = `http://192.168.1.96:8085/?room=${room}&username=${username}`;
     this.socket = new Socket({ url: socketUrl });
 
     this.socket.on('connect', () => {
