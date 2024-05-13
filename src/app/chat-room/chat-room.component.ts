@@ -33,7 +33,34 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   avgtestAreaVer: boolean = false;
   chartData: any = this.roomId;
 
+
   constructor(private socketService: SocketService , private route:ActivatedRoute ,private http: HttpClient,) {}
+
+  // deleteMessage(id:any){
+  //   console.log("hi");
+  //   const deleteMessageUrl = `http://localhost:8080/messsage/delete/${id}`;
+  //   this.http.delete<any>(deleteMessageUrl).subscribe(
+  //     (response)=>{
+  //       console.log(response);
+  //     },
+  //     (error)=>{
+  //       console.log(error);
+  //     }
+  //   )
+
+  //   const getMessagesUrl = `http://localhost:8080/message/${this.roomId}`;
+  //   this.http.get<any>(getMessagesUrl).subscribe(
+  //   (response) => {
+  //     // Assuming the response contains an array of messages
+  //     this.messages = response;
+  //     // Filter messages for the current room
+  //     this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === this.roomId));
+  //   },
+  //   (error) => {
+  //     console.error("Error fetching messages:", error);
+  //   }
+  // );
+  // }
 
   ngOnInit(): void {
     // this.messages = []; // Initialize messages array here
