@@ -3,6 +3,7 @@ import { Component, Input } from '@angular/core';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SnackbarComponent } from '../user/snackbar/snackbar.component';
+import jsPDF from 'jspdf';
 
 @Component({
   selector: 'app-chat',
@@ -102,8 +103,45 @@ export class ChatComponent  {
     console.log(this.dropdownPeople);
   }
   
-
-
+  // text:any
+  downloadPage() {
+    console.log('Download');
+     this.http.get<any[]>(`http://localhost:8080/message/${this.data}`).subscribe((messages: any[]) => {
+      const doc = new jsPDF();
+      let y = 10; // Initial Y position for text
+      const pageHeight = doc.internal.pageSize.height;
+      
+      messages.forEach(message => {
+          const messageHeader = `${message.username} : ${message.content}`;
+          const messageFooter = `(${message.createdDateTime}) - ${message.contentType}`;
+          
+          const headerLines = doc.splitTextToSize(messageHeader, 180); // Adjust width as needed
+          const footerLines = doc.splitTextToSize(messageFooter, 180); // Adjust width as needed
+          
+          const headerHeight = headerLines.length * (doc.getLineHeight() / doc.internal.scaleFactor); // Calculate header height
+          const footerHeight = footerLines.length * (doc.getLineHeight() / doc.internal.scaleFactor); // Calculate footer height
+          
+          const totalHeight = headerHeight + footerHeight;
+          
+          if (y + totalHeight > pageHeight - 10) { // Check if message exceeds page height
+              doc.addPage(); // Add new page if needed
+              y = 10; // Reset Y position for new page
+          }
+          
+          // Draw header
+          doc.text(headerLines, 15, y);
+          
+          // Draw footer
+          doc.text(footerLines, 15, y + headerHeight);
+          
+          y += totalHeight + 5; // Add some padding between messages
+      });
+      
+      doc.save('messages.pdf');
+  }, (error) => {
+      console.error('Failed to fetch messages:', error);
+    });
+  }
   
   dataToggle:boolean =false;
 

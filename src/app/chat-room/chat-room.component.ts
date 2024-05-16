@@ -18,7 +18,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   username :string |null = localStorage.getItem('userName')
   roomId : string |null = this.route.snapshot.params['roomId'];
 
-
  
   commonMessageText: any;
   goodMessageText: any;
@@ -33,7 +32,34 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   avgtestAreaVer: boolean = false;
   chartData: any = this.roomId;
 
+
   constructor(private socketService: SocketService , private route:ActivatedRoute ,private http: HttpClient,) {}
+
+  // deleteMessage(id:any){
+  //   console.log("hi");
+  //   const deleteMessageUrl = `http://localhost:8080/messsage/delete/${id}`;
+  //   this.http.delete<any>(deleteMessageUrl).subscribe(
+  //     (response)=>{
+  //       console.log(response);
+  //     },
+  //     (error)=>{
+  //       console.log(error);
+  //     }
+  //   )
+
+  //   const getMessagesUrl = `http://localhost:8080/message/${this.roomId}`;
+  //   this.http.get<any>(getMessagesUrl).subscribe(
+  //   (response) => {
+  //     // Assuming the response contains an array of messages
+  //     this.messages = response;
+  //     // Filter messages for the current room
+  //     this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === this.roomId));
+  //   },
+  //   (error) => {
+  //     console.error("Error fetching messages:", error);
+  //   }
+  // );
+  // }
 
   ngOnInit(): void {
     // this.messages = []; // Initialize messages array here
@@ -63,8 +89,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     )
     
 
-
-  
     // this.messages = JSON.parse(localStorage.getItem('chatMessages') || '[]');
     
     // if (this.messages) {
@@ -84,7 +108,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     }
   );
     
-
     this.socketService.initializeSocket(room, username!);
     this.socketService.connectionStatus$.subscribe((connected: boolean) => {
       this.isConnected = connected;
@@ -103,7 +126,6 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       this.filteredMessages.next(this.messages.filter((msg: any) =>msg && msg.room === room));
     });
   }
-
 
   //
   sendCommonMessage() {
@@ -147,6 +169,27 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     this.avgMessageText = ''; // Clear the input field after sending message
   }
 
+  selectedMessageIndex: number = -1; // Initialize with an invalid index
+  optionsDropDown(index: number){
+    this.selectedMessageIndex = (this.selectedMessageIndex === index) ? -1 : index;
+  }
+
+  deleteMessage(message : any){
+    this.http.delete<any[]>(`http://localhost:8080/message/delete/${message.id}/${message.username}/${localStorage.getItem('userName')}`).subscribe((response: any) => {
+      console.log("message deleted successfully");
+    },
+    (error)=>{
+      console.error("Failed to delete message :",error);   
+    });
+    }
+
+  editMessage(message : any){
+
+  }
+
+  likeMessage(message : any){
+
+  }
 
   ngOnDestroy(): void {
     // Unsubscribe from subscriptions to avoid memory leaks
