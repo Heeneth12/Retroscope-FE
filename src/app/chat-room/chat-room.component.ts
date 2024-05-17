@@ -20,7 +20,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   roomId : string |null = this.route.snapshot.params['roomId'];
 
   //retrotype
-  retroTypeData:any;
+  retroTypeData:any ;
 
  
   commonMessageText: any;
@@ -101,19 +101,22 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     // if (this.messages) {
     //   this.filteredMessages.next(this.messages.filter((message: any) => message && message.room === room));
     // }
+
     // Get messages from the server
-  const getMessagesUrl = environment.url+`/message/${this.roomId}`;
-  this.http.get<any>(getMessagesUrl).subscribe(
-    (response) => {
-      // Assuming the response contains an array of messages
-      this.messages = response;
-      // Filter messages for the current room
-      this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === room));
-    },
-    (error) => {
-      console.error("Error fetching messages:", error);
-    }
-  );
+  // const getMessagesUrl = environment.url+`/message/${this.roomId}`;
+  // this.http.get<any>(getMessagesUrl).subscribe(
+  //   (response) => {
+  //     // Assuming the response contains an array of messages
+  //     this.messages = response;
+  //     // Filter messages for the current room
+  //     this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === room));
+  //   },
+  //   (error) => {
+  //     console.error("Error fetching messages:", error);
+  //   }
+  // );
+
+  this.getMessages(room);
     
     this.socketService.initializeSocket(room, username!);
     this.socketService.connectionStatus$.subscribe((connected: boolean) => {
@@ -150,7 +153,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       content: this.goodMessageText,
       room: this.roomId,
       username: this.username, // Change this to dynamically get the username
-      contentType:"Good"
+      contentType:this.retroTypeData.topics[0].topicName
     };
     this.socketService.sendMessage(data);
     this.goodMessageText = ''; // Clear the input field after sending message
@@ -160,7 +163,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       content: this.badMessageText,
       room: this.roomId,
       username: this.username, // Change this to dynamically get the username
-      contentType:"Bad"
+      contentType:this.retroTypeData.topics[1].topicName
     };
     this.socketService.sendMessage(data);
     this.badMessageText = ''; // Clear the input field after sending message
@@ -170,7 +173,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       content: this.avgMessageText,
       room: this.roomId,
       username: this.username, // Change this to dynamically get the username
-      contentType:"Avg"
+      contentType:this.retroTypeData.topics[2].topicName
     };
     this.socketService.sendMessage(data);
     this.avgMessageText = ''; // Clear the input field after sending message
@@ -182,9 +185,14 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
   deleteMessage(message : any){
-  const url = environment.url+`/message/delete/${message.id}/${message.username}/${localStorage.getItem('userName')}`
+    const room = this.route.snapshot.params['roomId']
+  const url = environment.url+`/message/delete/${message.id}`
     this.http.delete<any[]>(url).subscribe((response: any) => {
-      console.log("message deleted successfully");
+      console.log(response);
+      if(response.status === "success"){
+        this.getMessages(room)
+
+      }
     },
     (error)=>{
       console.error("Failed to delete message :",error);   
@@ -225,14 +233,30 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   getRoomData() {
     const url =  environment.url+`/get/${this.roomId}`;
     this.http.get<any>(url).subscribe(
-      (response) => {
-        console.log(response);
-        this.retroTypeData = response; // Assign response to retroTypeData
+      (data) => {
+        console.log(data);
+        this.retroTypeData = data; // Assign response to retroTypeData
       },
       (error) => {
         console.error('Error fetching data:', error);
       }
     );
+  }
+
+  getMessages(room:string){
+  // Get messages from the server
+  const getMessagesUrl = environment.url+`/message/${this.roomId}`;
+  this.http.get<any>(getMessagesUrl).subscribe(
+    (response) => {
+      // Assuming the response contains an array of messages
+      this.messages = response;
+      // Filter messages for the current room
+      this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === room));
+    },
+    (error) => {
+      console.error("Error fetching messages:", error);
+    }
+  );
   }
 
 }
