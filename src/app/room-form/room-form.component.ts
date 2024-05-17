@@ -29,7 +29,7 @@ export class RoomFormComponent implements OnInit {
       user: [localStorage.getItem('userId')],
       restrictedRoom: [false],
       restrictedRoomPassKey: '',
-      roomTopics: [[]] // Initialize roomTopics as FormControl with null value
+      topics: [[]] // Initialize roomTopics as FormControl with null value
     });
   }
 

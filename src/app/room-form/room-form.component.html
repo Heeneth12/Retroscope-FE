@@ -42,11 +42,11 @@
           <mat-label>Topics to Discuss</mat-label>
           <mat-form-field>
             <!-- <mat-select formControlName="roomTopics" multiple></mat-select> -->
-            <mat-select formControlName="roomTopics" multiple [compareWith]="compareTopics">
+            <mat-select formControlName="topics" multiple [compareWith]="compareTopics">
               <mat-select-trigger>
-                {{ roomForm.get('roomTopics')?.value?.[0]?.topicName || '' }}
-                <span *ngIf="roomForm.get('roomTopics')?.value && roomForm.get('roomTopics')?.value.length > 1" class="example-additional-selection">
-                  (+{{ roomForm.get('roomTopics')?.value?.length - 1 }} {{ roomForm.get('roomTopics')?.value?.length === 2 ? 'other' : 'others' }})
+                {{ roomForm.get('topics')?.value?.[0]?.topicName || '' }}
+                <span *ngIf="roomForm.get('topics')?.value && roomForm.get('topics')?.value.length > 1" class="example-additional-selection">
+                  (+{{ roomForm.get('topics')?.value?.length - 1 }} {{ roomForm.get('topics')?.value?.length === 2 ? 'other' : 'others' }})
                 </span>
               </mat-select-trigger>
               <mat-option *ngFor="let topic of topicList" [value]="topic">

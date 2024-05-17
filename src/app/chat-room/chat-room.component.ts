@@ -19,6 +19,9 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   username :string |null = localStorage.getItem('userName')
   roomId : string |null = this.route.snapshot.params['roomId'];
 
+  //retrotype
+  retroTypeData:any;
+
  
   commonMessageText: any;
   goodMessageText: any;
@@ -66,6 +69,9 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     // this.messages = []; // Initialize messages array here
     const room = this.route.snapshot.params['roomId'];
     const username = localStorage.getItem('userName')
+
+    //getting room data
+    this.getRoomData();
 
     //user join methode
     const data = {
@@ -215,5 +221,18 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
 
+  //get room Data
+  getRoomData() {
+    const url =  environment.url+`/get/${this.roomId}`;
+    this.http.get<any>(url).subscribe(
+      (response) => {
+        console.log(response);
+        this.retroTypeData = response; // Assign response to retroTypeData
+      },
+      (error) => {
+        console.error('Error fetching data:', error);
+      }
+    );
+  }
 
 }
