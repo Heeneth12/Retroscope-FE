@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Socket } from 'ngx-socket-io';
 import { BehaviorSubject } from 'rxjs';
+import { environment } from '../../environment/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -13,11 +14,7 @@ export class SocketService {
   constructor() {}
 
   initializeSocket(room: string, username: string) {
-<<<<<<< HEAD
-    const socketUrl = `http://192.168.0.6:8085/?room=${room}&username=${username}`;
-=======
-    const socketUrl = `http://192.168.1.96:8085/?room=${room}&username=${username}`;
->>>>>>> 958abcb747bdb7a33b34946be1ba221e623e3043
+    const socketUrl = environment.socketUrl+`/?room=${room}&username=${username}`;
     this.socket = new Socket({ url: socketUrl });
 
     this.socket.on('connect', () => {

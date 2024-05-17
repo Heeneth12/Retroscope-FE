@@ -4,6 +4,7 @@ import { DialogComponent } from '../dialog/dialog.component';
 import { HttpClient, HttpHandler, HttpHeaders } from '@angular/common/http';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from '../snackbar/snackbar.component';
+import { environment } from '../../../environment/environment';
 
 
 @Component({
@@ -52,7 +53,7 @@ throw new Error('Method not implemented.');
   .set('Accept', 'application/json')
   .set('token', this.token!);
 
-     const url = 'http://localhost:8080/user/getUserByToken';
+     const url =  environment.url+ '/user/getUserByToken';
     
       
       this.http.get<any>( url, {headers}).subscribe(Response =>{
@@ -103,7 +104,8 @@ throw new Error('Method not implemented.');
       .set('token', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Im5pa2hpbCJ9.59lIdod1HHMnBjKLuxLeyJAxuUHyWIsGYuMsDSUM-YQ');
       
   
-      this.http.put<any>('http://localhost:8080/user/changeEmail', data, {headers})
+      const url = environment.url   +"/user/changeEmail"
+      this.http.put<any>(url, data, {headers})
         .subscribe(
           (response => {
             console.log(response)
@@ -161,7 +163,8 @@ throw new Error('Method not implemented.');
       // }
       
   
-      this.http.put<any>('http://localhost:8080/user/changePassword', body, {headers})
+      const url = environment.url + "/user/changePassword";
+      this.http.put<any>(url, body, {headers})
         .subscribe(
           (response => {
             if(response.Status === "OK"){

@@ -1,6 +1,8 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from '../../environment/environment';
+environment
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
@@ -32,7 +34,7 @@ showPasskeyInputVer: boolean= false;
   }
 
   getRoomData() {
-    const url = 'http://localhost:8080/get';
+    const url =  environment.url+'/get';
      // Define headers
      const headers = new HttpHeaders()
      .set('Content-Type', 'application/json')
@@ -67,7 +69,7 @@ showPasskeyInputVer: boolean= false;
 checkRoomPassKey(roomId: string, passkeyInput: string | undefined , roomName : string) {
   if (passkeyInput !== undefined) {
     // Call your API or perform other actions using roomId and passkeyInput
-    const url = 'http://localhost:8080/roomPasskey';
+    const url =  environment.url+ '/roomPasskey';
     const data = {
       roomId: roomId,
       roomPassKey: passkeyInput
@@ -88,10 +90,4 @@ checkRoomPassKey(roomId: string, passkeyInput: string | undefined , roomName : s
     // Handle the case when passkeyInput is undefined
   }
 }
-
-
-
-
-
-
 }

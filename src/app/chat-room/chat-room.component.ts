@@ -3,6 +3,7 @@ import { SocketService } from './socket.service';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { ActivatedRoute } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-chat-room',
@@ -73,7 +74,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     };
     console.log(data);
     
-    const url = "http://localhost:8080/userJoinRoom";
+    const url = environment.url+"/userJoinRoom";
     this.http.post<any>(url, data).subscribe(
       (response) => {
         console.log(response);
@@ -81,7 +82,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     );
 
     //Getmessages -->
-    const geturl = `http://localhost:8080/message/${this.roomId}`;
+    const geturl = environment.url+`/message/${this.roomId}`;
     this.http.get<any>(geturl).subscribe(
       (Response)=>{
         console.log(Response)
@@ -95,7 +96,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     //   this.filteredMessages.next(this.messages.filter((message: any) => message && message.room === room));
     // }
     // Get messages from the server
-  const getMessagesUrl = `http://localhost:8080/message/${this.roomId}`;
+  const getMessagesUrl = environment.url+`/message/${this.roomId}`;
   this.http.get<any>(getMessagesUrl).subscribe(
     (response) => {
       // Assuming the response contains an array of messages
@@ -175,7 +176,8 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
   deleteMessage(message : any){
-    this.http.delete<any[]>(`http://localhost:8080/message/delete/${message.id}/${message.username}/${localStorage.getItem('userName')}`).subscribe((response: any) => {
+  const url = environment.url+`/message/delete/${message.id}/${message.username}/${localStorage.getItem('userName')}`
+    this.http.delete<any[]>(url).subscribe((response: any) => {
       console.log("message deleted successfully");
     },
     (error)=>{

@@ -9,6 +9,7 @@ import {
 import { Router } from '@angular/router';
 import { response } from 'express';
 import { formatDate } from '@angular/common';
+import { environment } from '../../../environment/environment';
 
 
 @Component({
@@ -27,9 +28,9 @@ export class RegComponent {
   });
 
   registerUser() {
-    const url = 'http://localhost:8080/user/register';
+    const urls = environment.url + '/user/register';
     const formData = this.userRegData.value;
-    this.http.post(url, formData).subscribe((response) => {
+    this.http.post(urls, formData).subscribe((response) => {
       console.log(response);
        const test = response;
         this.router.navigate(['/login']);      

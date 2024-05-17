@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormControl } from '@angular/forms'; // Import FormControl
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { environment } from '../../environment/environment';
 
 interface Topic {
   topicId: number;
@@ -37,7 +38,7 @@ export class RoomFormComponent implements OnInit {
   }
 
   fetchTopicList(): void {
-    const url = "http://localhost:8080/topic/getAllTopic";
+    const url =  environment.url + "/topic/getAllTopic";
     this.http.get<Topic[]>(url).subscribe((response) => {
       this.topicList = response;
     });
@@ -49,7 +50,8 @@ export class RoomFormComponent implements OnInit {
 
   onSubmit(): void {
     console.log(this.roomForm.value);
-    this.http.post<any>('http://localhost:8080/create', this.roomForm.value)
+    const url = environment.url+ "/create";
+    this.http.post<any>(url, this.roomForm.value)
       .subscribe(
         (response) => {
           if (response.status === 'successfully created') {

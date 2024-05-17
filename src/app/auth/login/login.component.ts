@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router'; // Import Router module
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackbarComponent } from '../../user/snackbar/snackbar.component';
+import { environment } from '../../../environment/environment';
 
 @Component({
   selector: 'app-login',
@@ -26,7 +27,7 @@ export class LoginComponent {
       userPassword: this.password,
     };
 
-    const url = 'http://localhost:8080/user/login';
+    const url =   environment.url +'/user/login';
 
     // Define headers
     const headers = new HttpHeaders()

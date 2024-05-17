@@ -4,6 +4,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { Router } from '@angular/router';
 import { SnackbarComponent } from '../user/snackbar/snackbar.component';
 import jsPDF from 'jspdf';
+import { environment } from '../../environment/environment';
 
 @Component({
   selector: 'app-chat',
@@ -35,9 +36,10 @@ export class ChatComponent  {
   toggleDropdown(){
 
     this.dropdownOpen = !this.dropdownOpen;
+    const urls = environment.url+'/user/getEmail'
 
     if(this.dropdownOpen){
-      this.http.get<any>('http://localhost:8080/user/getEmail').subscribe(
+      this.http.get<any>(urls).subscribe(
         (response) => {
           console.log(response)
           if(response != null){
@@ -55,7 +57,7 @@ export class ChatComponent  {
 
 
   SendEmail(email:string) {
-    const url = 'http://localhost:8080/user/sendEmail'
+    const url = environment.url+'/user/sendEmail';
     const headers = new HttpHeaders()
   .set('Content-Type', 'application/json')
   .set('Accept', 'application/json')
@@ -81,9 +83,11 @@ export class ChatComponent  {
   
   showJoinedUsers() {
     this.dropdownPeople = !this.dropdownPeople;
+    const url = environment.url+`/usersInRoom/${this.data}`
     console.log(typeof (this.data));
     if (this.dropdownPeople) {
-      this.http.get<any>(`http://localhost:8080/usersInRoom/${this.data}`).subscribe(
+      
+      this.http.get<any>(url).subscribe(
         (response) => {
           console.log(response);
           if (response != null) {
@@ -106,7 +110,8 @@ export class ChatComponent  {
   // text:any
   downloadPage() {
     console.log('Download');
-     this.http.get<any[]>(`http://localhost:8080/message/${this.data}`).subscribe((messages: any[]) => {
+    const url = environment.url+`/message/${this.data}`
+     this.http.get<any[]>(url).subscribe((messages: any[]) => {
       const doc = new jsPDF();
       let y = 10; // Initial Y position for text
       const pageHeight = doc.internal.pageSize.height;
