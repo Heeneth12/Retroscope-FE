@@ -18,6 +18,10 @@ import { DialogComponent } from './user/dialog/dialog.component';
 import { SnackbarComponent } from './user/snackbar/snackbar.component';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDialogModule} from '@angular/material/dialog';
+import { RouterModule } from '@angular/router';
+import { KeycloakService } from './keycloak.service';
+
+
 
 
 @NgModule({
@@ -33,7 +37,8 @@ import {MatDialogModule} from '@angular/material/dialog';
         
     ],
     providers: [
-        provideAnimationsAsync()
+        provideAnimationsAsync(),
+        KeycloakService
     ],
     bootstrap: [AppComponent],
     imports: [
@@ -47,7 +52,11 @@ import {MatDialogModule} from '@angular/material/dialog';
         ChatModule,
         NavBarComponent,
         MatDialogModule,
-        MatSnackBarModule
+        MatSnackBarModule,
+        RouterModule.forRoot([]) // Ensure to initialize RouterModule.forRoot
+        
     ]
 })
-export class AppModule { }
+export class AppModule {
+    
+ }

@@ -26,6 +26,7 @@ showPasskeyInputVer: boolean= false;
   constructor(private http: HttpClient, private router: Router) {}
 
   ngOnInit(): void {
+    this.sendJwt();
     this.getRoomData();
   }
 
@@ -90,4 +91,26 @@ checkRoomPassKey(roomId: string, passkeyInput: string | undefined , roomName : s
     // Handle the case when passkeyInput is undefined
   }
 }
+
+sendJwt(): void {
+  const ssoEmail = sessionStorage.getItem('email');
+  const url = `${environment.url}/user/getToken/${ssoEmail}`;
+  
+  this.http.get<any>(url).subscribe(
+    response => {
+      console.log(response);
+      
+      localStorage.setItem('jwtToken', response.SsoToken);
+      localStorage.setItem('userEmail', response.userEmail);
+      localStorage.setItem('userName', response.userName);
+      localStorage.setItem('userId', response.userId);
+    },
+    error => {
+      console.error('Error fetching JWT:', error);
+    }
+  );
+}
+
+
+
 }

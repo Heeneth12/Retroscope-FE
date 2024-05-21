@@ -6,9 +6,9 @@ import { LoginComponent } from './auth/login/login.component';
 import { RegComponent } from './auth/reg/reg.component';
 import { RoomFormComponent } from './room-form/room-form.component';
 import { ProfileComponent } from './user/profile/profile.component';
-
-const routes: Routes = [
-  {path:'' ,component:HomeComponent},
+ 
+export const routes: Routes = [
+  {path:'' , component :HomeComponent},
   {path:'login' , component :LoginComponent},
   {path :'reg' , component : RegComponent},
   {path :'roomform' , component : RoomFormComponent},
