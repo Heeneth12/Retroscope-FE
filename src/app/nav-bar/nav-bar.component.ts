@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
+import { SharedService } from '../shared.service';
 
 @Component({
   selector: 'app-nav-bar',
@@ -15,6 +16,11 @@ export class NavBarComponent {
   menu:boolean = false;
   showDropdown: any;
 
+  constructor(private sharedService: SharedService) {}
+
+  onMyRoomsClick() {
+    this.sharedService.setMyRoomsView(true);
+  }
   ngOnInit(): void {
     if (localStorage.getItem('jwtToken')) {
     this.user = true;

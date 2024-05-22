@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { environment } from '../../environment/environment';
+import { SharedService } from '../shared.service';
 environment
 @Component({
   selector: 'app-home',
@@ -26,11 +27,12 @@ showPasskeyInputVer: boolean= false;
   passKey: any;
   joinButtonVisible: boolean = false;
 
-  constructor(private http: HttpClient, private router: Router) {}
+  constructor(private http: HttpClient, private router: Router, private sharedService: SharedService) {}
 
   ngOnInit(): void {
     this.sendJwt();
     this.getRoomData();
+    
     
   }
 
@@ -50,6 +52,13 @@ showPasskeyInputVer: boolean= false;
       console.log(response);
       this.roomData = response;
       this.filteredRoomData = response;
+      this.sharedService.myRooms$.subscribe(showMyRooms => {
+        if (showMyRooms) {
+          this.filterMyRooms();
+        } else {
+          this.filteredRoomData = response;
+        }
+      });
     });
   }
   checkPassKey(item: any) {
@@ -121,6 +130,13 @@ filterRooms(){
     room.roomName.toLowerCase().includes(this.searchTerm.toLowerCase())
   );
   console.log(this.filteredRoomData)
+}
+filterMyRooms() {
+  const userName = localStorage.getItem('userName');
+  this.filteredRoomData = this.roomData.filter((room: { user: { userName: string; }; }) =>
+    room.user.userName === userName
+  
+  );
 }
 
 
