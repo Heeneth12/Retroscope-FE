@@ -43,8 +43,7 @@ textarea{
     margin-right: 1rem; /* Adjust margin as needed */
   }
   .chat-svg{
-    background-color: #9ACD32;
-    padding: 12px;
+    
     border-radius: 50%;align-self: start;
     float: right;
   }

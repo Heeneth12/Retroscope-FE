@@ -217,7 +217,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   //toggle functions
   groupChatToggle() {
     this.groupChatToggleVer = !this.groupChatToggleVer;
+    //added new chat svg on click 
+    
   }
+
+
   goodTextAreaDropDown() {
     this.goodtestAreaVer = !this.goodtestAreaVer;
   }
