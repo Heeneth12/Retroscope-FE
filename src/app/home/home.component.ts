@@ -9,6 +9,8 @@ environment
   styleUrl: './home.component.css',
 })
 export class HomeComponent implements OnInit {
+  
+  
 passkeyInput: string | undefined;
 
 
@@ -18,6 +20,7 @@ passkeyInput: string | undefined;
 showPasskeyInputVer: boolean= false;
 
   roomData: any;
+  filteredRoomData: any;
   formToggleVer: boolean = false;
   token:string|null = localStorage.getItem('jwtToken')
   passKey: any;
@@ -28,6 +31,7 @@ showPasskeyInputVer: boolean= false;
   ngOnInit(): void {
     this.sendJwt();
     this.getRoomData();
+    
   }
 
   formToggle() {
@@ -45,6 +49,7 @@ showPasskeyInputVer: boolean= false;
     this.http.get<any>(url, {headers}).subscribe((response) => {
       console.log(response);
       this.roomData = response;
+      this.filteredRoomData = response;
     });
   }
   checkPassKey(item: any) {
@@ -109,6 +114,13 @@ sendJwt(): void {
       console.error('Error fetching JWT:', error);
     }
   );
+}
+searchTerm: string = '';
+filterRooms(){
+  this.filteredRoomData = this.roomData.filter((room: { roomName: string; }) => 
+    room.roomName.toLowerCase().includes(this.searchTerm.toLowerCase())
+  );
+  console.log(this.filteredRoomData)
 }
 
 

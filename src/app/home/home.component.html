@@ -8,7 +8,7 @@
                     <h2 class="font-bold text-2xl my-6 text-gray-700">Dashboard</h2>
                 </div>
                 <div>
-                    <input placeholder="Filter your boards" class="search-bar px-3 font-medium text-sm p-1">
+                    <input placeholder="Filter your boards" class="search-bar px-3 font-medium text-sm p-1"  [(ngModel)]="searchTerm" (input)="filterRooms()">
                 </div>
 
             </div>
@@ -36,7 +36,7 @@
                     </svg>
                 </button>
         </div>
-        <div *ngFor="let item of roomData" class="card p-4 px-8 bg-blue-400 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+        <div *ngFor="let item of filteredRoomData" class="card p-4 px-8 bg-blue-400 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
             <div class="flex justify-between items-center mt-2">
                 <h3 class="text-xl text-white font-bold">{{item.roomName}}</h3>
                 <p class=" items-center justify-center text-xs text-gray-600">
