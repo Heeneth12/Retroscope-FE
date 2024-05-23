@@ -26,6 +26,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   messages: any;
   filteredMessages: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   topicTextAreaStates: { [key: string]: boolean } = {};
+  previousUsername: string = ''; 
 
   constructor(
     private socketService: SocketService,
@@ -154,4 +155,9 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       }
     );
   }
+
+    // Method to update previousUsername
+    updatePreviousUsername(currentUsername: string) {
+      this.previousUsername = currentUsername;
+    }
 }
