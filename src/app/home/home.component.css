@@ -1,5 +1,5 @@
 .card{
-  background-color: #1b65fa;
+  background-color: #ffffff;
   border: 1px solid #E3E3E3;
   
 
@@ -19,7 +19,11 @@ img{
   border: 1px solid #E3E3E3;
 }
 input{
-  border: 0px solid white;
+  border: 0px solid rgb(0, 0, 0);
+ 
+}
+input:focus{
+  outline: none;
 }
 .roomId{
   border-radius: 3px;
@@ -27,4 +31,9 @@ input{
 }
 .roomInput:focus{
   outline: none;
+}
+
+.submit{
+  border: 1px solid black;
+  border-radius: 12px;
 }

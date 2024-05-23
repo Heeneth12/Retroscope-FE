@@ -18,7 +18,7 @@
             <h4 class="font-thin text-gray-700" >Public boards collaborate by sharing room ID</h4>
             <div class="flex items-center roomId">
                 <input placeholder="join-room" class="roomInput px-2">
-                <button class="hover:bg-slate-300 hover:">
+                <button class="hover:bg-gray-600 hover:">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5">
                         <path fill-rule="evenodd" d="M17 4.25A2.25 2.25 0 0 0 14.75 2h-5.5A2.25 2.25 0 0 0 7 4.25v2a.75.75 0 0 0 1.5 0v-2a.75.75 0 0 1 .75-.75h5.5a.75.75 0 0 1 .75.75v11.5a.75.75 0 0 1-.75.75h-5.5a.75.75 0 0 1-.75-.75v-2a.75.75 0 0 0-1.5 0v2A2.25 2.25 0 0 0 9.25 18h5.5A2.25 2.25 0 0 0 17 15.75V4.25Z" clip-rule="evenodd" />
                         <path fill-rule="evenodd" d="M1 10a.75.75 0 0 1 .75-.75h9.546l-1.048-.943a.75.75 0 1 1 1.004-1.114l2.5 2.25a.75.75 0 0 1 0 1.114l-2.5 2.25a.75.75 0 1 1-1.004-1.114l1.048-.943H1.75A.75.75 0 0 1 1 10Z" clip-rule="evenodd" />
@@ -28,25 +28,25 @@
             </div>
         </div>
     </div>
-    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-2 gap-6 mt-6">
-        <div (click)="formToggle()" class="card p-4 flex justify-center transition duration-300 ease-in-out transform hover:shadow-lg hover:-translate-y-1">
-                <button class="text-stone-300 hover:text-white">
+    <div class="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 md:grid-cols-2 gap-6 my-6">
+        <div (click)="formToggle()" class="card p-4 flex justify-center transition duration-300 ease-in-out transform hover:shadow-lg hover:-translate-y-1 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl">
+                <button class="text-stone-300 hover:text-gray-700">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
                     </svg>
                 </button>
         </div>
-        <div *ngFor="let item of filteredRoomData" class="card p-4 px-8 bg-blue-400 hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1">
+        <div *ngFor="let item of filteredRoomData" class="card p-4 px-8  hover:shadow-lg transition duration-300 ease-in-out transform hover:-translate-y-1 text-gray-700 bg-white shadow-md bg-clip-border rounded-xl">
             <div class="flex justify-between items-center mt-2">
-                <h3 class="text-xl text-white font-bold">{{item.roomName}}</h3>
+                <h3 class="block mb-2 font-sans text-xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900">{{item.roomName}}</h3>
                 <p class=" items-center justify-center text-xs text-gray-600">
-                    <span class="inline-block h-3 w-3 rounded-full ml-1 {{item.active ? 'bg-green-500' : 'bg-red-500'}}"></span>
+                    <span class="inline-block h-3 w-3 rounded-full ml-1 {{item.active ? 'bg-red-500' : 'bg-green-500'}}"></span>
                 </p>
             </div>
             <div class="my-2">
-                <p class="text-sm text-white my-4 rounded-sm">{{item.roomDescription}}</p>
+                <p class=" text-black my-4 block font-sans text-base antialiased font-light leading-relaxed text-inherit">{{item.roomDescription}}</p>
                 <div class="flex items-center">
-                    <h3 class="flex items-center mt-2 bg-blue-700 w-fit p-1 px-2 rounded-2xl text-sm font-semibold text-white">
+                    <h3 class="flex items-center mt-2 bg-gray-500 w-fit p-1 px-2 rounded-2xl text-sm font-semibold text-white">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" class="w-5 h-5 mr-2">
                             <path d="M10 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6ZM3.465 14.493a1.23 1.23 0 0 0 .41 1.412A9.957 9.957 0 0 0 10 18c2.31 0 4.438-.784 6.131-2.1.43-.333.604-.903.408-1.41a7.002 7.002 0 0 0-13.074.003Z" />
                         </svg>
@@ -59,17 +59,17 @@
                     </div>
                 </div>
             </div>
-            <div class="flex justify-end items-center">
-                <div>
-                    <button *ngIf="!item.passKeyEntered && item.restrictedRoom && !item.showPasskeyInput" (click)="showPasskeyInput(item)" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button>
-                    <div *ngIf="item.showPasskeyInput">
-                        <input placeholder="Enter Passkey" type="password" class="rounded-sm px-2 py-1 border-gray-400 border" [(ngModel)]="passkeyInput">
-                        <button (click)="checkRoomPassKey(item.roomId, passkeyInput , item.roomName)" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Submit</button>
+            <div class="flex justify-end items-center ">
+                <div class=" flex items-center">
+                    <button *ngIf="!item.passKeyEntered && item.restrictedRoom && !item.showPasskeyInput" (click)="showPasskeyInput(item)" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Join</button>
+                    <div *ngIf="item.showPasskeyInput" class="submit" >
+                        <input placeholder="Enter Passkey" type="password" class="rounded-sm px-2  m-1  border-gray-800" [(ngModel)]="passkeyInput">
+                        <button (click)="checkRoomPassKey(item.roomId, passkeyInput , item.roomName)" class="p-1 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Submit</button>
                     </div>
                 </div>
                 <!-- <button *ngIf="!item.restrictedRoom || item.passKeyEntered" [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button> -->
                 <!-- <button *ngIf="joinButtonVisible || !item.restrictedRoom || item.passKeyEntered" [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button> -->
-                <button #joinButton *ngIf="!item.restrictedRoom || item.passKeyEntered" [routerLink]="['/chat', item.roomId, item.roomName]" class="text-white bg-blue-700 hover:bg-blue-800 rounded-sm px-6 p-1">Join</button>
+                <button #joinButton *ngIf="!item.restrictedRoom || item.passKeyEntered" [routerLink]="['/chat', item.roomId, item.roomName]" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Join</button>
 
             </div>
         </div>

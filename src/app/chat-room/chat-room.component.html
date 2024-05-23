@@ -15,8 +15,14 @@
 
         <div class="my-4" *ngIf="topicTextAreaStates[topic.topicName]">
           <div>
-            <textarea class="border font-bold text-white text-xs bg-green-400 p-1 w-full rounded-sm focus:outline-none"
+            <textarea   class="border font-bold text-white text-xs  p-1 w-full rounded-sm focus:outline-none"
               type="text" [(ngModel)]="goodMessageText" (keydown.enter)="sendMessage(topic.topicName)"
+              [ngClass]="{
+                'bg-green-500': topic.topicName === 'Pros',
+                'bg-red-500': topic.topicName === 'Cons'  || topic.topicName === 'What Didn\'t Go Well',
+                'bg-blue-500': topic.topicName === 'What Went Well',
+                'bg-orange-500': topic.topicName === 'What Can Be Improved'
+              }"
               placeholder="Enter text..."></textarea>
           </div>
 
@@ -31,7 +37,14 @@
         <div *ngFor="let message of filteredMessages | async; let i = index" class="m-1">
           <div *ngIf="message?.contentType ===  topic.topicName ">
             <div
-              class=" bg-green-400 text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
+            [ngClass]="{
+              'bg-green-500': topic.topicName === 'Pros',
+              'bg-red-500': topic.topicName === 'Cons'|| topic.topicName === 'What Didn\'t Go Well',
+              'bg-blue-500': topic.topicName === 'What Went Well' ,
+              'bg-orange-500': topic.topicName === 'What Can Be Improved'
+            }"
+           
+              class="  text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
               <div class="flex justify-between">
                 <p>{{ message?.content }}
                 </p>
