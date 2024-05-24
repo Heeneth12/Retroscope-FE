@@ -9,7 +9,7 @@ import { HttpClient } from "@angular/common/http";
 })
 export class KeycloakService {
   private keycloakAuth: KeycloakInstance;
-
+  static auth: any = {};
   constructor() {
     this.keycloakAuth = new Keycloak({
       url: environment.keycloakRootUrl,
@@ -24,7 +24,13 @@ export class KeycloakService {
 
       if (authenticated) {
         sessionStorage.setItem('token', JSON.stringify(this.keycloakAuth.token));
-       
+        KeycloakService.auth.loggedIn = true;
+        KeycloakService.auth.authz = this.keycloakAuth;
+        KeycloakService.auth.logoutUrl = this.keycloakAuth.authServerUrl
+          + 'realms/master/protocol/openid-connect/logout?post_logout_redirect_uri='
+          + document.baseURI
+          + '&id_token_hint='
+          + this.keycloakAuth.idToken
 
         // // Example call to check if token is added, replace with actual URL
         // const url = "http://example.com/check-token"; // Replace with actual URL
@@ -40,7 +46,7 @@ export class KeycloakService {
         console.log(`Authenticated as: ${username}`);
         console.log(`Full name: ${fullName}`);
 
-        return true; // Authentication successful
+        return authenticated; // Authentication successful
       } else {
         console.error('User not authenticated');
         return false; // Authentication failed
@@ -65,6 +71,12 @@ export class KeycloakService {
   }
 
   logout(): void {
-    this.keycloakAuth.logout();
+    // this.keycloakAuth.logout();
+    sessionStorage.clear();
+    localStorage.clear();
+    console.log("cleared")
+    KeycloakService.auth.loggedIn = false;
+    KeycloakService.auth.authz = null;
+    window.location.href = KeycloakService.auth.logoutUrl;
   }
 }

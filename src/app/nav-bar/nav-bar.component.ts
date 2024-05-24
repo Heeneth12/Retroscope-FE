@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { SharedService } from '../shared.service';
+import { KeycloakService } from '../keycloak.service';
+import { keyframes } from '@angular/animations';
 
 @Component({
   selector: 'app-nav-bar',
@@ -16,7 +18,7 @@ export class NavBarComponent {
   menu:boolean = false;
   showDropdown: any;
 
-  constructor(private sharedService: SharedService) {}
+  constructor(private sharedService: SharedService, private keyCloakService: KeycloakService) {}
 
   onMyRoomsClick() {
     this.sharedService.setMyRoomsView(true);
@@ -39,10 +41,10 @@ export class NavBarComponent {
   }
 
   logout() {
-    localStorage.removeItem('jwtToken');
-    localStorage.removeItem('userEmail');
-    localStorage.removeItem('userName');
-    localStorage.removeItem('userId');
+    for(let i=1; i<=2; i++){
+      this.keyCloakService.logout()
+    }
+    
   }
 
 }

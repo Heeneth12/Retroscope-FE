@@ -9,7 +9,6 @@ import { ProfileComponent } from './user/profile/profile.component';
  
 export const routes: Routes = [
   {path:'' , component :HomeComponent},
-  {path:'login' , component :LoginComponent},
   {path :'reg' , component : RegComponent},
   {path :'roomform' , component : RoomFormComponent},
   {path :'profile' , component : ProfileComponent},
