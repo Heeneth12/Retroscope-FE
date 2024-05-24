@@ -115,6 +115,22 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     );
   }
 
+  like: number = 0;
+  likesCount(message: any){
+    const room = this.route.snapshot.params['roomId'];
+    const url = environment.url + `/message/like/${message.id}`;
+    this.like = this.like+1;
+    this.http.put<any>(url,this.like).subscribe(
+      (response: any)=>{
+        console.log(response);
+        this.getMessages(room);
+      },
+      (error) => {
+        console.error('Failed to like/unlike message:', error);
+      }
+    )
+  }
+
   ngOnDestroy(): void {
     if (this.connectionStatusSubscription) {
       this.connectionStatusSubscription.unsubscribe();
