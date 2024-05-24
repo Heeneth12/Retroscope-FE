@@ -90,7 +90,10 @@
             </div>
           </div>
             <div  class="flex justify-between">
-            <h4 class="font-thin text-gray-700" >Public boards collaborate by sharing room ID</h4>
+                <div>
+                    <h4 class="font-thin text-gray-700" >Public boards collaborate by sharing room ID</h4>
+                </div>
+            
             <!-- <div class="flex items-center">
                 <div *ngIf="true" class="flex space-x-4">
                     <p class="bg-green-400 text-white px-2 py-1 rounded">Good: {{messageTypeCount?.Good}}</p>
@@ -100,6 +103,15 @@
                 </div>
                 <button (click)="reportData()" class="mx-4"><img src="https://static.wixstatic.com/media/17ac83_810739dfef3941449effd1751ba1c080~mv2.gif" width="64" height="32"></button>
             </div> -->
+            <div>
+                <button routerLink="/" routerLinkActive="router-link-active"  type="button" class="py-3 mx-2 px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
+                    Exit room
+                    <svg class="flex-shrink-0 size-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M5 12h14"></path>
+                      <path d="m12 5 7 7-7 7"></path>
+                    </svg>
+                  </button>
+            </div>
         </div>
     </div>
 </div>
