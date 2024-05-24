@@ -17,7 +17,7 @@ interface Topic {
 export class RoomFormComponent implements OnInit {
   roomForm: FormGroup;
   topicList: Topic[] = [];
-
+  errorMessage: string = '';
   constructor(
     private formBuilder: FormBuilder,
     private http: HttpClient,
@@ -29,7 +29,7 @@ export class RoomFormComponent implements OnInit {
       user: [localStorage.getItem('userId')],
       restrictedRoom: [false],
       restrictedRoomPassKey: '',
-      topics: [[]] // Initialize roomTopics as FormControl with null value
+      topics: [[], [Validators.required] ] // Initialize roomTopics as FormControl with null value
     });
   }
 
@@ -49,6 +49,10 @@ export class RoomFormComponent implements OnInit {
   }
 
   onSubmit(): void {
+    if (this.roomForm.invalid) {
+      this.errorMessage = 'Please fill in all required fields.';
+      return;
+    }
     console.log(this.roomForm.value);
     const url = environment.url+ "/create";
     this.http.post<any>(url, this.roomForm.value)

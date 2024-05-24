@@ -26,6 +26,7 @@ showPasskeyInputVer: boolean= false;
   token:string|null = localStorage.getItem('jwtToken')
   passKey: any;
   joinButtonVisible: boolean = false;
+  PassErrorMessage: String = 'Enter PassKey';
 
   constructor(private http: HttpClient, private router: Router, private sharedService: SharedService) {}
 
@@ -82,6 +83,10 @@ showPasskeyInputVer: boolean= false;
 }
 
 checkRoomPassKey(roomId: string, passkeyInput: string | undefined , roomName : string) {
+  if (passkeyInput == null) {
+    this.PassErrorMessage = 'Please Enter Pass Key';
+    return;
+  }
   if (passkeyInput !== undefined) {
     // Call your API or perform other actions using roomId and passkeyInput
     const url =  environment.url+ '/roomPasskey';
@@ -95,6 +100,9 @@ checkRoomPassKey(roomId: string, passkeyInput: string | undefined , roomName : s
         console.log(response);
         if (response.status === "success") {
          this.router.navigate(['/chat', roomId , roomName])
+        }
+        else{
+          
         }
       },
       (error) => {

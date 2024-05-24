@@ -63,7 +63,7 @@
                 <div class=" flex items-center">
                     <button *ngIf="!item.passKeyEntered && item.restrictedRoom && !item.showPasskeyInput" (click)="showPasskeyInput(item)" class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Join</button>
                     <div *ngIf="item.showPasskeyInput" class="submit" >
-                        <input placeholder="Enter Passkey" type="password" class="rounded-sm px-2  m-1  border-gray-800" [(ngModel)]="passkeyInput">
+                        <input placeholder={{PassErrorMessage}} type="password" class="rounded-sm px-2  m-1  border-gray-800" [(ngModel)]="passkeyInput">
                         <button (click)="checkRoomPassKey(item.roomId, passkeyInput , item.roomName)" class="p-1 align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs py-3 px-6 rounded-lg bg-gray-900 text-white shadow-md shadow-gray-900/10 hover:shadow-lg hover:shadow-gray-900/20 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none">Submit</button>
                     </div>
                 </div>
