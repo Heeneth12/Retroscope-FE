@@ -68,3 +68,13 @@ textarea{
 .animate-notification {
   animation: fadeInSlideDown 0.5s ease-out;
 }
+
+.notification-user {
+  font-size: small;
+  font-weight: bold;
+  color: #ffffff; /* Example color, adjust as needed */
+}
+
+.joined-message {
+  color: #a5aaaa; /* Example color, adjust as needed */
+}

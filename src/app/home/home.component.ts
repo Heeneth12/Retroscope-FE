@@ -32,7 +32,7 @@ showPasskeyInputVer: boolean= false;
 
   ngOnInit(): void {
     this.sendJwt();
-    this.getRoomData();
+
     
     
   }
@@ -121,17 +121,22 @@ sendJwt(): void {
   this.http.get<any>(url).subscribe(
     response => {
       console.log(response);
-      
       localStorage.setItem('jwtToken', response.SsoToken);
       localStorage.setItem('userEmail', response.userEmail);
       localStorage.setItem('userName', response.userName);
       localStorage.setItem('userId', response.userId);
+      if(response.Status == "User already exists" ){
+        this.getRoomData();
+      }
+
     },
     error => {
       console.error('Error fetching JWT:', error);
     }
   );
 }
+
+
 searchTerm: string = '';
 filterRooms(){
   this.filteredRoomData = this.roomData.filter((room: { roomName: string; }) => 

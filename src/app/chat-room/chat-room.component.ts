@@ -11,11 +11,9 @@ import { environment } from '../../environment/environment';
   styleUrls: ['./chat-room.component.css'],
 })
 export class ChatRoomComponent implements OnInit, OnDestroy {
-  connectionStatusSubscription: Subscription | undefined;
+  private subscriptions: Subscription[] = [];
   isConnected: boolean | undefined;
   groupChatToggleVer: boolean = false;
-  receivedMessageSubscription: any;
-  isHovered: boolean = true;
   username: string | null = localStorage.getItem('userName');
   roomId: string | null = this.route.snapshot.params['roomId'];
   retroTypeData: any;
@@ -23,10 +21,12 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   goodMessageText: any;
   badMessageText: any;
   avgMessageText: any;
-  messages: any;
+  messages: any = [];
   filteredMessages: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   topicTextAreaStates: { [key: string]: boolean } = {};
-  previousUsername: string = ''; 
+  selectedMessageIndex: number = -1;
+  previousUsername: string = '';
+  like: number = 0;
 
   constructor(
     private socketService: SocketService,
@@ -35,35 +35,42 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
-    const room = this.route.snapshot.params['roomId'];
-    const username = localStorage.getItem('userName');
+    const room = this.roomId!;
+    const username = this.username!;
 
-    // Get room data
+    // Get room data and messages
     this.getRoomData();
+    this.getMessages(room);
+
+    // Initialize socket connection
+    this.socketService.initializeSocket(room, username);
+
+    // Subscribe to socket events
+    this.subscriptions.push(
+      this.socketService.connectionStatus$.subscribe((connected: boolean) => {
+        this.isConnected = connected;
+      }),
+      this.socketService.userJoin$.subscribe((data: any) => {
+        console.log("User joined:", data);
+        this.userNotificationLogs(data+" joined the room");
+      }),
+      this.socketService.userExit$.subscribe((data: any) => {
+        console.log("User exited:", data);
+        this.userNotificationLogs(data+" left the room");
+      }),
+      this.socketService.receiveMessage$.subscribe((message: any) => {
+        this.messages.push(message);
+        this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === room));
+      })
+    );
 
     // User join method
     const data = {
       userId: localStorage.getItem('userId'),
       roomId: room,
     };
-    console.log(data);
-
-    const url = environment.url + '/userJoinRoom';
-    this.http.post<any>(url, data).subscribe((response) => {
+    this.http.post<any>(environment.url + '/userJoinRoom', data).subscribe((response) => {
       console.log(response);
-    });
-
-    // Get messages
-    this.getMessages(room);
-
-    this.socketService.initializeSocket(room, username!);
-    this.socketService.connectionStatus$.subscribe((connected: boolean) => {
-      this.isConnected = connected;
-    });
-
-    this.socketService.receiveMessage$.subscribe((message: any) => {
-      this.messages.push(message);
-      this.filteredMessages.next(this.messages.filter((msg: any) => msg && msg.room === room));
     });
   }
 
@@ -93,14 +100,12 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     this.goodMessageText = '';
   }
 
-  selectedMessageIndex: number = -1;
-
   optionsDropDown(index: number) {
     this.selectedMessageIndex = this.selectedMessageIndex === index ? -1 : index;
   }
 
   deleteMessage(message: any) {
-    const room = this.route.snapshot.params['roomId'];
+    const room = this.roomId!;
     const url = environment.url + `/message/delete/${message.id}`;
     this.http.delete<any[]>(url).subscribe(
       (response: any) => {
@@ -115,26 +120,24 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     );
   }
 
-  like: number = 0;
-  likesCount(message: any){
-    const room = this.route.snapshot.params['roomId'];
+  likesCount(message: any) {
+    const room = this.roomId!;
     const url = environment.url + `/message/like/${message.id}`;
-    this.like = this.like+1;
-    this.http.put<any>(url,this.like).subscribe(
-      (response: any)=>{
+    this.like = this.like + 1;
+    this.http.put<any>(url, this.like).subscribe(
+      (response: any) => {
         console.log(response);
         this.getMessages(room);
       },
       (error) => {
         console.error('Failed to like/unlike message:', error);
       }
-    )
+    );
   }
 
   ngOnDestroy(): void {
-    if (this.connectionStatusSubscription) {
-      this.connectionStatusSubscription.unsubscribe();
-    }
+    // Unsubscribe from all subscriptions
+    this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   groupChatToggle() {
@@ -172,8 +175,21 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     );
   }
 
-    // Method to update previousUsername
-    updatePreviousUsername(currentUsername: string) {
-      this.previousUsername = currentUsername;
-    }
+  updatePreviousUsername(currentUsername: string) {
+    this.previousUsername = currentUsername;
+  }
+
+// User logs Notification 
+userNotification: boolean = false;
+notificationUserName: string = "";
+
+userNotificationLogs(userJoin: string) {
+  this.userNotification = true;
+  this.notificationUserName = userJoin;
+  // Set timeout to reset the notification
+  setTimeout(() => {
+    this.userNotification = false;
+  }, 3000);
+}
+
 }

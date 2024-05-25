@@ -37,10 +37,7 @@ export class NavBarComponent {
   }
 
   logout() {
-  
       this.keyCloakService.logout()
-  
-    
   }
 
 }
