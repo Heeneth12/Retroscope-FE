@@ -3,7 +3,7 @@
 <app-chat [data]="roomId"></app-chat>
 <div>
   <div class="">
-    <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 min-h-svh lg:grid-cols-3 gap-2 mt-2 px-2 lg:px-12">
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 min-h-svh lg:grid-cols-3 gap-2 mt-2 px-2 lg:px-12">
      <div *ngFor="let topic of retroTypeData.topics">
       <div class="bg-white p-2 shadow min-h-96 rounded-sm chat-card">
         <h2 class="text-sm text-center font-semibold text-gray-700">
@@ -14,28 +14,33 @@
           +
         </button>
 
-        <div class="my-4" *ngIf="topicTextAreaStates[topic.topicName]">
+        <div class="my-6" *ngIf="topicTextAreaStates[topic.topicName]">
           <div>
-            <textarea   class="border font-bold text-white text-xs  p-1 w-full rounded-sm focus:outline-none"
-              type="text" [(ngModel)]="goodMessageText" (keydown.enter)="sendMessage(topic.topicName)"
+            <textarea
+              class="border font-bold text-white text-xs p-1 w-full rounded-sm focus:outline-none"
+              type="text"
+              [(ngModel)]="goodMessageText"
+              (keydown.enter)="goodMessageText.trim() && sendMessage(topic.topicName)"
               [ngClass]="{
                 'bg-green-500': topic.topicName === 'Pros',
-                'bg-red-500': topic.topicName === 'Cons'  || topic.topicName === 'What Didn\'t Go Well',
+                'bg-red-500': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
                 'bg-blue-500': topic.topicName === 'What Went Well',
                 'bg-orange-500': topic.topicName === 'What Can Be Improved'
               }"
               placeholder="Enter text..."></textarea>
           </div>
-
-          
-          <button class="bg-blue-400 rounded-sm text-white text-xs px-1" style="float: right"
+          <button
+            *ngIf="goodMessageText.trim()"
+            class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs  px-4 border border-gray-900 text-gray-900 hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] rounded-full"
+            style="float: right"
             (click)="sendMessage(topic.topicName)">
-            send
+            Send
           </button>
         </div>
+        
 
 
-        <div *ngFor="let message of filteredMessages | async; let i = index" class="m-1">
+        <div *ngFor="let message of filteredMessages | async; let i = index" class="m-2">
           <div *ngIf="message?.contentType ===  topic.topicName ">
             <div
             [ngClass]="{

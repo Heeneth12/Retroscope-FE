@@ -90,6 +90,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
   sendMessage(type: string) {
+    if (!this.goodMessageText.trim()) {
+      // If goodMessageText is empty or contains only whitespace, do not send the message
+      
+      return;
+    }
     const data = {
       content: this.goodMessageText, // Use goodMessageText for simplicity
       room: this.roomId,

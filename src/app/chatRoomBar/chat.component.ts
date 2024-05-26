@@ -21,6 +21,10 @@ export class ChatComponent  {
   durationInSeconds = 5;
   
 
+//active users
+activeUsers = [];
+activeuser:object = {}
+
   roomName:string = "Demo project"
 
 
@@ -36,6 +40,9 @@ export class ChatComponent  {
   toggleDropdown(){
 
     this.dropdownOpen = !this.dropdownOpen;
+    if(this.dropdownPeople == true){
+      this.dropdownPeople = false;
+    }
     const urls = environment.url+'/user/getEmail'
 
     if(this.dropdownOpen){
@@ -83,6 +90,9 @@ export class ChatComponent  {
   
   showJoinedUsers() {
     this.dropdownPeople = !this.dropdownPeople;
+    if(this.dropdownOpen== true){
+      this.dropdownOpen=false;
+    }
     const url = environment.url+`/usersInRoom/${this.data}`
     console.log(typeof (this.data));
     if (this.dropdownPeople) {
