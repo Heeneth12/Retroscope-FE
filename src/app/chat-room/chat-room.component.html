@@ -22,9 +22,9 @@
               [(ngModel)]="goodMessageText"
               (keydown.enter)="goodMessageText.trim() && sendMessage(topic.topicName)"
               [ngClass]="{
-                'bg-green-500': topic.topicName === 'Pros',
-                'bg-red-500': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
-                'bg-blue-500': topic.topicName === 'What Went Well',
+                'bg-green-500': topic.topicName === 'good',
+                'bg-red-500': topic.topicName === 'bad' || topic.topicName === 'What Didn\'t Go Well',
+                'bg-blue-500': topic.topicName === 'avg',
                 'bg-orange-500': topic.topicName === 'What Can Be Improved'
               }"
               placeholder="Enter text..."></textarea>
@@ -44,9 +44,9 @@
           <div *ngIf="message?.contentType ===  topic.topicName ">
             <div
             [ngClass]="{
-              'bg-green-500': topic.topicName === 'Pros',
-              'bg-red-500': topic.topicName === 'Cons'|| topic.topicName === 'What Didn\'t Go Well',
-              'bg-blue-500': topic.topicName === 'What Went Well' ,
+              'bg-green-500': topic.topicName === 'good',
+              'bg-red-500': topic.topicName === 'bad'|| topic.topicName === 'What Didn\'t Go Well',
+              'bg-blue-500': topic.topicName === 'avg' ,
               'bg-orange-500': topic.topicName === 'What Can Be Improved'
             }"
            
