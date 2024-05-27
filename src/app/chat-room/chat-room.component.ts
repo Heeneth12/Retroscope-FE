@@ -24,7 +24,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   messages: any = [];
   filteredMessages: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   topicTextAreaStates: { [key: string]: boolean } = {};
-  selectedMessageIndex: number = -1;
+  selectedMessageIndex: number | undefined;
   previousUsername: string = '';
   like: number = 0;
 
@@ -125,18 +125,19 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
     );
   }
 
-  likesCount(message: any){
-    const room = this.route.snapshot.params['roomId'];
+  likesCount(message: any) {
+    const room = this.roomId!;
     const url = environment.url + `/message/like/${message.id}`;
-    this.http.put<any>(url,this.username).subscribe(
-      (response: any)=>{
+  
+    this.http.put<any>(url, this.username).subscribe(
+      (response: any) => {
         console.log(response);
         this.getMessages(room);
       },
       (error) => {
         console.error('Failed to like/unlike message:', error);
       }
-    )
+    );
   }
 
   ngOnDestroy(): void {

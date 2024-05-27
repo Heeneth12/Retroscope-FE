@@ -1,6 +1,32 @@
-<div class="relative">
 <app-nav-bar></app-nav-bar>
-<app-chat [data]="roomId"></app-chat>
+<div>
+  <app-chat [data]="roomId"></app-chat>
+  <!-- user notification bar  -->
+<div *ngIf="userNotification">
+  <div class="absolute inset-0 flex justify-center items-start mt-16 animate-notification">
+      <div class="max-w-sm bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-neutral-800 dark:border-neutral-700" role="alert">
+          <div class="flex p-2 px-4">
+              <div class="flex-shrink-0">
+                  <svg class="size-5 text-gray-600 mt-1 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
+                      <path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"></path>
+                  </svg>
+              </div>
+              <div class="ms-4">
+                <h3 class="text-gray-800 font-semibold dark:text-white">
+                    App notifications
+                </h3>
+                <div class="mt-1 text-sm text-gray-600  dark:text-neutral-400">
+                    <span class="notification-user px-1">{{notificationUserName}}</span> 
+                </div>
+            </div>
+            
+          </div>
+      </div>
+  </div>
+</div>
+</div>
+
 <div>
   <div class="">
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 min-h-svh lg:grid-cols-3 gap-2 mt-2 px-2 lg:px-12">
@@ -22,10 +48,15 @@
               [(ngModel)]="goodMessageText"
               (keydown.enter)="goodMessageText.trim() && sendMessage(topic.topicName)"
               [ngClass]="{
-                'bg-green-500': topic.topicName === 'good',
-                'bg-red-500': topic.topicName === 'bad' || topic.topicName === 'What Didn\'t Go Well',
-                'bg-blue-500': topic.topicName === 'avg',
-                'bg-orange-500': topic.topicName === 'What Can Be Improved'
+               'bg-green-500': topic.topicName === 'Pros' || topic.topicName == 'Learned',
+                'bg-red-500': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
+                'bg-blue-500': topic.topicName === 'What Went Well',
+                'bg-orange-500': topic.topicName === 'What Can Be Improved',
+                'bg-gray-500': topic.topicName === 'Learned',
+                'bg-violet-500': topic.topicName === 'Improvements for the Future',
+                'bg-yellow-500': topic.topicName === 'Customer Feedback',
+                'bg-purple-600': topic.topicName === 'Risk Management'
+                
               }"
               placeholder="Enter text..."></textarea>
           </div>
@@ -44,10 +75,14 @@
           <div *ngIf="message?.contentType ===  topic.topicName ">
             <div
             [ngClass]="{
-              'bg-green-500': topic.topicName === 'good',
-              'bg-red-500': topic.topicName === 'bad'|| topic.topicName === 'What Didn\'t Go Well',
-              'bg-blue-500': topic.topicName === 'avg' ,
-              'bg-orange-500': topic.topicName === 'What Can Be Improved'
+              'bg-green-500': topic.topicName === 'Pros',
+                'bg-red-500': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
+                'bg-blue-500': topic.topicName === 'What Went Well',
+                'bg-orange-500': topic.topicName === 'What Can Be Improved',
+                'bg-gray-500': topic.topicName === 'Learned',
+                'bg-violet-500': topic.topicName === 'Improvements for the Future',
+                'bg-yellow-500': topic.topicName === 'Customer Feedback',
+                'bg-purple-600': topic.topicName === 'Risk Management'
             }"
            
               class="  text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
@@ -194,7 +229,7 @@
 </div>
 
 <!-- user notification bar  -->
-<div *ngIf="userNotification">
+<!-- <div *ngIf="userNotification">
   <div class="absolute inset-0 flex justify-center items-start mt-16 animate-notification">
       <div class="max-w-sm bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-neutral-800 dark:border-neutral-700" role="alert">
           <div class="flex p-2 px-4">
@@ -216,4 +251,4 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
