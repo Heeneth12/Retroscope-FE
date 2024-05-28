@@ -24,7 +24,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   messages: any = [];
   filteredMessages: BehaviorSubject<any[]> = new BehaviorSubject<any[]>([]);
   topicTextAreaStates: { [key: string]: boolean } = {};
-  selectedMessageIndex: number | undefined;
+  selectedMessageIndex: number = -1;
   previousUsername: string = '';
   like: number = 0;
 
@@ -52,11 +52,18 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       }),
       this.socketService.userJoin$.subscribe((data: any) => {
         console.log("User joined:", data);
+      if (data != null){
+
         this.userNotificationLogs(data+" joined the room");
+
+      }
       }),
       this.socketService.userExit$.subscribe((data: any) => {
         console.log("User exited:", data);
-        this.userNotificationLogs(data+" left the room");
+        if (data != null){
+
+          this.userNotificationLogs(data+" left the room");
+        }
       }),
       this.socketService.receiveMessage$.subscribe((message: any) => {
         this.messages.push(message);
@@ -75,6 +82,10 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
   sendCommonMessage() {
+    if (!this.commonMessageText.trim()) {
+      // If goodMessageText is empty or contains only whitespace, do not send the message
+      return;
+    }
     const data = {
       content: this.commonMessageText,
       room: this.roomId,
@@ -86,7 +97,15 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   }
 
   TextAreaDropDown(topicName: string) {
-    this.topicTextAreaStates[topicName] = !this.topicTextAreaStates[topicName];
+    const currentState = this.topicTextAreaStates[topicName];
+    
+    // Close all text areas
+    for (let key in this.topicTextAreaStates) {
+      this.topicTextAreaStates[key] = false;
+    }
+    
+    // Toggle the current text area (if it was closed, open it)
+    this.topicTextAreaStates[topicName] = !currentState;
   }
 
   sendMessage(type: string) {
@@ -116,6 +135,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
       (response: any) => {
         console.log(response);
         if (response.status === 'success') {
+          this.selectedMessageIndex = -1;
           this.getMessages(room);
         }
       },

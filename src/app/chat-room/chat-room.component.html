@@ -43,7 +43,7 @@
         <div class="my-6" *ngIf="topicTextAreaStates[topic.topicName]">
           <div>
             <textarea
-              class="border font-bold text-white text-xs p-1 w-full rounded-sm focus:outline-none"
+              class="border font-bold text-white text-xs p-1 w-full rounded-sm focus:outline-none placeholder:text-white"
               type="text"
               [(ngModel)]="goodMessageText"
               (keydown.enter)="goodMessageText.trim() && sendMessage(topic.topicName)"
