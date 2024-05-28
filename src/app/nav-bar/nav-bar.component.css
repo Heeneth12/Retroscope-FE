@@ -1,21 +1,27 @@
-.Navbar{
-    background-color: white;
-}
+.app-logo{
+    justify-content: center;
+    align-items: center;
 
-
-.spect{
-    color: #9ACD32;
-}
-img{
-    width: 34px;
-    border-radius: 50%;
     
 }
-.user {
-    background-color:#9ACD32;
-    border-radius: 22px;
+
+h3{
+    font-size: larger;
 }
 
-.menu{
-    border: 1px solid #E3E3E3;
-}
+
+.dropdown-item {
+    transition: background-color 0.3s ease;
+  }
+  
+  .dropdown-item:hover {
+    background-color: #f8f9fa; /* Change to desired hover background color */
+  }
+  
+  .dropdown-item:focus {
+    background-color: #e9ecef; /* Change to desired focus background color */
+    color: #212529; /* Change to desired focus text color */
+    text-decoration: none;
+    outline: none;
+  }
+  

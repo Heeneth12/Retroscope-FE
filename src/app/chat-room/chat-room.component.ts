@@ -27,6 +27,7 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
   selectedMessageIndex: number = -1;
   previousUsername: string = '';
   like: number = 0;
+  pollingInterval: any;
 
   constructor(
     private socketService: SocketService,
@@ -40,7 +41,11 @@ export class ChatRoomComponent implements OnInit, OnDestroy {
 
     // Get room data and messages
     this.getRoomData();
-    this.getMessages(room);
+    // this.getMessages(room);
+       // Start long polling to fetch messages every 2 seconds
+       this.pollingInterval = setInterval(() => {
+        this.getMessages(room);
+      }, 2000);
 
     // Initialize socket connection
     this.socketService.initializeSocket(room, username);

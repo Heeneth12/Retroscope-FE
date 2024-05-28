@@ -1,39 +1,40 @@
-.card{
-  background-color: #ffffff;
-  border: 1px solid #E3E3E3;
-  
+.btn-primary{
+  background-color: black;
+  border: 0px none;
+}
+.add-btn{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} 
 
+.card {
+  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
 }
-img{
-    border-radius: 50%;
-    
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-.search-bar{
-    border: 1px solid #E3E3E3;
-    border-radius: 2px;
+.add-btn {
+  cursor: pointer;
 }
-.add-card{
-  border-radius: 50
+.status-indicator {
+  width: 0.75rem;
+  height: 0.75rem;
+  display: inline-block;
+  border-radius: 50%;
 }
-.form{
-  border: 1px solid #E3E3E3;
+.room-name {
+  font-weight: 600;
+  font-size: 1.25rem;
+  color: #1E293B;
 }
-input{
-  border: 0px solid rgb(0, 0, 0);
- 
+.room-description {
+  color: #000;
+  font-size: 1rem;
+  margin: 1rem 0;
 }
-input:focus{
-  outline: none;
-}
-.roomId{
-  border-radius: 3px;
-  border: 2px solid black;
-}
-.roomInput:focus{
-  outline: none;
-}
-
-.submit{
-  border: 1px solid black;
-  border-radius: 12px;
+.user-name {
+  font-size: 1rem;
+  padding-left: 0.5rem;
 }
