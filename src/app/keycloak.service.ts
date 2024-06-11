@@ -14,7 +14,7 @@ export class KeycloakService {
     this.keycloakAuth = new Keycloak({
       url: environment.keycloakRootUrl,
       realm: 'master',
-      clientId: 'ahcl',
+      clientId: 'maatrum',
     });
   }
 

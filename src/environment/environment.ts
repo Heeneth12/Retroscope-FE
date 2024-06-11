@@ -1,12 +1,12 @@
 export const environment = {
-  url: 'http://192.168.0.6:8080',
-  homeUrl : 'http://192.168.0.6:4200',
-  socketUrl: 'http://192.168.0.6:8085',
+  url: 'http://10.10.10.158:8080',
+  homeUrl : 'http://10.10.10.158:4200',
+  socketUrl: 'http://10.10.10.158:8085',
   production: true,
-  nodeUrl: 'https://auth.dragarwal.com',
-  devUrl: "https://auth.dragarwal.com",
-  keycloakRootUrl: 'https://auth.dragarwal.com' + '/auth/',
-  loginUrl: 'https://auth.dragarwal.com' + '/auth/',
+  nodeUrl: 'https://auth.maatrum.com',
+  devUrl: "https://auth.maatrum.com",
+  keycloakRootUrl: 'https://auth.maatrum.com' + '/auth/',
+  loginUrl: 'https://auth.maatrum.com' + '/auth/',
   userManagementService: '/authentication',
   cjService: '/cjservice'
 };

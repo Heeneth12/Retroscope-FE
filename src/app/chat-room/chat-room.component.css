@@ -27,7 +27,7 @@ textarea{
 }
 
 /* CSS for positioning the group chat component */
-.absolute {
+.position-absolute {
     position: absolute;
   }
   .bottom-0 {
@@ -77,4 +77,42 @@ textarea{
 
 .joined-message {
   color: #a5aaaa; /* Example color, adjust as needed */
+}
+
+
+
+.topic-text{
+  font-size: 16px;
+}
+.min-height{
+  min-height: 24rem;
+}
+.min-width{
+  min-width: 24rem;
+}
+.chat-width{
+  width: 24rem;
+}
+.max-width {
+  max-width: 28rem/* 448px */;
+}
+::placeholder {
+  color: black;
+  opacity: 1; /* Firefox */
+}
+.min-height-svh{
+  min-height: 100svh;
+}
+a{
+  font-size: 14px;
+}
+.origin {
+  transform-origin: top right;
+}
+.un-text{
+  font-size: 8px;
+}
+.chat-box-height{
+  max-height: 24rem/* 384px */;
+  min-height: 9rem/* 144px */;
 }

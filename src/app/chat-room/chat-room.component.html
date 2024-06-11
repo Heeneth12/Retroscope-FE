@@ -1,11 +1,13 @@
 <app-nav-bar></app-nav-bar>
 <div>
   <app-chat [data]="roomId"></app-chat>
+
+
   <!-- user notification bar  -->
-<div *ngIf="userNotification">
-  <div class="absolute inset-0 flex justify-center items-start mt-16 animate-notification">
-      <div class="max-w-sm bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-neutral-800 dark:border-neutral-700" role="alert">
-          <div class="flex p-2 px-4">
+<!-- <div *ngIf="userNotification">
+  <div class="position-absolute inset-0 d-flex justify-content-center align-items-start mt-16 animate-notification">
+      <div class="max-w-sm bg-white border border-gray-200 rounded-xl shadow-lg dark:bg-neutral-900 dark:border-neutral-700" role="alert">
+          <div class="d-flex p-2 px-4">
               <div class="flex-shrink-0">
                   <svg class="size-5 text-gray-600 mt-1 dark:text-neutral-400" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"></path>
@@ -25,82 +27,285 @@
       </div>
   </div>
 </div>
+</div> -->
+
+
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-lg-4 col-sm-12 col-md-4 mb-2 d-flex gap-3  min-height-svh mt-2 px-2 px-lg-4">
+      <div *ngFor="let topic of retroTypeData.topics">
+        <div class="bg-light p-2 shadow min-height rounded-sm chat-card">
+          <h4 class="topic-text text-center font-weight-semibold text-muted">
+            {{ topic.topicName}}
+          </h4>
+          <button (click)="TextAreaDropDown(topic.topicName)" class="btn btn-secondary rounded w-100">
+            +
+          </button>
+          <div class="my-6" *ngIf="topicTextAreaStates[topic.topicName]">
+            <div>
+              <textarea
+                class="border font-weight-bold text-light  p-1 w-100 rounded-sm  "
+                type="text"
+                [(ngModel)]="goodMessageText"
+                (keydown.enter)="goodMessageText.trim() && sendMessage(topic.topicName)"
+                [ngClass]="{
+                 'bg-success': topic.topicName === 'Pros' || topic.topicName == 'Learned',
+                  'bg-danger': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
+                  'bg-primary': topic.topicName === 'What Went Well',
+                  'bg-warning': topic.topicName === 'What Can Be Improved',
+                  'bg-secondary': topic.topicName === 'Learned',
+                  'bg-info': topic.topicName === 'Improvements for the Future',
+                  'bg-light': topic.topicName === 'Customer Feedback',
+                  'bg-dark': topic.topicName === 'Risk Management'
+                  
+                }"
+                placeholder="Enter text..."></textarea>
+            </div>
+            <button
+              *ngIf="goodMessageText.trim()"
+              class="btn btn-secondary btn-sm float-end "
+              style="float: right"
+              (click)="sendMessage(topic.topicName)">
+              Send
+            </button>
+          </div> 
+
+          <div *ngFor="let message of filteredMessages | async; let i = index" class="m-2">
+            <div *ngIf="message?.contentType ===  topic.topicName ">
+              <div
+              [ngClass]="{
+                'bg-success': topic.topicName === 'Pros',
+                  'bg-danger': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
+                  'bg-primary': topic.topicName === 'What Went Well',
+                  'bg-warning': topic.topicName === 'What Can Be Improved',
+                  'bg-secondary': topic.topicName === 'Learned',
+                  'bg-info': topic.topicName === 'Improvements for the Future',
+                  'bg-light': topic.topicName === 'Customer Feedback',
+                  'bg-dark': topic.topicName === 'Risk Management'
+              }"
+             
+                class="  text-light rounded font-weight-bold text-xs p-3 my-1 hover:scale-105 transition-transform">
+                <div class="d-flex justify-content-between">
+                  <p>{{ message?.content }}
+                  </p>
+  
+                  <div class="d-flex align-items-center">
+                    <div class="position-relative d-inline-block "> 
+                       <!-- Dropdown toggle button -->
+                    <button (click)="optionsDropDown(i)"  class="position-relative btn btn-link z-10 d-block p-1 text-light  border-transparent rounded">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="" width="20" height="20" viewBox="0 0 20 20" fill="currentColor">
+                            <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
+                        </svg>
+                    </button>
+                     <!-- Dropdown menu -->
+                    <div x-show="isOpen" 
+                       *ngIf="selectedMessageIndex === i"
+                        x-transition:enter="transition ease-out duration-100"
+                        x-transition:enter-start="opacity-0 scale-90"
+                        x-transition:enter-end="opacity-100 scale-100"
+                        x-transition:leave="transition ease-in duration-100"
+                        x-transition:leave-start="opacity-100 scale-100"
+                        x-transition:leave-end="opacity-0 scale-90"
+                        class="position-absolute right-0 z-20  py-2 mt-2 origin bg-light rounded shadow "
+                    >
+                        <a   (click)="deleteMessage(message)"   class="d-block px-4 py-3  text-secondary text-capitalize transition-colors duration-300 transform  ">
+                            Delete
+                        </a>
+                
+                        <a  class="d-block px-4 py-3  text-secondary text-capitalize transition-colors duration-300 transform ">
+                            Edit
+                        </a>
+                
+                        <a  class="d-block px-4 py-3  text-secondary text-capitalize transition-colors duration-300 transform ">
+                            Keyboard shortcuts
+                        </a>
+                    </div>
+                </div>
+
+                </div>
+              </div>
+              <div class="d-flex justify-content-between">
+               <div>
+                <div class="d-inline-flex">
+                  <button (click)="likesCount(message)" type="button" class="btn btn-sm btn-outline-primary me-1 d-inline-flex flex-shrink-0 justify-content-center align-items-center rounded-circle text-light hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    <svg class="flex-shrink-0 " xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M7 10v12"></path>
+                      <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"></path>
+                    </svg>
+                  </button>
+
+                  {{message?.likes}}
+                  
+                  <button type="button" class=" btn btn-sm btn-outline-warning d-inline-flex flex-shrink-0 justify-content-center align-items-center rounded-circle text-light hover:bg-primary  focus:z-10 focus:outline-none focus:ring-2 focus:ring-primary">
+                    <svg class="flex-shrink-0 " xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                      <path d="M17 14V2"></path>
+                      <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"></path>
+                    </svg>
+                  </button>
+                </div>
+               </div>
+                <div class="d-flex align-items-center ">
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
+                    fill="currentColor" class="" width="12" height="12">
+                    <path fill-rule="evenodd"
+                    
+                      clip-rule="evenodd" />  d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z"
+                  </svg>
+                   {{ message?.username }}
+                 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+          
+
+          
+        </div>
+      </div>
+       <!-- group chat -->
+      <div class="position-fixed z-30 min-width  bottom-0 right-0 mb-4 mr-4">
+        <div>
+          <div>
+            <div>
+              <div class="chat-width" *ngIf="groupChatToggleVer" style="overflow-y: auto;">
+                <div class="max-width chat mx-auto my-2 bg-light rounded shadow-lg"> 
+                  <!-- Chat header -->
+                  <div class="d-flex align-items-center bg-secondary px-2 p-2 ">
+                    <div class="svg p-2">
+                      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="" height="24" width="24">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                          d="M7.5 8.25h9m-9 3H12m-9.75 1.51c0 1.6 1.123 2.994 2.707 3.227 1.129.166 2.27.293 3.423.379.35.026.67.21.865.501L12 21l2.755-4.133a1.14 1.14 0 0 1 .865-.501 48.172 48.172 0 0 0 3.423-.379c1.584-.233 2.707-1.626 2.707-3.228V6.741c0-1.602-1.123-2.995-2.707-3.228A48.394 48.394 0 0 0 12 3c-2.392 0-4.744.175-7.043.513C3.373 3.746 2.25 5.14 2.25 6.741v6.018Z" />
+                      </svg>
+                    </div>
+                    <div class="px-1">
+                      <h2 class="text-mb text-dark font-weight-bold mb-0">Chat Room</h2>
+                    <p class="m-0 font-weight-light text-light text-xs">online</p>
+                    </div>
+                  </div>
+                  <!-- Chat messages -->
+                  <div class="m-2 mt-4  chat-box-height scroll-auto  overflow-y-auto">
+                    <div *ngFor="let message of filteredMessages | async" class="m-1">
+                      <div *ngIf="message?.contentType === 'Common'"
+                        [ngClass]="{'justify-content-end  ': message.username === username, 'justify-content-start': message.sender !== 'user'}"
+                        class="d-flex">
+                        <div class="p-3 bg-light shadow-sm rounded-lg">
+                          <p class="text-sm text-dark font-weight-bold">{{ message.content }}</p> 
+                          <!-- Check if the current username is different from the previous one -->
+                          <ng-container *ngIf="message.username !== previousUsername">
+                            <p class="text-xs font-weight-light text-dark">{{ message.username }}</p>
+                            <!-- Update previousUsername after displaying each message -->
+                            {{ updatePreviousUsername(message.username) }}
+                          </ng-container>
+                        </div>
+                      </div>
+                    </div>
+                  </div> 
+                  <!-- Input box -->
+                  <div class="d-flex p-1 bg-light mt-auto mt-min-50">
+                    <input type="text" (keydown.enter)="sendCommonMessage()" [(ngModel)]="commonMessageText"
+                      placeholder="Type your message..."
+                      class="flex-1 px-4 py-1 mr-2 rounded-sm border border-light focus:outline-none focus:border-primary" />
+                    <button (click)="sendCommonMessage()"
+                      class="btn btn-primary px-4 py-1 text-light rounded-sm ">Send</button>
+                  </div>
+                </div>
+              </div>
+              <div>
+                <!-- Chat toggle button -->
+                <button (click)="groupChatToggle()" class="btn btn-light chat-svg text-dark shadow-lg ">
+                  <img *ngIf="!groupChatToggleVer" src="https://static.wixstatic.com/media/713b90_7841ba78e810446f8765776b69ee76e3~mv2.png" height="48" width="48" style="border-radius: 50%;" >
+                  <img *ngIf="groupChatToggleVer" class="p-0 " src="../assets/images/x-button.png" height="48px" width="48px">
+                </button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
 </div>
 
-<div>
-  <div class="">
-    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 min-h-svh lg:grid-cols-3 gap-2 mt-2 px-2 lg:px-12">
+
+
+
+
+<!-- <div class="container-fluid">
+  <div class="row">
+    <div class="col-12 col-sm-6 col-md-4 col-lg-4 mb-2 d-flex  ">
      <div *ngFor="let topic of retroTypeData.topics">
       <div class="bg-white p-2 shadow min-h-96 rounded-sm chat-card">
-        <h2 class="text-sm text-center font-semibold text-gray-700">
+        <h2 class="text-sm text-center font-semibold text-muted">
         {{ topic.topicName}}
         </h2>
         <button (click)="TextAreaDropDown(topic.topicName)"
-          class="bg-gray-100 w-full text-gray-700 px-4 my-1 rounded hover:bg-gray-300 hover:text-gray-900 hover:font-bold">
+          class="btn btn-secondary btn-block my-1 ">
           +
         </button>
 
         <div class="my-6" *ngIf="topicTextAreaStates[topic.topicName]">
           <div>
             <textarea
-              class="border font-bold text-white text-xs p-1 w-full rounded-sm focus:outline-none placeholder:text-white"
+              class="border font-weight-bold text-white text-xs p-1 w-100 rounded-sm focus:outline-none placeholder:text-white"
               type="text"
               [(ngModel)]="goodMessageText"
               (keydown.enter)="goodMessageText.trim() && sendMessage(topic.topicName)"
               [ngClass]="{
-               'bg-green-500': topic.topicName === 'Pros' || topic.topicName == 'Learned',
-                'bg-red-500': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
-                'bg-blue-500': topic.topicName === 'What Went Well',
-                'bg-orange-500': topic.topicName === 'What Can Be Improved',
-                'bg-gray-500': topic.topicName === 'Learned',
-                'bg-violet-500': topic.topicName === 'Improvements for the Future',
-                'bg-yellow-500': topic.topicName === 'Customer Feedback',
-                'bg-purple-600': topic.topicName === 'Risk Management'
+               'bg-success': topic.topicName === 'Pros' || topic.topicName == 'Learned',
+                'bg-danger': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
+                'bg-primary': topic.topicName === 'What Went Well',
+                'bg-warning': topic.topicName === 'What Can Be Improved',
+                'bg-secondary': topic.topicName === 'Learned',
+                'bg-info': topic.topicName === 'Improvements for the Future',
+                'bg-light': topic.topicName === 'Customer Feedback',
+                'bg-dark': topic.topicName === 'Risk Management'
                 
               }"
               placeholder="Enter text..."></textarea>
           </div>
           <button
             *ngIf="goodMessageText.trim()"
-            class="align-middle select-none font-sans font-bold text-center uppercase transition-all disabled:opacity-50 disabled:shadow-none disabled:pointer-events-none text-xs  px-4 border border-gray-900 text-gray-900 hover:opacity-75 focus:ring focus:ring-gray-300 active:opacity-[0.85] rounded-full"
+            class="btn btn-secondary btn-sm float-end "
             style="float: right"
             (click)="sendMessage(topic.topicName)">
             Send
           </button>
-        </div>
+        </div> -->
         
 
 
-        <div *ngFor="let message of filteredMessages | async; let i = index" class="m-2">
+        <!-- <div *ngFor="let message of filteredMessages | async; let i = index" class="m-2">
           <div *ngIf="message?.contentType ===  topic.topicName ">
             <div
             [ngClass]="{
-              'bg-green-500': topic.topicName === 'Pros',
-                'bg-red-500': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
-                'bg-blue-500': topic.topicName === 'What Went Well',
-                'bg-orange-500': topic.topicName === 'What Can Be Improved',
-                'bg-gray-500': topic.topicName === 'Learned',
-                'bg-violet-500': topic.topicName === 'Improvements for the Future',
-                'bg-yellow-500': topic.topicName === 'Customer Feedback',
-                'bg-purple-600': topic.topicName === 'Risk Management'
+              'bg-success': topic.topicName === 'Pros',
+                'bg-danger': topic.topicName === 'Cons' || topic.topicName === 'What Didn\'t Go Well',
+                'bg-primary': topic.topicName === 'What Went Well',
+                'bg-warning': topic.topicName === 'What Can Be Improved',
+                'bg-secondary': topic.topicName === 'Learned',
+                'bg-info': topic.topicName === 'Improvements for the Future',
+                'bg-light': topic.topicName === 'Customer Feedback',
+                'bg-dark': topic.topicName === 'Risk Management'
             }"
            
-              class="  text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform duration-300">
-              <div class="flex justify-between">
+              class="  text-white rounded-sm font-semibold text-xs p-3 my-1 hover:scale-105 transition-transform">
+              <div class="d-flex justify-content-between">
                 <p>{{ message?.content }}
                 </p>
 
-                <div class="flex items-center">
-                  <div class="relative inline-block ">
+                <div class="d-flex align-items-center">
+                  <div class="position-relative d-inline-block "> -->
                     <!-- Dropdown toggle button -->
-                    <button (click)="optionsDropDown(i)"  class="relative z-10 block p-1 text-gray-800  border-transparent rounded-md">
+                    <!-- <button (click)="optionsDropDown(i)"  class="position-relative btn btn-link  z-10 block p-1 text-secondary  border-transparent rounded-md">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
                             <path d="M10 6a2 2 0 110-4 2 2 0 010 4zM10 12a2 2 0 110-4 2 2 0 010 4zM10 18a2 2 0 110-4 2 2 0 010 4z" />
                         </svg>
-                    </button>
+                    </button> -->
                 
                     <!-- Dropdown menu -->
-                    <div x-show="isOpen" 
+                    <!-- <div x-show="isOpen" 
                        *ngIf="selectedMessageIndex === i"
                         x-transition:enter="transition ease-out duration-100"
                         x-transition:enter-start="opacity-0 scale-90"
@@ -114,11 +319,11 @@
                             Delete
                         </a>
                 
-                        <a  class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <a  class="d-block px-4 py-3 text-sm text-secondary capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-light dark:hover:bg-gray-700 dark:hover:text-white">
                             Edit
                         </a>
                 
-                        <a  class="block px-4 py-3 text-sm text-gray-600 capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700 dark:hover:text-white">
+                        <a  class="d-block px-4 py-3 text-sm text-secondary capitalize transition-colors duration-300 transform dark:text-gray-300 hover:bg-light dark:hover:bg-gray-700 dark:hover:text-white">
                             Keyboard shortcuts
                         </a>
                     </div>
@@ -126,10 +331,10 @@
 
                   </div>
               </div>
-              <div class="flex justify-between">
+              <div class="d-flex justify-content-between">
                <div>
-                <div class="inline-flex">
-                  <button (click)="likesCount(message)" type="button" class="inline-flex flex-shrink-0 justify-center items-center size-6 rounded-full text-white hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                <div class="d-inline-flex">
+                  <button (click)="likesCount(message)" type="button" class="btn btn-sm btn-outline-primary me-1 d-inline-flex flex-shrink-0 justify-content-center align-items-center size-6 rounded-full text-white hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
                     <svg class="flex-shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M7 10v12"></path>
                       <path d="M15 5.88 14 10h5.83a2 2 0 0 1 1.92 2.56l-2.33 8A2 2 0 0 1 17.5 22H4a2 2 0 0 1-2-2v-8a2 2 0 0 1 2-2h2.76a2 2 0 0 0 1.79-1.11L12 2h0a3.13 3.13 0 0 1 3 3.88Z"></path>
@@ -138,7 +343,7 @@
 
                   {{message?.likes}}
                   
-                  <button type="button" class="inline-flex flex-shrink-0 justify-center items-center size-6 rounded-full text-white hover:bg-blue-100 hover:text-blue-800 focus:z-10 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                  <button type="button" class="d-inline-flex flex-shrink-0 justify-content-center align-items-center size-6 rounded-full text-white hover:bg-primary hover:text-primary focus:z-10 focus:outline-none focus:ring-2 focus:ring-primary">
                     <svg class="flex-shrink-0 size-3" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                       <path d="M17 14V2"></path>
                       <path d="M9 18.12 10 14H4.17a2 2 0 0 1-1.92-2.56l2.33-8A2 2 0 0 1 6.5 2H20a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2h-2.76a2 2 0 0 0-1.79 1.11L12 22h0a3.13 3.13 0 0 1-3-3.88Z"></path>
@@ -146,12 +351,12 @@
                   </button>
                 </div>
                </div>
-                <div class="flex items-center">
+                <div class="d-flex align-items-center">
                   <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16"
                     fill="currentColor" class="w-4 h-4 m-1">
                     <path fill-rule="evenodd"
-                      d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z"
-                      clip-rule="evenodd" />
+                    
+                      clip-rule="evenodd" />  d="M15 8A7 7 0 1 1 1 8a7 7 0 0 1 14 0Zm-5-2a2 2 0 1 1-4 0 2 2 0 0 1 4 0ZM8 9c-1.825 0-3.422.977-4.295 2.437A5.49 5.49 0 0 0 8 13.5a5.49 5.49 0 0 0 4.294-2.063A4.997 4.997 0 0 0 8 9Z"
                   </svg>
                   {{ message?.username }}
                 </div>
@@ -160,18 +365,18 @@
           </div>
         </div>
       </div>
-     </div>
+     </div> -->
 
 
       <!-- group chat -->
-      <div class="fixed z-30 min-w-96  bottom-0 right-0 mb-4 mr-4">
+      <!-- <div class="fixed z-30 min-w-96  bottom-0 right-0 mb-4 mr-4">
         <div>
           <div>
             <div>
-              <div class="min-w-full" *ngIf="groupChatToggleVer" style="overflow-y: auto;">
-                <div class="max-w-md chat mx-auto my-2 bg-gray-100 rounded-sm shadow-lg">
+              <div class="w-96" *ngIf="groupChatToggleVer" style="overflow-y: auto;">
+                <div class="max-w-md chat mx-auto my-2 bg-light rounded-sm shadow-lg"> -->
                   <!-- Chat header -->
-                  <div class="flex items-center bg-slate-300  px-2 p-2 ">
+                  <!-- <div class="d-flex align-items-center bg-secondary px-2 p-2 ">
                     <div class="svg p-2">
                       <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
                         stroke="currentColor" class="w-6 h-6">
@@ -180,41 +385,41 @@
                       </svg>
                     </div>
                     <div class="px-1">
-                      <h2 class="text-mb text-gray-800 font-semibold mb-0">Chat Room</h2>
-                      <p class="m-0 font-thin text-gray-600 text-xs">online</p>
+                      <h2 class="text-mb text-dark font-semibold mb-0">Chat Room</h2>
+                    <p class="m-0 font-thin text-muted text-xs">online</p>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- Chat messages -->
-                  <div class="m-2 mt-4 min-h-36 max-h-96 scroll-auto  overflow-y-auto">
+                  <!-- <div class="m-2 mt-4 min-h-36 max-h-96 scroll-auto  overflow-y-auto">
                     <div *ngFor="let message of filteredMessages | async" class="m-1">
                       <div *ngIf="message?.contentType === 'Common'"
-                        [ngClass]="{'justify-end  ': message.username === username, 'justify-start': message.sender !== 'user'}"
+                        [ngClass]="{'justify-content-end  ': message.username === username, 'justify-content-start': message.sender !== 'user'}"
                         class="flex">
-                        <div class="p-3 bg-gray-200 shadow-md rounded-3xl">
-                          <p class="text-sm text-gray-800 font-semibold">{{ message.content }}</p>
+                        <div class="p-3 bg-light shadow-sm rounded-lg">
+                          <p class="text-sm text-dark font-semibold">{{ message.content }}</p> -->
                           <!-- Check if the current username is different from the previous one -->
-                          <ng-container *ngIf="message.username !== previousUsername">
-                            <p class="text-xs font-thin text-gray-600">{{ message.username }}</p>
+                          <!-- <ng-container *ngIf="message.username !== previousUsername">
+                            <p class="text-xs font-thin text-muted">{{ message.username }}</p> -->
                             <!-- Update previousUsername after displaying each message -->
-                            {{ updatePreviousUsername(message.username) }}
+                            <!-- {{ updatePreviousUsername(message.username) }}
                           </ng-container>
                         </div>
                       </div>
                     </div>
-                  </div>
+                  </div> -->
                   <!-- Input box -->
-                  <div class="flex p-1 bg-slate-100 mt-auto mt-min-50">
+                  <!-- <div class="d-flex p-1 bg-light mt-auto mt-min-50">
                     <input type="text" (keydown.enter)="sendCommonMessage()" [(ngModel)]="commonMessageText"
                       placeholder="Type your message..."
-                      class="flex-1 px-4 py-1 mr-2 rounded-sm border border-gray-300 focus:outline-none focus:border-blue-500" />
+                      class="flex-1 px-4 py-1 mr-2 rounded-sm border border-light focus:outline-none focus:border-primary" />
                     <button (click)="sendCommonMessage()"
-                      class="px-4 py-1 bg-blue-500 text-white rounded-sm hover:bg-blue-600">Send</button>
+                      class="px-4 py-1 bg-primary text-white rounded-sm hover:bg-primary-dark">Send</button>
                   </div>
                 </div>
               </div>
-              <div>
+              <div> -->
                 <!-- Chat toggle button -->
-                <button (click)="groupChatToggle()" class="chat-svg text-gray-800 shadow-lg hover:text-gray-600">
+                <!-- <button (click)="groupChatToggle()" class="btn btn-light chat-svg text-dark shadow-lg hover:text-dark">
                   <img *ngIf="!groupChatToggleVer" src="https://static.wixstatic.com/media/713b90_7841ba78e810446f8765776b69ee76e3~mv2.png" height="48" width="48" style="border-radius: 50%;" >
                   <img *ngIf="groupChatToggleVer" class="p-0 " src="../assets/images/x-button.png" height="48px" width="48px">
                 </button>
@@ -226,7 +431,7 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- user notification bar  -->
 <!-- <div *ngIf="userNotification">

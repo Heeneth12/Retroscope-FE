@@ -1,57 +1,57 @@
-<div class="lg:px-12 px-2">
-    <div>
-        <div>
-            <div class="flex justify-between items-center flex-col sm:flex-row">
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between align-items-start">
                 <div>
-                    <h2 class="font-bold text-xl sm:text-2xl my-3 sm:my-5 text-gray-700">Chat-Room - {{roomName}}</h2>
+                    <h2 class="font-weight-bold  header-text my-3 my-sm-2 text-secondary">Chat-Room - {{roomName}}</h2>
                 </div>
-                <div class="flex space-x-4 mt-3 sm:mt-0">
-                    <div class="relative">
-                        <button (click)="toggleDropdown()" class="flex items-center text-white bg-blue-500 hover:bg-blue-800 focus:outline-none font-medium rounded-sm text-sm px-3 py-2 sm:px-5 sm:py-2.5 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 sm:mr-2">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
-                            </svg>
-                            <span class="hidden sm:inline">Share</span>
+                <div class="d-flex mr-4 mt-3 mt-sm-3 gap-4">
+                    <div class="position-relative">
+                        <button (click)="toggleDropdown()" class="d-flex align-items-center text-light btn btn-primary btn-sm  font-weight-medium  text-sm-center px-3 py-2 px-sm-5 py-sm-2.5 text-center">
+                            
+                            <span class="d-none d-sm-inline">Share</span>
                         </button>
-                        <div *ngIf="dropdownOpen" class="absolute mt-1 right-0 bg-white border border-gray-300 rounded shadow-md">
-                            <ul class="py-1 px-1">
+                        <div *ngIf="dropdownOpen" class="position-fixed mt-1  right-0 bg-light border border-secondary rounded shadow">
+                            
+                            <ul class="py-1 px-1 ">
+                                
                                 <li class="mb-2">
-                                    <div class="flex items-center p-1 border border-gray-300 rounded hover:bg-gray-100">
-                                        <input class="flex-grow py-1 px-2 mr-2 focus:outline-none" placeholder="Enter Email" type="email">
-                                        <button class="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600">Send</button>
+                                    <div class="d-flex align-items-center p-1 border border-light rounded ">
+                                        <input class="flex-grow-1 py-1 px-2 mr-2 " placeholder="Enter Email" type="email">
+                                        <button class="btn btn-primary btn-sm text-light m-1 px-4 py-1 rounded ">Send</button>
                                     </div>
                                 </li>
                                 <div class="dropEmailAlign">
-                                    <div class="flex justify-between" *ngFor="let email of emails">
+                                    <div class="d-flex justify-content-between" *ngFor="let email of emails">
                                         <li>
-                                            <p class="block px-2 py-2 text-gray-800 hover:bg-gray-100">{{email}}</p>
+                                            <p class="block px-2 py-2 text-dark hover:bg-light">{{email}}</p>
                                         </li>
-                                        <button (click)="SendEmail(email)" class="px-2 py-2 text-gray-800 hover:bg-gray-100">
+                                        <button (click)="SendEmail(email)" class="btn btn-light px-2 py-2 text-dark hover:bg-light">
                                             <img height="16px" width="16px" src="../../assets/images/paper-plane.png">
                                         </button>
                                     </div>
                                 </div>
                             </ul>
-                        </div>
+                        </div>  
                     </div>
-                    <div class="relative">
-                        <button (click)="showJoinedUsers()" class="flex items-center text-white bg-blue-500 hover:bg-blue-800 focus:outline-none font-medium rounded-sm text-sm px-3 py-2 sm:px-5 sm:py-2.5 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ">
+                    <div class="position-relative">
+                        <button (click)="showJoinedUsers()" class="d-flex align-items-center text-light btn btn-primary btn-sm font-weight-medium text-sm-center px-3 py-2 px-sm-4 py-sm-2.5 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class=""  width="20px" height="20px">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
                             </svg>
-                            <span class="hidden sm:inline">People</span>
+                            <span class="d-none d-sm-inline">People</span>
                         </button>
-                        <div *ngIf="dropdownPeople" class="absolute mt-1 right-0 bg-white border border-gray-300 rounded shadow-md">
+                        <div *ngIf="dropdownPeople" class="position-absolute mt-1 right-0 bg-light border border-secondary rounded shadow">
                             <ul class="py-1 px-1">
                                 <div class="dropEmailAlign">
-                                    <div class="flex justify-between" *ngFor="let user of users">
+                                    <div class="d-flex justify-content-between" *ngFor="let user of users">
                                         <li>
-                                            <div class="flex items-center bg-slate-100 px-2 my-1 rounded-md hover:bg-slate-200">
-                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                            <div class="d-flex align-items-center bg-light px-2 my-1 rounded-md hover:light">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class=""  width="20px" height="20px">
                                                     <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
                                                 </svg>
-                                                <p class="block  px-2 py-2 rounded-lg my-1 text-gray-800">{{user.userName}}</p>
-                                                <img src="../assets/images/demo.svg" width="22px" class="rounded-full">
+                                                <p class="block  px-2 py-2 rounded-lg my-1 text-dark">{{user.userName}}</p>
+                                                <img src="../assets/images/demo.svg" width="22px" class="rounded-circle">
                                             </div>
                                         </li>
                                     </div>
@@ -60,22 +60,160 @@
                         </div>
                     </div>
                     <div>
-                        <button [disabled]="true"  (click)="downloadPage()" class="flex items-center text-white bg-blue-500 hover:bg-blue-800 focus:outline-none font-medium rounded-sm text-sm px-3 py-2 sm:px-5 sm:py-2.5 text-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 sm:mr-2">
+                        <button [disabled]="true"  (click)="downloadPage()" class="d-flex align-items-center text-white btn btn-primary btn-sm  focus:outline-none font-weight-medium rounded text-sm-center px-3 py-2 px-sm-4 py-sm-2.5 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="" width="20px" height="20px">
                                 <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
                             </svg>
-                            <span class="hidden sm:inline">Download</span>
+                            <span class="d-none d-sm-inline">Download</span>
                         </button>
                     </div>
                 </div>
             </div>
-            <div class="flex justify-between mt-4">
-                <div>
-                    <h4 class="font-thin text-gray-700">Public boards collaborate by sharing room ID</h4>
+            <div class="d-flex justify-content-between mt-4">
+                <div class="col-md-6">
+                    <h4 class="font-weight-light header2-text text-secondary ">Public boards collaborate by sharing room ID</h4>
                 </div>
                 <div>
-                    <button routerLink="/" routerLinkActive="router-link-active" type="button" class="py-2 sm:py-3 px-3 sm:px-4 inline-flex items-center gap-x-2 text-sm font-medium rounded-lg border border-gray-200 bg-white text-gray-800 shadow-sm hover:bg-gray-50 disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
-                        <svg class="flex-shrink-0 size-4 w-4 h-4 sm:w-5 sm:h-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <button routerLink="/" routerLinkActive="router-link-active" type="button" class="btn btn-outline-secondary py-1 py-sm-1 px-1 px-sm-3 d-inline-flex align-items-center gap-x-2  font-weight-medium rounded border border-secondary  shadow ">
+                        <svg class="" height="20px" width="20px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M5 12h14"></path>
+                            <path d="m12 5 7 7-7 7"></path>
+                        </svg>
+                        Exit room
+                    </button>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="px-lg-5 px-2">
+    <div>
+        <div>
+            <div class="d-flex justify-content-between align-items-center flex-column flex-sm-row">
+                <div>
+                    <h2 class="font-weight-bold text-lg text-sm-xl my-3 my-sm-2 text-secondary">Chat-Room - {{roomName}}</h2>
+                </div>
+                <div class="d-flex mr-4 mt-3 mt-sm-0">
+                    <div class="position-relative">
+                        <button (click)="toggleDropdown()" class="d-flex align-items-center text-light btn btn-primary btn-sm hover:bg-primary outline-none font-weight-medium rounded-sm text-sm px-3 py-2 px-sm-5 py-sm-2.5 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-sm-2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M7.217 10.907a2.25 2.25 0 1 0 0 2.186m0-2.186c.18.324.283.696.283 1.093s-.103.77-.283 1.093m0-2.186 9.566-5.314m-9.566 7.5 9.566 5.314m0 0a2.25 2.25 0 1 0 3.935 2.186 2.25 2.25 0 0 0-3.935-2.186Zm0-12.814a2.25 2.25 0 1 0 3.933-2.185 2.25 2.25 0 0 0-3.933 2.185Z" />
+                            </svg>
+                            <span class="d-none d-sm-inline">Share</span>
+                        </button>
+                        <div *ngIf="dropdownOpen" class="postion-absolute mt-1 right-0 bg-white border border-secondary rounded shadow-md">
+                            <ul class="py-1 px-1">
+                                <li class="mb-2">
+                                    <div class="d-flex align-items-center p-1 border border-light rounded hover:bg-light">
+                                        <input class="flex-grow-1 py-1 px-2 mr-2 focus:outline-none" placeholder="Enter Email" type="email">
+                                        <button class="btn btn-primary text-white px-4 py-1 rounded hover:bg-primary">Send</button>
+                                    </div>
+                                </li>
+                                <div class="dropEmailAlign">
+                                    <div class="d-flex justify-content-between" *ngFor="let email of emails">
+                                        <li>
+                                            <p class="block px-2 py-2 text-dark hover:bg-light">{{email}}</p>
+                                        </li>
+                                        <button (click)="SendEmail(email)" class="btn btn-light px-2 py-2 text-dark hover:bg-light">
+                                            <img height="16px" width="16px" src="../../assets/images/paper-plane.png">
+                                        </button>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="position-relative">
+                        <button (click)="showJoinedUsers()" class="d-flex align-items-center text-light btn btn-primary btn-sm hover:bg-primary outline-none font-weight-medium rounded-sm text-sm px-3 py-2 px-sm-5 py-sm-2.5 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-5 h-5 ">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 0 0 2.625.372 9.337 9.337 0 0 0 4.121-.952 4.125 4.125 0 0 0-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 0 1 8.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0 1 11.964-3.07M12 6.375a3.375 3.375 0 1 1-6.75 0 3.375 3.375 0 0 1 6.75 0Zm8.25 2.25a2.625 2.625 0 1 1-5.25 0 2.625 2.625 0 0 1 5.25 0Z" />
+                            </svg>
+                            <span class="d-none d-sm-inline">People</span>
+                        </button>
+                        <div *ngIf="dropdownPeople" class="position-absolute mt-1 right-0 bg-white border border-secondary rounded shadow-md">
+                            <ul class="py-1 px-1">
+                                <div class="dropEmailAlign">
+                                    <div class="d-flex justify-content-between" *ngFor="let user of users">
+                                        <li>
+                                            <div class="d-flex align-items-center bg-light px-2 my-1 rounded-md hover:light">
+                                                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+                                                    <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+                                                </svg>
+                                                <p class="block  px-2 py-2 rounded-lg my-1 text-dark">{{user.userName}}</p>
+                                                <img src="../assets/images/demo.svg" width="22px" class="rounded-circle">
+                                            </div>
+                                        </li>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                    <div>
+                        <button [disabled]="true"  (click)="downloadPage()" class="d-flex align-items-center text-white btn btn-primary btn-sm hover:bg-primary focus:outline-none font-weight-medium rounded-sm text-sm px-3 py-2 px-sm-5 py-sm-2.5 text-center">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-4 h-4 mr-sm-2">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M19.5 14.25v-2.625a3.375 3.375 0 0 0-3.375-3.375h-1.5A1.125 1.125 0 0 1 13.5 7.125v-1.5a3.375 3.375 0 0 0-3.375-3.375H8.25m.75 12 3 3m0 0 3-3m-3 3v-6m-1.5-9H5.625c-.621 0-1.125.504-1.125 1.125v17.25c0 .621.504 1.125 1.125 1.125h12.75c.621 0 1.125-.504 1.125-1.125V11.25a9 9 0 0 0-9-9Z" />
+                            </svg>
+                            <span class="d-none d-sm-inline">Download</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-4">
+                <div>
+                    <h4 class="font-weight-light text-secondary">Public boards collaborate by sharing room ID</h4>
+                </div>
+                <div>
+                    <button routerLink="/" routerLinkActive="router-link-active" type="button" class="btn btn-outline-secondary py-2 py-sm-1 px-3 px-sm-3 d-inline-flex align-items-center gap-x-2 text-sm font-weight-medium rounded-lg border border-secondary bg-white text-secondary shadow-sm hover:bg-light disabled:opacity-50 disabled:pointer-events-none dark:bg-neutral-900 dark:border-neutral-700 dark:text-white dark:hover:bg-neutral-800">
+                        <svg class=" w-2 h-2 w-sm-2 h-sm-2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                             <path d="M5 12h14"></path>
                             <path d="m12 5 7 7-7 7"></path>
                         </svg>
@@ -85,4 +223,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
